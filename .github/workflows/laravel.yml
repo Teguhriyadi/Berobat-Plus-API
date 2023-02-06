@@ -40,4 +40,4 @@ jobs:
         username: ${{ secrets.username }}
         host: ${{ secrets.host }}
         password: ${{ secrets.password }}
-        script: "cd /home/u890410510/domains/berobatplus.shop/Berobat-Plus-API && php artisan migrate:fresh --seed && php artisan optimize"
+        script: "cd /home/u890410510/domains/berobatplus.shop/Berobat-Plus-API && composer install && php artisan migrate:fresh --seed && php artisan optimize"
