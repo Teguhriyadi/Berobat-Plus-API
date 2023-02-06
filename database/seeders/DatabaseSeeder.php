@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use Database\Seeders\Akun\CompanySeeder;
+use Database\Seeders\Akun\DokterSeeder;
 use Database\Seeders\Akun\UsersSeeder;
 use Illuminate\Database\Seeder;
 
@@ -19,5 +20,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UsersSeeder::class);
         $this->call(CompanySeeder::class);
+        $this->call(DokterSeeder::class);
     }
 }
