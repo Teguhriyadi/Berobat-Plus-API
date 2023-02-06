@@ -20,7 +20,3 @@ Route::get('/', function () {
 Route::get("/coba", function () {
     echo "Hamdan 500";
 });
-
-Route::prefix("autentikasi")->group(function () {
-    Route::post("/login", [LoginController::class, "login"]);
-});
