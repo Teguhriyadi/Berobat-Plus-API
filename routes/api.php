@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Autentikasi\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
