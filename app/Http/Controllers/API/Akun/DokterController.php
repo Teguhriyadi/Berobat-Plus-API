@@ -66,10 +66,11 @@ class DokterController extends Controller
     {
         return DB::transaction(function () use ($id_dokter, $request) {
 
-            User::create([
+            $dokter = Dokter::where("id_dokter", $id_dokter)->first();
+
+            User::where("id", $dokter->user_id)->update([
                 "nama" => $request->nama,
                 "email" => $request->email,
-                "password" => bcrypt("password"),
                 "nomor_hp" => $request->nomor_hp,
                 "alamat" => $request->alamat,
                 "id_role" => 3,
@@ -77,8 +78,7 @@ class DokterController extends Controller
                 "usia" => $request->usia,
                 "berat_badan" => $request->berat_badan,
                 "tinggi_badan" => $request->tinggi_badan,
-                "tanggal_lahir" => $request->tanggal_lahir,
-                "status" => 1
+                "tanggal_lahir" => $request->tanggal_lahir
             ]);
 
             Dokter::where("id_dokter", $id_dokter)->update([
