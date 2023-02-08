@@ -22,4 +22,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getRole()
+    {
+        return $this->belongsTo("App\Models\Master\Role", "id_role", "id_role");
+    }
 }

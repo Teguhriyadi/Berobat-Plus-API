@@ -37,17 +37,7 @@ class LoginController extends Controller
             );
         }
 
-        if ($user->id_role == 1) {
-            $text = "super_admin";
-        } else if ($user->id_role == 2) {
-            $text = "rumah_sakit";
-        } else if ($user->id_role == 3) {
-            $text = "dokter";
-        } else if ($user->id_role == 4) {
-            $text = "konsumen";
-        }
-
-        $token = $user->createToken("api", [$text]);
+        $token = $user->createToken("api", [$user->getRole->nama_role]);
 
         Auth::login($user);
 
