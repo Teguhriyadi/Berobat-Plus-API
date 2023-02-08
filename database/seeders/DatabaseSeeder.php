@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use Database\Seeders\Akun\CompanySeeder;
 use Database\Seeders\Akun\DokterSeeder;
+use Database\Seeders\Akun\KonsumenSeeder;
 use Database\Seeders\Akun\OwnerApotekSeeder;
 use Database\Seeders\Akun\UsersSeeder;
 use Database\Seeders\Master\RoleSeeder;
@@ -25,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DokterSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(OwnerApotekSeeder::class);
+        $this->call(KonsumenSeeder::class);
     }
 }
