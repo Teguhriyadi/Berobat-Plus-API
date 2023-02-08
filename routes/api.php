@@ -22,7 +22,10 @@ use Illuminate\Support\Facades\Route;
 Route::prefix("autentikasi")->group(function () {
     Route::post("/login", [LoginController::class, "login"]);
     Route::get("/login", function () {
-        echo "ada";
+        return response()->json([
+            "pesan" => "Anda Harus Login Terlebih Dahulu",
+            "status" => 401
+        ]);
     })->name("login");
 });
 
