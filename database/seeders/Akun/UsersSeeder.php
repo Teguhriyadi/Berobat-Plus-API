@@ -116,8 +116,8 @@ class UsersSeeder extends Seeder
         ]);
 
         User::create([
-            "nama" => "Ahmad Asrori",
-            "email" => "ahmad_asrori@gmail.com",
+            "nama" => "Ahmad Bajuri",
+            "email" => "ahmad_bajuri@gmail.com",
             "password" => bcrypt("password"),
             "nomor_hp" => "0853242372671",
             "alamat" => "Palembang",
@@ -129,6 +129,26 @@ class UsersSeeder extends Seeder
             "tempat_lahir" => "Bandung",
             "tanggal_lahir" => "2023-02-02",
             "status" => "1"
+        ]);
+
+        User::create([
+            "nama" => "Mohammad Prasetya",
+            "email" => "prasetya@gmail.com",
+            "password" => bcrypt("password"),
+            "nomor_hp" => "08532423726759",
+            "alamat" => "Brazil",
+            "id_role" => "RO-2003065",
+            "status" => 1
+        ]);
+
+        User::create([
+            "nama" => "Mohammad Septian",
+            "email" => "septian@gmail.com",
+            "password" => bcrypt("password"),
+            "nomor_hp" => "08532423726780",
+            "alamat" => "Konghucu",
+            "id_role" => "RO-2003065",
+            "status" => 1
         ]);
     }
 }

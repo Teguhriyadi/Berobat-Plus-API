@@ -22,22 +22,22 @@ class RoleSeeder extends Seeder
 
         Role::create([
             "id_role" => "RO-2003062",
-            "nama_role" => "Owner Apotek"
-        ]);
-
-        Role::create([
-            "id_role" => "RO-2003063",
             "nama_role" => "Dokter"
         ]);
 
         Role::create([
-            "id_role" => "RO-2003064",
+            "id_role" => "RO-2003063",
             "nama_role" => "Perawat"
         ]);
 
         Role::create([
-            "id_role" => "RO-2003065",
+            "id_role" => "RO-2003064",
             "nama_role" => "Konsumen"
+        ]);
+
+        Role::create([
+            "id_role" => "RO-2003065",
+            "nama_role" => "Owner Apotek"
         ]);
     }
 }
