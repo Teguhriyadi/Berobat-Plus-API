@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix("autentikasi")->group(function () {
     Route::post("/login", [LoginController::class, "login"]);
+    Route::get("/login", function () {
+        echo "ada";
+    })->name("login");
 });
 
 Route::middleware("auth:sanctum")->group(function () {
