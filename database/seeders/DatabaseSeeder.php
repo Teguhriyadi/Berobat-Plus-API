@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use Database\Seeders\Akun\CompanySeeder;
 use Database\Seeders\Akun\DokterSeeder;
 use Database\Seeders\Akun\UsersSeeder;
+use Database\Seeders\Master\RoleSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersSeeder::class);
         $this->call(CompanySeeder::class);
         $this->call(DokterSeeder::class);
+        $this->call(RoleSeeder::class);
     }
 }

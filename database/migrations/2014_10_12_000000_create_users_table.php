@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("password");
             $table->string("nomor_hp", 20);
             $table->text("alamat");
-            $table->tinyInteger("id_role");
+            $table->string("id_role", 50);
             $table->integer("created_by")->nullable();
             $table->enum("jenis_kelamin", ["L", "P"]);
             $table->string("token")->nullable();
@@ -28,8 +28,9 @@ return new class extends Migration
             $table->string("latitude")->nullable();
             $table->string("foto")->nullable();
             $table->integer("usia");
-            $table->string("berat_badan", 50);
-            $table->string("tinggi_badan", 50);
+            $table->double("berat_badan");
+            $table->double("tinggi_badan");
+            $table->string("tempat_lahir", 50);
             $table->date("tanggal_lahir");
             $table->enum("status", [1, 0]);
             $table->timestamps();
