@@ -4,6 +4,7 @@ use App\Http\Controllers\API\Akun\CompanyController;
 use App\Http\Controllers\API\Akun\DokterController;
 use App\Http\Controllers\API\Akun\KonsumenController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
+use App\Http\Controllers\API\Master\Obat\GolonganObatController;
 use App\Http\Controllers\API\Master\RoleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,5 +39,9 @@ Route::middleware("auth:sanctum")->group(function () {
 
     Route::prefix("master")->group(function () {
         Route::resource("role", RoleController::class);
+
+        Route::prefix("obat")->group(function () {
+            Route::resource("golongan_obat", GolonganObatController::class);
+        });
     });
 });
