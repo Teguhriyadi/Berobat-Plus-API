@@ -4,6 +4,7 @@ use App\Http\Controllers\API\Akun\CompanyController;
 use App\Http\Controllers\API\Akun\DokterController;
 use App\Http\Controllers\API\Akun\KonsumenController;
 use App\Http\Controllers\API\Akun\Profile\Admin\ProfileController;
+use App\Http\Controllers\API\Akun\Profile\Apotek\ProfileController as ApotekProfileController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\Master\Obat\GolonganObatController;
 use App\Http\Controllers\API\Master\RoleController;
@@ -41,6 +42,11 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::prefix("admin")->group(function () {
                 Route::get("/profil", [ProfileController::class, "get_profil"]);
                 Route::put("/profil", [ProfileController::class, "update_profil"]);
+            });
+
+            Route::prefix("apotek")->group(function () {
+                Route::get("/profil", [ApotekProfileController::class, "get_profil"]);
+                Route::put("/profil", [ApotekProfileController::class, "update_profil"]);
             });
         });
     });

@@ -17,14 +17,12 @@ class OwnerApotekSeeder extends Seeder
     {
         OwnerApotek::create([
             "id_owner_apotek" => "OWN-312456789",
-            "user_id" => 5,
-            "nama_apotek" => "Apotek RS. Makanan"
+            "user_id" => 5
         ]);
 
         OwnerApotek::create([
             "id_owner_apotek" => "OWN-312456790",
-            "user_id" => 5,
-            "nama_apotek" => "Apotek RS. Minuman"
+            "user_id" => 5
         ]);
     }
 }
