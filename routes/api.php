@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\Akun\CompanyController;
 use App\Http\Controllers\API\Akun\DokterController;
 use App\Http\Controllers\API\Akun\KonsumenController;
+use App\Http\Controllers\API\Akun\Profile\Admin\ProfileController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\Master\Obat\GolonganObatController;
 use App\Http\Controllers\API\Master\RoleController;
@@ -35,6 +36,13 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::resource("/company", CompanyController::class);
         Route::resource("/dokter", DokterController::class);
         Route::resource("/konsumen", KonsumenController::class);
+
+        Route::prefix("profil")->group(function () {
+            Route::prefix("admin")->group(function () {
+                Route::get("/profil", [ProfileController::class, "get_profil"]);
+                Route::put("/profil", [ProfileController::class, "update_profil"]);
+            });
+        });
     });
 
     Route::prefix("master")->group(function () {
