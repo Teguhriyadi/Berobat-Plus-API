@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Akun\AllAccountController;
 use App\Http\Controllers\API\Akun\CompanyController;
 use App\Http\Controllers\API\Akun\DokterController;
 use App\Http\Controllers\API\Akun\KonsumenController;
@@ -37,6 +38,7 @@ Route::prefix("autentikasi")->group(function () {
 
 Route::middleware("auth:sanctum")->group(function () {
     Route::prefix("akun")->group(function () {
+        Route::get("/all_account", [AllAccountController::class, "index"]);
         Route::resource("/company", CompanyController::class);
         Route::resource("/dokter", DokterController::class);
         Route::resource("/konsumen", KonsumenController::class);
