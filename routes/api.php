@@ -7,6 +7,7 @@ use App\Http\Controllers\API\Akun\OwnerApotekController;
 use App\Http\Controllers\API\Akun\PerawatController;
 use App\Http\Controllers\API\Akun\Profile\Admin\ProfileController;
 use App\Http\Controllers\API\Akun\Profile\Apotek\ProfileController as ApotekProfileController;
+use App\Http\Controllers\API\Akun\Profile\Perawat\ProfileController as PerawatProfileController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\Master\Obat\GolonganObatController;
 use App\Http\Controllers\API\Master\RoleController;
@@ -51,6 +52,11 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::prefix("apotek")->group(function () {
                 Route::get("/profil", [ApotekProfileController::class, "get_profil"]);
                 Route::put("/profil", [ApotekProfileController::class, "update_profil"]);
+            });
+
+            Route::prefix("perawat")->group(function () {
+                Route::get("/profil", [PerawatProfileController::class, "get_profil"]);
+                Route::put("/profil", [PerawatProfileController::class, "update_profil"]);
             });
         });
     });
