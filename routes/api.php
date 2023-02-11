@@ -70,4 +70,6 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::resource("golongan_obat", GolonganObatController::class);
         });
     });
+
+    Route::get("/logout", [LoginController::class, "logout"]);
 });

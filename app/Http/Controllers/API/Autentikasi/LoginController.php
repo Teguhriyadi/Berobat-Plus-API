@@ -45,4 +45,13 @@ class LoginController extends Controller
 
         return response()->json($user);
     }
+
+    public function logout()
+    {
+        $user = Auth::user();
+
+        $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
+
+        return response()->json(["pesan" => "Anda Berhasil Logout"]);
+    }
 }
