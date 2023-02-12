@@ -12,6 +12,7 @@ use App\Http\Controllers\API\Akun\Profile\Apotek\ProfileController as ApotekProf
 use App\Http\Controllers\API\Akun\Profile\Perawat\ProfileController as PerawatProfileController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\DashboardController;
+use App\Http\Controllers\API\Master\Artikel\DataArtikelController;
 use App\Http\Controllers\API\Master\Artikel\KategoriArtikelController;
 use App\Http\Controllers\API\Master\Obat\DataObatController;
 use App\Http\Controllers\API\Master\Obat\GolonganObatController;
@@ -74,6 +75,7 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::prefix("master")->group(function () {
         Route::resource("role", RoleController::class);
         Route::resource("kategori_artikel", KategoriArtikelController::class);
+        Route::resource("artikel", DataArtikelController::class);
 
         Route::prefix("obat")->group(function () {
             Route::resource("data_obat", DataObatController::class);
