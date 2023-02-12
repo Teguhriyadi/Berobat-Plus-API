@@ -11,6 +11,7 @@ use App\Http\Controllers\API\Akun\Profile\Admin\ProfileController;
 use App\Http\Controllers\API\Akun\Profile\Apotek\ProfileController as ApotekProfileController;
 use App\Http\Controllers\API\Akun\Profile\Perawat\ProfileController as PerawatProfileController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
+use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\API\Master\Obat\GolonganObatController;
 use App\Http\Controllers\API\Master\RoleController;
 use Illuminate\Http\Request;
@@ -73,6 +74,8 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::resource("golongan_obat", GolonganObatController::class);
         });
     });
+
+    Route::get("/count_data", [DashboardController::class, "dashboard"]);
 
     Route::get("/logout", [LoginController::class, "logout"]);
 });
