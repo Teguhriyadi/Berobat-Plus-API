@@ -19,8 +19,8 @@ return new class extends Migration
             $table->date("tanggal");
             $table->integer("qty");
             $table->string("apotek_id", 50);
-            $table->string("nama_supplier", 50);
-            $table->string("asal_supplier", 100);
+            $table->string("nama_supplier", 50)->nullable();
+            $table->string("asal_supplier", 100)->nullable();
             $table->tinyInteger("status")->default(1);
             $table->timestamps();
         });

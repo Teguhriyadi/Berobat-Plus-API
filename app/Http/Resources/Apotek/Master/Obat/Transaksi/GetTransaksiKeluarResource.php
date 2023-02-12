@@ -14,6 +14,12 @@ class GetTransaksiKeluarResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            "id_transaksi_obat" => $this->id_transaksi_obat,
+            "get_obat" => $this->getObat,
+            "tanggal" => $this->tanggal,
+            "qty" => $this->qty,
+            "status" => $this->status
+        ];
     }
 }

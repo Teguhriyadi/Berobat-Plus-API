@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\API\Master\Obat\Transaksi;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Apotek\Master\Obat\Transaksi\GetTransaksiMasukResource;
+use App\Http\Resources\Apotek\Master\Obat\Transaksi\GetTransaksiKeluarResource;
 use App\Models\Master\Obat\TransaksiObat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class TransaksiObatMasukController extends Controller
+class TransaksiObatKeluarController extends Controller
 {
     public function index()
     {
         return DB::transaction(function () {
             $transaksi = TransaksiObat::orderBy("created_at", "DESC")->with("getObat:id_obat,nama_obat,harga")->paginate(10);
 
-            return GetTransaksiMasukResource::collection($transaksi);
+            return GetTransaksiKeluarResource::collection($transaksi);
         });
     }
 
@@ -29,12 +29,10 @@ class TransaksiObatMasukController extends Controller
                 "tanggal" => $request->tanggal,
                 "qty" => $request->qty,
                 "apotek_id" => Auth::user()->getApotek->id_owner_apotek,
-                "nama_supplier" => $request->nama_supplier,
-                "asal_supplier" => $request->asal_supplier,
-                "status" => 1
+                "status" => 0
             ]);
 
-            return response()->json(["pesan" => "Data Transaksi Obat Masuk Berhasil di Tambahkan"]);
+            return response()->json(["pesan" => "Data Transaksi Obat Keluar Berhasil di Tambahkan"]);
         });
     }
 
@@ -43,7 +41,7 @@ class TransaksiObatMasukController extends Controller
         return DB::transaction(function () use ($id_transaksi_obat) {
             $transaksi = TransaksiObat::where("id_transaksi_obat", $id_transaksi_obat)->first();
 
-            return new GetTransaksiMasukResource($transaksi);
+            return new GetTransaksiKeluarResource($transaksi);
         });
     }
 
@@ -54,12 +52,10 @@ class TransaksiObatMasukController extends Controller
             TransaksiObat::where("id_transaksi_obat", $id_transaksi_obat)->update([
                 "obat_id" => $request->obat_id,
                 "tanggal" => $request->tanggal,
-                "qty" => $request->qty,
-                "nama_supplier" => $request->nama_supplier,
-                "asal_supplier" => $request->asal_supplier
+                "qty" => $request->qty
             ]);
 
-            return response()->json(["pesan" => "Data Transaksi Obat Masuk Berhasil di Simpan"]);
+            return response()->json(["pesan" => "Data Transaksi Obat Keluar Berhasil di Simpan"]);
         });
     }
 
@@ -69,7 +65,7 @@ class TransaksiObatMasukController extends Controller
 
             TransaksiObat::where("id_transaksi_obat", $id_transaksi_obat)->delete();
 
-            return response()->json(["pesan" => "Data Transaksi Obat Masuk Berhasil di Hapus"]);
+            return response()->json(["pesan" => "Data Transaksi Obat Keluar Berhasil di Hapus"]);
         });
     }
 }
