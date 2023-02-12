@@ -20,8 +20,6 @@ return new class extends Migration
             $table->text("deskripsi");
             $table->string("apotek_id", 50);
             $table->string("foto")->nullable();
-            $table->string("nama_supplier");
-            $table->string("asal_supplier");
             $table->string("golongan_obat_id", 50);
             $table->timestamps();
         });

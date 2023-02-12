@@ -20,8 +20,6 @@ class GetObatResource extends JsonResource
             "harga" => "Rp." . number_format($this->harga),
             "deskripsi" => $this->deskripsi,
             "foto" => $this->foto,
-            "nama_supplier" => $this->nama_supplier,
-            "asal_supplier" => $this->asal_supllier,
             "get_golongan_obat" => $this->getGolonganObat
         ];
     }

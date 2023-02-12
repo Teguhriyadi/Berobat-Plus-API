@@ -29,8 +29,6 @@ class DataObatController extends Controller
                 "harga" => $request->harga,
                 "deskripsi" => $request->deskripsi,
                 "apotek_id" => Auth::user()->getApotek->id_owner_apotek,
-                "nama_supplier" => $request->nama_supplier,
-                "asal_supplier" => $request->asal_supplier,
                 "golongan_obat_id" => $request->golongan_obat_id
             ]);
 
@@ -55,8 +53,6 @@ class DataObatController extends Controller
                 "nama_obat" => $request->nama_obat,
                 "harga" => $request->harga,
                 "deskripsi" => $request->deskripsi,
-                "nama_supplier" => $request->nama_supplier,
-                "asal_supplier" => $request->asal_supplier,
                 "golongan_obat_id" => $request->golongan_obat_id
             ]);
 
