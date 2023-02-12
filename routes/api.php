@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Akun\AllAccountController;
+use App\Http\Controllers\API\Akun\ChangePasswordController;
 use App\Http\Controllers\API\Akun\CompanyController;
 use App\Http\Controllers\API\Akun\DokterController;
 use App\Http\Controllers\API\Akun\KonsumenController;
@@ -61,6 +62,8 @@ Route::middleware("auth:sanctum")->group(function () {
                 Route::put("/profil", [PerawatProfileController::class, "update_profil"]);
             });
         });
+
+        Route::put("/change_password", [ChangePasswordController::class, "change_password"]);
     });
 
     Route::prefix("master")->group(function () {
