@@ -27,4 +27,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo("App\Models\Master\Role", "id_role", "id_role");
     }
+
+    public function getApotek()
+    {
+        return $this->belongsTo("App\Models\Akun\OwnerApotek", "id", "user_id");
+    }
 }
