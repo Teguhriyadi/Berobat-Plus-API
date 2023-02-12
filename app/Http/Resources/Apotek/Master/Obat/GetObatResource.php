@@ -17,7 +17,7 @@ class GetObatResource extends JsonResource
         return [
             "id_obat" => $this->id_obat,
             "nama_obat" => $this->nama_obat,
-            "harga" => "Rp." . number_format($this->harga),
+            "harga" => $this->harga,
             "deskripsi" => $this->deskripsi,
             "foto" => $this->foto,
             "get_golongan_obat" => $this->getGolonganObat
