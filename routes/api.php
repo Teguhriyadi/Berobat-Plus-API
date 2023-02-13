@@ -18,6 +18,7 @@ use App\Http\Controllers\API\Master\Obat\DataObatController;
 use App\Http\Controllers\API\Master\Obat\GolonganObatController;
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatKeluarController;
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatMasukController;
+use App\Http\Controllers\API\Master\Pengaturan\ProfilController;
 use App\Http\Controllers\API\Master\RoleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -82,6 +83,10 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::resource("golongan_obat", GolonganObatController::class);
             Route::resource("transaksi_obat_masuk", TransaksiObatMasukController::class);
             Route::resource("transaksi_obat_keluar", TransaksiObatKeluarController::class);
+        });
+
+        Route::prefix("pengaturan")->group(function () {
+            Route::resource("profil", ProfilController::class);
         });
     });
 
