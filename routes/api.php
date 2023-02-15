@@ -10,6 +10,7 @@ use App\Http\Controllers\API\Akun\PerawatController;
 use App\Http\Controllers\API\Akun\Profile\Admin\ProfileController;
 use App\Http\Controllers\API\Akun\Profile\Apotek\ProfileController as ApotekProfileController;
 use App\Http\Controllers\API\Akun\Profile\Perawat\ProfileController as PerawatProfileController;
+use App\Http\Controllers\API\Akun\Public\PictureController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\API\Master\Artikel\DataArtikelController;
@@ -46,6 +47,9 @@ Route::prefix("autentikasi")->group(function () {
 
 Route::middleware("auth:sanctum")->group(function () {
     Route::prefix("akun")->group(function () {
+
+        Route::put("/update-picture", [PictureController::class, "update_picture"]);
+
         Route::get("/all_account", [AllAccountController::class, "index"]);
         Route::resource("/company", CompanyController::class);
         Route::resource("/dokter", DokterController::class);
