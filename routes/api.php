@@ -10,6 +10,7 @@ use App\Http\Controllers\API\Akun\PerawatController;
 use App\Http\Controllers\API\Akun\Profile\Admin\ProfileController;
 use App\Http\Controllers\API\Akun\Profile\Apotek\ProfileController as ApotekProfileController;
 use App\Http\Controllers\API\Akun\Profile\Perawat\ProfileController as PerawatProfileController;
+use App\Http\Controllers\API\Akun\Public\ActivateAccountController;
 use App\Http\Controllers\API\Akun\Public\PictureController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\DashboardController;
@@ -73,6 +74,8 @@ Route::middleware("auth:sanctum")->group(function () {
                 Route::put("/profil", [PerawatProfileController::class, "update_profil"]);
             });
         });
+
+        Route::put("/active_account/{id_user}", [ActivateAccountController::class, "active_account"]);
 
         Route::put("/change_password", [ChangePasswordController::class, "change_password"]);
     });
