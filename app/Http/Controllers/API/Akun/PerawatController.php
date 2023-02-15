@@ -27,7 +27,7 @@ class PerawatController extends Controller
             $user = User::create([
                 "nama" => $request->nama,
                 "email" => $request->email,
-                "password" => bcrypt("perawat"),
+                "password" => bcrypt($request->password),
                 "nomor_hp" => $request->nomor_hp,
                 "alamat" => $request->alamat,
                 "id_role" => "RO-2003063",
@@ -37,7 +37,7 @@ class PerawatController extends Controller
                 "tinggi_badan" => $request->tinggi_badan,
                 "tempat_lahir" => $request->tempat_lahir,
                 "tanggal_lahir" => $request->tanggal_lahir,
-                "status" => 1
+                "status" => "0"
             ]);
 
             Perawat::create([
@@ -53,7 +53,7 @@ class PerawatController extends Controller
     public function edit($id)
     {
         return DB::transaction(function () use ($id) {
-            $perawat = Perawat::where("id_perawat", $id)->first();
+            $perawat = Perawat::where("id_perawat", $id)->with("getUser:id,nama,email,nomor_hp,alamat,jenis_kelamin,foto,usia,berat_badan,tinggi_badan,tempat_lahir,tanggal_lahir")->first();
 
             return new GetPerawatResource($perawat);
         });
