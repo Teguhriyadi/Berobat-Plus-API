@@ -44,7 +44,8 @@ class DokterController extends Controller
                 "id_dokter" => "DOC-" . date("YmdHis"),
                 "pendidikan_terakhir" => $request->pendidikan_terakhir,
                 "nomor_str" => $request->nomor_str,
-                "user_id" => $user->id
+                "user_id" => $user->id,
+                "kelas" => $request->kelas
             ]);
 
             return response()->json(["pesan" => "Data Dokter Berhasil di Tambahkan"]);
@@ -79,8 +80,8 @@ class DokterController extends Controller
             ]);
 
             Dokter::where("id_dokter", $id_dokter)->update([
-                "pendidikan_terakhir" => $request->pendidikan_terakhir,
                 "nomor_str" => $request->nomor_str,
+                "kelas" => $request->kelas
             ]);
 
             return response()->json(["pesan" => "Data Dokter Berhasil di Simpan"]);

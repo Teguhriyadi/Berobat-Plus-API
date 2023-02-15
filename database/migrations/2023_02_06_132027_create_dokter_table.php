@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("id_dokter", 50)->primary();
             $table->integer("user_id");
             $table->string("nomor_str", 50);
+            $table->tinyInteger("kelas");
             $table->timestamps();
         });
     }

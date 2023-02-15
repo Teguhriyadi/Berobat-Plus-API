@@ -17,7 +17,8 @@ class GetDokterResource extends JsonResource
         return [
             "id_dokter" => $this->id_dokter,
             "user_id" => $this->getUser,
-            "nomor_str" => $this->nomor_str
+            "nomor_str" => $this->nomor_str,
+            "kelas" => $this->kelas
         ];
     }
 }
