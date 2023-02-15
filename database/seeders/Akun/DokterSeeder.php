@@ -18,21 +18,18 @@ class DokterSeeder extends Seeder
         Dokter::create([
             "id_dokter" => "DKTR-09022002",
             "user_id" => 3,
-            "pendidikan_terakhir" => "Universitas Siliwangi",
             "nomor_str" => "3212121211212121"
         ]);
 
         Dokter::create([
             "id_dokter" => "DKTR-09022003",
             "user_id" => 4,
-            "pendidikan_terakhir" => "Universitas Tasikmalaya",
             "nomor_str" => "3212121211212121"
         ]);
 
         Dokter::create([
             "id_dokter" => "DKTR-09022004",
             "user_id" => 5,
-            "pendidikan_terakhir" => "Universitas Indonesia",
             "nomor_str" => "3212121211212121"
         ]);
     }

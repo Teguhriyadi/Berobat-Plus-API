@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('dokter', function (Blueprint $table) {
             $table->string("id_dokter", 50)->primary();
             $table->integer("user_id");
-            $table->string("pendidikan_terakhir", 50);
             $table->string("nomor_str", 50);
             $table->timestamps();
         });

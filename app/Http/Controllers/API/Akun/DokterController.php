@@ -15,7 +15,7 @@ class DokterController extends Controller
     public function index()
     {
         return DB::transaction(function () {
-            $dokter = Dokter::orderBy("created_at", "DESC")->paginate(10);
+            $dokter = Dokter::orderBy("created_at", "DESC")->with("getUser:id,nama,email,jenis_kelamin,nomor_hp,alamat,tempat_lahir,tanggal_lahir")->paginate(10);
 
             return GetDokterResource::collection($dokter);
         });
@@ -28,23 +28,21 @@ class DokterController extends Controller
             $user = User::create([
                 "nama" => $request->nama,
                 "email" => $request->email,
-                "password" => bcrypt("password"),
+                "password" => bcrypt($request->password),
                 "nomor_hp" => $request->nomor_hp,
                 "alamat" => $request->alamat,
-                "id_role" => 3,
+                "id_role" => "RO-2003062",
                 "jenis_kelamin" => $request->jenis_kelamin,
                 "usia" => $request->usia,
                 "berat_badan" => $request->berat_badan,
                 "tinggi_badan" => $request->tinggi_badan,
                 "tanggal_lahir" => $request->tanggal_lahir,
-                "status" => 1
+                "status" => "0"
             ]);
 
             Dokter::create([
                 "id_dokter" => "DOC-" . date("YmdHis"),
-                "jabatan" => $request->jabatan,
                 "pendidikan_terakhir" => $request->pendidikan_terakhir,
-                "praktik_di" => $request->praktik_di,
                 "nomor_str" => $request->nomor_str,
                 "user_id" => $user->id
             ]);
@@ -56,7 +54,7 @@ class DokterController extends Controller
     public function edit($id)
     {
         return DB::transaction(function () use ($id) {
-            $dokter = Dokter::where("id_dokter", $id)->first();
+            $dokter = Dokter::where("id_dokter", $id)->with("getUser:id,nama,email,jenis_kelamin,nomor_hp,alamat,tempat_lahir,tanggal_lahir")->first();
 
             return new GetDokterResource($dokter);
         });
@@ -73,7 +71,6 @@ class DokterController extends Controller
                 "email" => $request->email,
                 "nomor_hp" => $request->nomor_hp,
                 "alamat" => $request->alamat,
-                "id_role" => 3,
                 "jenis_kelamin" => $request->jenis_kelamin,
                 "usia" => $request->usia,
                 "berat_badan" => $request->berat_badan,
@@ -82,9 +79,7 @@ class DokterController extends Controller
             ]);
 
             Dokter::where("id_dokter", $id_dokter)->update([
-                "jabatan" => $request->jabatan,
                 "pendidikan_terakhir" => $request->pendidikan_terakhir,
-                "praktik_di" => $request->praktik_di,
                 "nomor_str" => $request->nomor_str,
             ]);
 
