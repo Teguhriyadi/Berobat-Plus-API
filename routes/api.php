@@ -16,6 +16,7 @@ use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\API\Master\Artikel\DataArtikelController;
 use App\Http\Controllers\API\Master\Artikel\KategoriArtikelController;
+use App\Http\Controllers\API\Master\KeahlianDokterController;
 use App\Http\Controllers\API\Master\Obat\DataObatController;
 use App\Http\Controllers\API\Master\Obat\GolonganObatController;
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatKeluarController;
@@ -95,6 +96,8 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::prefix("pengaturan")->group(function () {
             Route::resource("profil", ProfilController::class);
         });
+
+        Route::resource("keahlian", KeahlianDokterController::class);
     });
 
     Route::get("/count_data", [DashboardController::class, "dashboard"]);
