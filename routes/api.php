@@ -15,6 +15,7 @@ use App\Http\Controllers\API\Akun\Public\PictureController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\API\Master\Artikel\DataArtikelController;
+use App\Http\Controllers\API\Master\Artikel\GroupingArtikelController;
 use App\Http\Controllers\API\Master\Artikel\KategoriArtikelController;
 use App\Http\Controllers\API\Master\DokterKeahlianController;
 use App\Http\Controllers\API\Master\KeahlianDokterController;
@@ -86,6 +87,7 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::resource("role", RoleController::class);
         Route::resource("kategori_artikel", KategoriArtikelController::class);
         Route::resource("artikel", DataArtikelController::class);
+        Route::resource("grouping_artikel", GroupingArtikelController::class);
 
         Route::prefix("obat")->group(function () {
             Route::resource("data_obat", DataObatController::class);
