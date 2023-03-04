@@ -25,6 +25,7 @@ use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatKeluarController
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatMasukController;
 use App\Http\Controllers\API\Master\Pengaturan\ProfilController;
 use App\Http\Controllers\API\Master\RoleController;
+use App\Http\Controllers\TesXenditController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,9 @@ Route::prefix("autentikasi")->group(function () {
         ]);
     })->name("login");
 });
+
+Route::resource("tagihan", TesXenditController::class);
+Route::get("/callback", [TesXenditController::class, "callback"]);
 
 Route::middleware("auth:sanctum")->group(function () {
     Route::prefix("akun")->group(function () {
