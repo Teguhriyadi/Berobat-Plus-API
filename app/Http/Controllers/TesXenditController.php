@@ -9,6 +9,13 @@ use Illuminate\Support\Str;
 
 class TesXenditController extends Controller
 {
+    public function index()
+    {
+        $data = Tagihan::all();
+
+        return view("/tes-xendit", compact("data"));
+    }
+
     public function store(Request $request)
     {
         $secret_key = "Basic " . config("xendit.key_auth");
