@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('tagihans', function (Blueprint $table) {
             $table->id();
-            $table->string("doc_no")->nullable();
+            $table->string("doc_no", 255)->nullable();
             $table->text("description")->nullable();
             $table->integer("amount")->default(0);
-            $table->string("payment_status")->nullable();
+            $table->string("payment_status", 255)->nullable();
             $table->text("payment_link")->nullable();
             $table->timestamps();
         });

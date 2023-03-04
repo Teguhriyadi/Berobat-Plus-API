@@ -50,7 +50,7 @@ Route::prefix("autentikasi")->group(function () {
     })->name("login");
 });
 
-Route::resource("tagihan", TesXenditController::class);
+Route::resource("/tagihan", TesXenditController::class);
 Route::get("/callback", [TesXenditController::class, "callback"]);
 
 Route::middleware("auth:sanctum")->group(function () {
