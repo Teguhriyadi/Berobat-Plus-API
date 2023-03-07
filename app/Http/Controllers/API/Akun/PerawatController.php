@@ -14,7 +14,7 @@ class PerawatController extends Controller
     public function index()
     {
         return DB::transaction(function () {
-            $perawat = Perawat::orderBy("created_at", "DESC")->with("getUser:id,nama,email,nomor_hp,alamat,jenis_kelamin,foto,usia,berat_badan,tinggi_badan,tempat_lahir,tanggal_lahir")->paginate(10);
+            $perawat = Perawat::orderBy("created_at", "DESC")->with("getUser:id,nama,email,nomor_hp,alamat,jenis_kelamin,foto,usia,berat_badan,tinggi_badan,tempat_lahir,tanggal_lahir, status")->paginate(10);
 
             return GetPerawatResource::collection($perawat);
         });
