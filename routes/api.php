@@ -25,6 +25,7 @@ use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatKeluarController
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatMasukController;
 use App\Http\Controllers\API\Master\Pengaturan\ProfilController;
 use App\Http\Controllers\API\Master\RoleController;
+use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\TesXenditController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -106,6 +107,12 @@ Route::middleware("auth:sanctum")->group(function () {
 
         Route::resource("keahlian", KeahlianDokterController::class);
         Route::resource("dokter_keahlian", DokterKeahlianController::class);
+    });
+
+    Route::prefix("apotek")->group(function () {
+        Route::prefix("pengaturan")->group(function () {
+            Route::resource("profil_apotek", ProfilApotekController::class);
+        });
     });
 
     Route::get("/count_data", [DashboardController::class, "dashboard"]);
