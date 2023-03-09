@@ -15,6 +15,7 @@ class GetProfilResource extends JsonResource
     public function toArray($request)
     {
         return [
+            "id"            => $this->id,
             "nama"          => $this->nama,
             "email"         => $this->email,
             "nomor_hp"      => $this->nomor_hp,
