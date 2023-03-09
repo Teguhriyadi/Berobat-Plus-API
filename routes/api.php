@@ -111,6 +111,8 @@ Route::middleware("auth:sanctum")->group(function () {
 
     Route::prefix("apotek")->group(function () {
         Route::prefix("pengaturan")->group(function () {
+            Route::put("/profil_apotek/aktifkan", [ProfilApotekController::class, "aktifkan"]);
+            Route::put("/profil_apotek/non_aktifkan", [ProfilApotekController::class, "non_aktifkan"]);
             Route::resource("profil_apotek", ProfilApotekController::class);
         });
     });

@@ -71,4 +71,26 @@ class ProfilApotekController extends Controller
             return response()->json(["pesan" => "Data Berhasil di Hapus"]);
         });
     }
+
+    public function aktifkan(Request $request)
+    {
+        return DB::transaction(function () use ($request) {
+            ProfilApotek::where("id_profil_apotek", $request->id_profil_apotek)->update([
+                "status" => 1
+            ]);
+
+            return response()->json(["pesan" => "Data Status Berhasil di Aktifkan"]);
+        });
+    }
+
+    public function non_aktifkan(Request $request)
+    {
+        return DB::transaction(function () use ($request) {
+            ProfilApotek::where("id_profil_apotek", $request->id_profil_apotek)->update([
+                "status" => 0
+            ]);
+
+            return response()->json(["pesan" => "Data Status Berhasil di Non - Aktifkan"]);
+        });
+    }
 }
