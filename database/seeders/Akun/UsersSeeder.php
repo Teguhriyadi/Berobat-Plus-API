@@ -138,6 +138,7 @@ class UsersSeeder extends Seeder
             "nomor_hp" => "08532423726759",
             "alamat" => "Brazil",
             "id_role" => "RO-2003065",
+            "created_by" => 1,
             "status" => 1
         ]);
 
