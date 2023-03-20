@@ -12,6 +12,21 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    public function create_api()
+    {
+        $user = User::find(1);
+
+        $token = $user->createToken("ApiToken")->plainTextToken;
+
+        $response = [
+            "success" => true,
+            "user" => $user,
+            "token" => $token
+        ];
+
+        return response($response, 201);
+    }
+
     public function dashboard()
     {
         $data = [
