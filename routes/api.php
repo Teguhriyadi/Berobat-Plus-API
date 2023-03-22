@@ -15,6 +15,7 @@ use App\Http\Controllers\API\Akun\Public\PictureController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\API\Master\Artikel\DataArtikelController;
+use App\Http\Controllers\API\Master\Artikel\DetailArtikelController;
 use App\Http\Controllers\API\Master\Artikel\GroupingArtikelController;
 use App\Http\Controllers\API\Master\Artikel\KategoriArtikelController;
 use App\Http\Controllers\API\Master\DokterKeahlianController;
@@ -92,6 +93,8 @@ Route::middleware("auth:sanctum")->group(function () {
     });
 
     Route::prefix("master")->group(function () {
+
+        Route::get("/artikel/{slug}", [DetailArtikelController::class, "index"]);
         Route::resource("role", RoleController::class);
         Route::resource("kategori_artikel", KategoriArtikelController::class);
         Route::resource("artikel", DataArtikelController::class);
