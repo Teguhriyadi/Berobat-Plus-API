@@ -28,6 +28,7 @@ use App\Http\Controllers\API\Master\Pengaturan\ProfilController;
 use App\Http\Controllers\API\Master\RoleController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\TesXenditController;
+use App\Models\Master\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +58,9 @@ Route::prefix("autentikasi")->group(function () {
 Route::resource("/tagihan", TesXenditController::class);
 Route::get("/callback", [TesXenditController::class, "callback"]);
 
+Route::prefix("akun")->group(function () {
+    Route::resource("/konsumen", KonsumenController::class);
+});
 
 Route::middleware("auth:sanctum")->group(function () {
     Route::prefix("akun")->group(function () {
@@ -66,7 +70,6 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::get("/all_account", [AllAccountController::class, "index"]);
         Route::resource("/company", CompanyController::class);
         Route::resource("/dokter", DokterController::class);
-        Route::resource("/konsumen", KonsumenController::class);
         Route::resource("/perawat", PerawatController::class);
         Route::resource("/apotek", OwnerApotekController::class);
 
