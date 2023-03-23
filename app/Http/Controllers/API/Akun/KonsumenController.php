@@ -27,16 +27,10 @@ class KonsumenController extends Controller
             $user = User::create([
                 "nama" => $request->nama,
                 "email" => $request->email,
-                "password" => bcrypt("password"),
+                "password" => bcrypt($request->password),
                 "nomor_hp" => $request->nomor_hp,
                 "alamat" => $request->alamat,
                 "id_role" => "RO-2003064",
-                "jenis_kelamin" => $request->jenis_kelamin,
-                "usia" => $request->usia,
-                "berat_badan" => $request->berat_badan,
-                "tinggi_badan" => $request->tinggi_badan,
-                "tempat_lahir" => $request->tempat_lahir,
-                "tanggal_lahir" => $request->tanggal_lahir,
                 "status" => 1
             ]);
 
