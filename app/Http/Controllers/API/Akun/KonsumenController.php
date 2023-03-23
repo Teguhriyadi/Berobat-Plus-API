@@ -29,6 +29,7 @@ class KonsumenController extends Controller
                 "email" => $request->email,
                 "password" => bcrypt($request->password),
                 "nomor_hp" => $request->nomor_hp,
+                "alamat" => "Indonesia",
                 "id_role" => "RO-2003064",
                 "status" => 1
             ]);
