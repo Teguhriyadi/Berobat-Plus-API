@@ -15,7 +15,7 @@ class DataArtikelController extends Controller
     public function index()
     {
         return DB::transaction(function () {
-            $artikel = DataArtikel::orderBy(DB::raw("RAND()"))->with("getUser:id,nama")->paginate(2);
+            $artikel = DataArtikel::orderBy(DB::raw("RAND()"))->with("getUser:id,nama")->paginate(4);
 
             return GetArtikelResource::collection($artikel);
         });
