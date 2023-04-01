@@ -69,6 +69,8 @@ Route::middleware("auth:sanctum")->group(function () {
 
         Route::get("/all_account", [AllAccountController::class, "index"]);
         Route::resource("/company", CompanyController::class);
+
+        Route::get("/dokter/semua_data", [DokterController::class, "all_data"]);
         Route::resource("/dokter", DokterController::class);
         Route::resource("/perawat", PerawatController::class);
         Route::resource("/apotek", OwnerApotekController::class);

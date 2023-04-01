@@ -11,6 +11,9 @@ use Database\Seeders\Akun\OwnerApotekSeeder;
 use Database\Seeders\Akun\UsersSeeder;
 use Database\Seeders\Apotek\ObatSeeder;
 use Database\Seeders\Apotek\ProfilApotekSeeder;
+use Database\Seeders\Master\Artikel\ContentArtikelSeeder;
+use Database\Seeders\Master\GroupingArtikel\GroupingSeeder;
+use Database\Seeders\Master\Kategori\KategoriArtikelSeeder;
 use Database\Seeders\Master\Obat\GolonganObatSeeder;
 use Database\Seeders\Master\RoleSeeder;
 use Illuminate\Database\Seeder;
@@ -32,5 +35,8 @@ class DatabaseSeeder extends Seeder
         $this->call(GolonganObatSeeder::class);
         $this->call(ProfilApotekSeeder::class);
         $this->call(ObatSeeder::class);
+        $this->call(KategoriArtikelSeeder::class);
+        $this->call(ContentArtikelSeeder::class);
+        $this->call(GroupingSeeder::class);
     }
 }

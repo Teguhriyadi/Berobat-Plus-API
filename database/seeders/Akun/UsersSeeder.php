@@ -151,5 +151,15 @@ class UsersSeeder extends Seeder
             "id_role" => "RO-2003065",
             "status" => 1
         ]);
+
+        User::create([
+            "nama" => "Abdul Rahman",
+            "email" => "abdul123@gmail.com",
+            "password" => bcrypt("password"),
+            "nomor_hp" => "085324237267812",
+            "alamat" => "Bandung",
+            "id_role" => "RO-2003062",
+            "status" => 1
+        ]);
     }
 }

@@ -101,4 +101,13 @@ class DokterController extends Controller
             return response()->json(["pesan" => "Data Dokter Berhasil di Hapus"]);
         });
     }
+
+    public function all_data()
+    {
+        return DB::transaction(function () {
+            $dokter = Dokter::orderBy(DB::raw("RAND()"))->with("getUser:id,nama,email,jenis_kelamin,nomor_hp,alamat,tempat_lahir,tempat_lahir,tanggal_lahir,status")->paginate(10);
+
+            return GetDokterResource::collection($dokter);
+        });
+    }
 }
