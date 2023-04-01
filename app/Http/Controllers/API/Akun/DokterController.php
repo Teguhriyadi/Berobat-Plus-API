@@ -110,4 +110,13 @@ class DokterController extends Controller
             return GetDokterResource::collection($dokter);
         });
     }
+
+    public function uid_partner($uid_partner)
+    {
+        return DB::transaction(function () use ($uid_partner) {
+            $list = Dokter::where("id_dokter", $uid_partner)->first();
+
+            return new GetDokterResource($list);
+        });
+    }
 }
