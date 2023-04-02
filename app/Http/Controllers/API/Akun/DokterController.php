@@ -114,9 +114,9 @@ class DokterController extends Controller
     public function uid_partner($uid_partner)
     {
         return DB::transaction(function () use ($uid_partner) {
-            $list = Dokter::where("id_dokter", $uid_partner)->first();
+            $list = Dokter::where("id_dokter", $uid_partner)->get();
 
-            return new GetDokterResource($list);
+            return GetDokterResource::collection($list);
         });
     }
 }
