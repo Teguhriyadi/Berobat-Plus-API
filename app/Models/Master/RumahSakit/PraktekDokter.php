@@ -18,4 +18,14 @@ class PraktekDokter extends Model
     protected $keyType = "string";
 
     public $incrementing = false;
+
+    public function getDokter()
+    {
+        return $this->belongsTo("App\Models\Akun\Dokter", "id_dokter", "id_dokter");
+    }
+
+    public function getKeahlian()
+    {
+        return $this->belongsTo("App\Models\Master\KeahlianDokter", "id_keahlian", "id_keahlian");
+    }
 }

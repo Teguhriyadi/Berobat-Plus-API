@@ -19,6 +19,7 @@ use Database\Seeders\Master\Kategori\KategoriArtikelSeeder;
 use Database\Seeders\Master\Obat\GolonganObatSeeder;
 use Database\Seeders\Master\RoleSeeder;
 use Database\Seeders\Master\RumahSakit\DetailPraktekDokterSeeder;
+use Database\Seeders\Master\RumahSakit\PraktekDokterSeeder;
 use Database\Seeders\Master\RumahSakit\SpesialisRumahSakitSeeder;
 use Illuminate\Database\Seeder;
 
@@ -46,5 +47,6 @@ class DatabaseSeeder extends Seeder
         $this->call(KeahlianDokterSeeder::class);
         $this->call(DetailPraktekDokterSeeder::class);
         $this->call(SpesialisRumahSakitSeeder::class);
+        $this->call(PraktekDokterSeeder::class);
     }
 }

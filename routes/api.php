@@ -26,6 +26,7 @@ use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatKeluarController
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatMasukController;
 use App\Http\Controllers\API\Master\Pengaturan\ProfilController;
 use App\Http\Controllers\API\Master\RoleController;
+use App\Http\Controllers\API\Master\RumahSakit\GetSpesialisDokterController;
 use App\Http\Controllers\API\Master\RumahSakit\SpesialisRumahSakitController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\TesXenditController;
@@ -123,6 +124,9 @@ Route::middleware("auth:sanctum")->group(function () {
 
         Route::prefix("rumah_sakit")->group(function () {
             Route::get("/spesialis/{id_rumah_sakit}", [SpesialisRumahSakitController::class, "index"]);
+        });
+        Route::prefix("spesialis")->group(function () {
+            Route::get("/{id_spesialis}", [GetSpesialisDokterController::class, "index"]);
         });
     });
 
