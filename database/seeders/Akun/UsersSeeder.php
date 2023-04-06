@@ -161,5 +161,15 @@ class UsersSeeder extends Seeder
             "id_role" => "RO-2003062",
             "status" => 1
         ]);
+
+        User::create([
+            "nama" => "Lapu - Lapu",
+            "email" => "rs.lapu@gmail.com",
+            "password" => bcrypt("rumahsakit"),
+            "nomor_hp" => "1234567891011",
+            "alamat" => "Cirebon",
+            "id_role" => "RO-2003066",
+            "status" => 1
+        ]);
     }
 }

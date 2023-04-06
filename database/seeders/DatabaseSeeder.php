@@ -8,6 +8,7 @@ use Database\Seeders\Akun\CompanySeeder;
 use Database\Seeders\Akun\DokterSeeder;
 use Database\Seeders\Akun\KonsumenSeeder;
 use Database\Seeders\Akun\OwnerApotekSeeder;
+use Database\Seeders\Akun\RumahSakitSeeder;
 use Database\Seeders\Akun\UsersSeeder;
 use Database\Seeders\Apotek\ObatSeeder;
 use Database\Seeders\Apotek\ProfilApotekSeeder;
@@ -38,5 +39,6 @@ class DatabaseSeeder extends Seeder
         $this->call(KategoriArtikelSeeder::class);
         $this->call(ContentArtikelSeeder::class);
         $this->call(GroupingSeeder::class);
+        $this->call(RumahSakitSeeder::class);
     }
 }

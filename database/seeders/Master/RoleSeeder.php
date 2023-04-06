@@ -39,5 +39,10 @@ class RoleSeeder extends Seeder
             "id_role" => "RO-2003065",
             "nama_role" => "Owner Apotek"
         ]);
+
+        Role::create([
+            "id_role" => "RO-2003066",
+            "nama_role" => "Admin Rumah Sakit"
+        ]);
     }
 }
