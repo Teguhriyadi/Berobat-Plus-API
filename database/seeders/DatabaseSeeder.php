@@ -14,6 +14,7 @@ use Database\Seeders\Apotek\ObatSeeder;
 use Database\Seeders\Apotek\ProfilApotekSeeder;
 use Database\Seeders\Master\Artikel\ContentArtikelSeeder;
 use Database\Seeders\Master\Bidang\KeahlianDokterSeeder;
+use Database\Seeders\Master\Dokter\BiayaDokterSeeder;
 use Database\Seeders\Master\GroupingArtikel\GroupingSeeder;
 use Database\Seeders\Master\Kategori\KategoriArtikelSeeder;
 use Database\Seeders\Master\Obat\GolonganObatSeeder;
@@ -50,5 +51,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SpesialisRumahSakitSeeder::class);
         $this->call(PraktekDokterSeeder::class);
         $this->call(SpesialisPenyakitSeeder::class);
+        $this->call(BiayaDokterSeeder::class);
     }
 }
