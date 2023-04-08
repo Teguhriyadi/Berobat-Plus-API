@@ -9,6 +9,7 @@ use App\Http\Controllers\API\Akun\OwnerApotekController;
 use App\Http\Controllers\API\Akun\PerawatController;
 use App\Http\Controllers\API\Akun\Profile\Admin\ProfileController;
 use App\Http\Controllers\API\Akun\Profile\Apotek\ProfileController as ApotekProfileController;
+use App\Http\Controllers\API\Akun\Profile\Konsumen\ProfileController as KonsumenProfileController;
 use App\Http\Controllers\API\Akun\Profile\Perawat\ProfileController as PerawatProfileController;
 use App\Http\Controllers\API\Akun\Public\ActivateAccountController;
 use App\Http\Controllers\API\Akun\Public\PictureController;
@@ -94,6 +95,11 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::prefix("perawat")->group(function () {
                 Route::get("/profil", [PerawatProfileController::class, "get_profil"]);
                 Route::put("/profil", [PerawatProfileController::class, "update_profil"]);
+            });
+
+            Route::prefix("konsumen")->group(function () {
+                Route::get("/profil", [KonsumenProfileController::class, "get_profil"]);
+                Route::put("/profil", [KonsumenProfileController::class, "update_profil"]);
             });
         });
 
