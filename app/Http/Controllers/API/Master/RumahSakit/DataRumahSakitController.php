@@ -13,7 +13,7 @@ class DataRumahSakitController extends Controller
     public function index()
     {
         return DB::transaction(function () {
-            $rs = RumahSakit::paginate(2);
+            $rs = RumahSakit::paginate(4);
 
             return GetRumahSakitResource::collection($rs);
         });
