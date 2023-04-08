@@ -50,7 +50,6 @@ class SpesialisRumahSakitSeeder extends Seeder
             "slug_spesialis" => "obstetrics"
         ]);
 
-
         // Rumah Sakit Kedua
 
         SpesialisRumahSakit::create([
@@ -86,6 +85,62 @@ class SpesialisRumahSakitSeeder extends Seeder
             "id_rumah_sakit" => "RS-123456790",
             "nama_spesialis" => "Obstetrics 2",
             "slug_spesialis" => "obstetrics-dua"
+        ]);
+
+        SpesialisRumahSakit::create([
+            "id_spesialis" => "SPS-011",
+            "id_rumah_sakit" => "RS-123456789",
+            "nama_spesialis" => "Hamdan",
+            "slug_spesialis" => "hamdan"
+        ]);
+
+        SpesialisRumahSakit::create([
+            "id_spesialis" => "SPS-012",
+            "id_rumah_sakit" => "RS-123456789",
+            "nama_spesialis" => "Bordrexin",
+            "slug_spesialis" => "bodrexin"
+        ]);
+
+        SpesialisRumahSakit::create([
+            "id_spesialis" => "SPS-013",
+            "id_rumah_sakit" => "RS-123456789",
+            "nama_spesialis" => "Panadol",
+            "slug_spesialis" => "panadol"
+        ]);
+
+        SpesialisRumahSakit::create([
+            "id_spesialis" => "SPS-014",
+            "id_rumah_sakit" => "RS-123456789",
+            "nama_spesialis" => "Maag",
+            "slug_spesialis" => "maag"
+        ]);
+
+        SpesialisRumahSakit::create([
+            "id_spesialis" => "SPS-015",
+            "id_rumah_sakit" => "RS-123456790",
+            "nama_spesialis" => "Bagja",
+            "slug_spesialis" => "bagja"
+        ]);
+
+        SpesialisRumahSakit::create([
+            "id_spesialis" => "SPS-016",
+            "id_rumah_sakit" => "RS-123456790",
+            "nama_spesialis" => "Kulit",
+            "slug_spesialis" => "kulit"
+        ]);
+
+        SpesialisRumahSakit::create([
+            "id_spesialis" => "SPS-017",
+            "id_rumah_sakit" => "RS-123456790",
+            "nama_spesialis" => "Gigi",
+            "slug_spesialis" => "gigi"
+        ]);
+
+        SpesialisRumahSakit::create([
+            "id_spesialis" => "SPS-018",
+            "id_rumah_sakit" => "RS-123456790",
+            "nama_spesialis" => "Badan",
+            "slug_spesialis" => "badan"
         ]);
     }
 }

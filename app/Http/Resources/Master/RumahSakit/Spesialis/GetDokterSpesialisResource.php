@@ -17,7 +17,7 @@ class GetDokterSpesialisResource extends JsonResource
     {
         return [
             "id_praktek" => $this->id_praktek,
-            "id_dokter" => $this->getDokter,
+            "dokter" => $this->getDokter->getUser,
             "id_keahlian" => $this->getKeahlian,
             "id_spesialis" => $this->id_spesialis
         ];
