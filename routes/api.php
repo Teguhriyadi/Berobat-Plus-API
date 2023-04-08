@@ -33,7 +33,6 @@ use App\Http\Controllers\API\Master\RumahSakit\GetSpesialisDokterController;
 use App\Http\Controllers\API\Master\RumahSakit\SpesialisRumahSakitController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\TesXenditController;
-use App\Models\Master\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

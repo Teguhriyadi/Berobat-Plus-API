@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Akun\Dokter;
+namespace App\Http\Resources\Master\Dokter;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GetDokterResource extends JsonResource
+class BiayaDokterResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +15,7 @@ class GetDokterResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id_dokter" => $this->id_dokter,
-            "user_id" => $this->getUser,
-            "nomor_str" => $this->nomor_str,
-            "kelas" => $this->kelas,
-            "biaya" => $this->getBiaya
+            "get_biaya" => $this->biaya
         ];
     }
 }

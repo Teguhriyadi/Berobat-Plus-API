@@ -23,4 +23,9 @@ class Dokter extends Model
     {
         return $this->belongsTo("App\Models\User", "user_id", "id");
     }
+
+    public function getBiaya()
+    {
+        return $this->belongsTo("App\Models\Master\Dokter\BiayaDokter", "id_dokter", "id_dokter");
+    }
 }
