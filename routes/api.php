@@ -27,6 +27,7 @@ use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatKeluarController
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatMasukController;
 use App\Http\Controllers\API\Master\Pengaturan\ProfilController;
 use App\Http\Controllers\API\Master\Penyakit\SpesialisPenyakitController;
+use App\Http\Controllers\API\Master\Produk\KategoriProdukController;
 use App\Http\Controllers\API\Master\RoleController;
 use App\Http\Controllers\API\Master\RumahSakit\DataRumahSakitController;
 use App\Http\Controllers\API\Master\RumahSakit\GetSpesialisDokterController;
@@ -108,6 +109,10 @@ Route::middleware("auth:sanctum")->group(function () {
     });
 
     Route::prefix("master")->group(function () {
+
+        Route::prefix("produk")->group(function () {
+            Route::resource("kategori_produk", KategoriProdukController::class);
+        });
 
         Route::get("/artikel/{slug}", [DetailArtikelController::class, "index"]);
         Route::resource("role", RoleController::class);
