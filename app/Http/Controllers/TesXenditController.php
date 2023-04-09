@@ -6,52 +6,77 @@ use App\Models\Tagihan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use Xendit\Xendit;
+use Carbon\Carbon;
 
 class TesXenditController extends Controller
 {
     public function index()
     {
-        $data = Tagihan::all();
+        $secret_key = env("SECRET_KEY_XENDIT");
 
-        return view("/tes-xendit", compact("data"));
+        Xendit::setApiKey($secret_key);
+
+        $getVaBanks = \Xendit\VirtualAccounts::getVABanks();
+
+        return response()->json([
+            "data" => $getVaBanks
+        ])->setStatusCode(200);
     }
 
     public function store(Request $request)
     {
-        $secret_key = "Basic " . config("xendit.key_auth");
-        $external_id = Str::random(10);
+        $secret_key = env("SECRET_KEY_XENDIT");
 
-        $request_data = Http::withHeaders([
-            "Authorization" => $secret_key,
-        ])->post("https://api.xendit.co/v2/invoices", [
+        Xendit::setApiKey($secret_key);
+
+        $external_id = 'va-' . time();
+
+        $params = [
             "external_id" => $external_id,
-            "amount" => $request->amount
+            "bank_code" => $request->bank_code,
+            "name" => $request->user_name,
+            "expected_amount" => 50000,
+            "is_closed" => true,
+            "expiration_date" => Carbon::now()->addDays(1)->toISOString(),
+            "is_single_use" => true
+        ];
+
+        $insert = Tagihan::create([
+            "external_id" => $external_id,
+            "payment_channel" => "Virtual Account",
+            "email" => $request->email,
+            "harga" => $request->harga
         ]);
 
-        $response = $request_data->object();
-
-        Tagihan::create([
-            "doc_no" => $external_id,
-            "amount" => $request->amount,
-            "description" => $request->description,
-            "payment_status" => $response->status,
-            "payment_link" => $response->invoice_url
-        ]);
-
-        return response()->json(["message" => "Data Berhasil"]);
+        $createVA = \Xendit\VirtualAccounts::create($params);
+        return response()->json([
+            "data" => $createVA
+        ])->setStatusCode(200);
     }
 
-    public function callback(Request $request)
+    public function callbackVa(Request $request)
     {
-        $data = $request->all();
+        $external_id = $request->external_id;
+        $status = $request->status;
+        $payment = Tagihan::where("external_id", $external_id)->exists();
 
-        $status = $data["status"];
-        $external_id = $data["external_id"];
+        if ($payment) {
+            if ($status == "ACTIVE") {
+                $update = Tagihan::where("external_id", $external_id)->update([
+                    "status" => 1
+                ]);
 
-        Tagihan::where("doc_no", $external_id)->update([
-            "payment_status" => $status
-        ]);
+                if ($update > 0) {
+                    return response()->json(["pesan" => "Data Berhasil di Simpan"]);
+                }
 
-        return response()->json($data);
+                return false;
+            }
+        } else {
+            return response()->json([
+                "message" => "Data Tidak Ada"
+            ]);
+        }
     }
 }
