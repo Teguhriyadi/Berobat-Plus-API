@@ -68,6 +68,12 @@ Route::prefix("akun")->group(function () {
 });
 
 Route::middleware("auth:sanctum")->group(function () {
+
+    Route::prefix("xendit")->group(function () {
+        Route::get("/list", [TesXenditController::class, "list"]);
+        Route::post("/create-customer", [TesXenditController::class, "create_customer"]);
+    });
+
     Route::prefix("akun")->group(function () {
 
         Route::put("/update-picture", [PictureController::class, "update_picture"]);

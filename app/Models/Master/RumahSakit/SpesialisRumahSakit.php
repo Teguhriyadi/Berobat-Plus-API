@@ -18,4 +18,9 @@ class SpesialisRumahSakit extends Model
     protected $keyType = "string";
 
     public $incrementing = false;
+
+    public function getSpesialisPenyakit()
+    {
+        return $this->belongsTo("App\Models\Master\Penyakit\SpesialisPenyakit", "id_penyakit", "id_penyakit");
+    }
 }
