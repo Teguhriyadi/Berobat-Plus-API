@@ -69,7 +69,7 @@ class DataProdukController extends Controller
 
             ProdukApotek::where("id_produk", $id_produk)->delete();
 
-            return response()->json(["pesan" => "Data Apotek Berhasil di Hapus"]);
+            return response()->json(["pesan" => "Data Produk Berhasil di Hapus"]);
         });
     }
 }
