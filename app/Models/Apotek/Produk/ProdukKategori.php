@@ -18,4 +18,14 @@ class ProdukKategori extends Model
     protected $keyType = "string";
 
     public $incrementing = false;
+
+    public function getProduk()
+    {
+        return $this->belongsTo("App\Models\Apotek\Produk\ProdukApotek", "id_produk", "id_produk");
+    }
+
+    public function getKategori()
+    {
+        return $this->belongsTo("App\Models\Master\Produk\KategoriProduk", "id_kategori_produk", "id_kategori_produk");
+    }
 }
