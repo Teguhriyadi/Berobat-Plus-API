@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("id_dokter", 50);
             $table->string("id_keahlian", 50);
             $table->string("id_spesialis", 50);
+            $table->string("id_rumah_sakit", 50);
             $table->timestamps();
         });
     }

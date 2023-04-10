@@ -145,7 +145,7 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::get("/spesialis/{id_rumah_sakit}", [SpesialisRumahSakitController::class, "index"]);
         });
         Route::prefix("spesialis")->group(function () {
-            Route::get("/{id_spesialis}", [GetSpesialisDokterController::class, "index"]);
+            Route::get("/{id_spesialis}/{id_rumah_sakit}", [GetSpesialisDokterController::class, "index"]);
         });
 
         Route::prefix("penyakit")->group(function () {
