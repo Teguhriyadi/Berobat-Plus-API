@@ -18,4 +18,9 @@ class ProdukApotek extends Model
     protected $keyType = "string";
 
     public $incrementing = false;
+
+    public function getOwnerApotek()
+    {
+        return $this->belongsTo("App\Models\Akun\OwnerApotek", "id_owner_apotek", "id_owner_apotek");
+    }
 }

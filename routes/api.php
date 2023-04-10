@@ -32,6 +32,7 @@ use App\Http\Controllers\API\Master\RoleController;
 use App\Http\Controllers\API\Master\RumahSakit\DataRumahSakitController;
 use App\Http\Controllers\API\Master\RumahSakit\GetSpesialisDokterController;
 use App\Http\Controllers\API\Master\RumahSakit\SpesialisRumahSakitController;
+use App\Http\Controllers\API\Produk\DataProdukController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\TesXenditController;
 use Illuminate\Http\Request;
@@ -158,6 +159,10 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::put("/profil_apotek/aktifkan", [ProfilApotekController::class, "aktifkan"]);
             Route::put("/profil_apotek/non_aktifkan", [ProfilApotekController::class, "non_aktifkan"]);
             Route::resource("profil_apotek", ProfilApotekController::class);
+        });
+
+        Route::prefix("produk")->group(function () {
+            Route::resource("/data_produk", DataProdukController::class);
         });
     });
 
