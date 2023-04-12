@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\TesXenditController;
 use Illuminate\Support\Facades\Route;
 

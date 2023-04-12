@@ -35,6 +35,7 @@ use App\Http\Controllers\API\Master\RumahSakit\SpesialisRumahSakitController;
 use App\Http\Controllers\API\Produk\DataProdukController;
 use App\Http\Controllers\API\Produk\ProdukKategoriController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\TesXenditController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::get("/findNearest", [LocationController::class, "findNearest"]);
 
 Route::get("/create-api", [DashboardController::class, "create_api"]);
 
