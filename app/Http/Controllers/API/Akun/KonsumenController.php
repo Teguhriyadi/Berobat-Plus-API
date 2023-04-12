@@ -31,7 +31,7 @@ class KonsumenController extends Controller
                 "nomor_hp" => $request->nomor_hp,
                 "alamat" => "Indonesia",
                 "id_role" => "RO-2003064",
-                "status" => 0
+                "status" => 1
             ]);
 
             Konsumen::create([
