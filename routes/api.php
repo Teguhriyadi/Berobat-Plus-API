@@ -151,6 +151,7 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::resource("/data", DataRumahSakitController::class);
             Route::get("/spesialis/{id_rumah_sakit}", [SpesialisRumahSakitController::class, "index"]);
 
+            Route::get("/fasilitas_rs/rs/{id_rumah_sakit}", [FasilitasRumahSakitController::class, "get_list_fasilitas"]);
             Route::resource("fasilitas_rs", FasilitasRumahSakitController::class);
         });
         Route::prefix("spesialis")->group(function () {

@@ -61,4 +61,13 @@ class FasilitasRumahSakitController extends Controller
             return response()->json(["pesan" => "Data Fasilitas Berhasil di Hapus"]);
         });
     }
+
+    public function get_list_fasilitas($id_rumah_sakit)
+    {
+        return DB::transaction(function () use ($id_rumah_sakit) {
+            $fasilitas = FasilitasRumahSakit::with("getRumahSakit:id_rumah_sakit,nama_rs")->where("id_rumah_sakit", $id_rumah_sakit)->get();
+
+            return GetFasilitasResource::collection($fasilitas);
+        });
+    }
 }
