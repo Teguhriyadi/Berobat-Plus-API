@@ -20,6 +20,9 @@ use Database\Seeders\Master\Dokter\BiayaDokterSeeder;
 use Database\Seeders\Master\GroupingArtikel\GroupingSeeder;
 use Database\Seeders\Master\Kategori\KategoriArtikelSeeder;
 use Database\Seeders\Master\Obat\GolonganObatSeeder;
+use Database\Seeders\Master\Penyakit\DataPenyakitSeeder;
+use Database\Seeders\Master\Penyakit\GejalaPenyakitSeeder;
+use Database\Seeders\Master\Penyakit\GejalaSeeder;
 use Database\Seeders\Master\Penyakit\SpesialisPenyakitSeeder;
 use Database\Seeders\Master\Produk\KategoriProdukSeeder;
 use Database\Seeders\Master\RoleSeeder;
@@ -58,5 +61,8 @@ class DatabaseSeeder extends Seeder
         $this->call(KategoriProdukSeeder::class);
         $this->call(DataProdukSeeder::class);
         $this->call(ProdukKategoriSeeder::class);
+        $this->call(DataPenyakitSeeder::class);
+        $this->call(GejalaSeeder::class);
+        $this->call(GejalaPenyakitSeeder::class);
     }
 }

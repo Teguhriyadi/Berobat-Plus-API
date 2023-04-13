@@ -35,6 +35,7 @@ use App\Http\Controllers\API\Master\RumahSakit\SpesialisRumahSakitController;
 use App\Http\Controllers\API\Produk\DataProdukController;
 use App\Http\Controllers\API\Produk\ProdukKategoriController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
+use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\TesXenditController;
 use Illuminate\Http\Request;
@@ -175,3 +176,5 @@ Route::middleware("auth:sanctum")->group(function () {
 
     Route::get("/logout", [LoginController::class, "logout"]);
 });
+
+Route::post("/tes-diagnosa", [DiagnosaController::class, "diagnosa"]);
