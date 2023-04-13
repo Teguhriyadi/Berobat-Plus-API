@@ -30,6 +30,7 @@ use App\Http\Controllers\API\Master\Penyakit\SpesialisPenyakitController;
 use App\Http\Controllers\API\Master\Produk\KategoriProdukController;
 use App\Http\Controllers\API\Master\RoleController;
 use App\Http\Controllers\API\Master\RumahSakit\DataRumahSakitController;
+use App\Http\Controllers\API\Master\RumahSakit\FasilitasRumahSakitController;
 use App\Http\Controllers\API\Master\RumahSakit\GetSpesialisDokterController;
 use App\Http\Controllers\API\Master\RumahSakit\SpesialisRumahSakitController;
 use App\Http\Controllers\API\Produk\DataProdukController;
@@ -149,6 +150,8 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::prefix("rumah_sakit")->group(function () {
             Route::resource("/data", DataRumahSakitController::class);
             Route::get("/spesialis/{id_rumah_sakit}", [SpesialisRumahSakitController::class, "index"]);
+
+            Route::resource("fasilitas_rs", FasilitasRumahSakitController::class);
         });
         Route::prefix("spesialis")->group(function () {
             Route::get("/{id_spesialis}/{id_rumah_sakit}", [GetSpesialisDokterController::class, "index"]);

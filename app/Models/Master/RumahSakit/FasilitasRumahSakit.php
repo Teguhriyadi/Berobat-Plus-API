@@ -18,4 +18,9 @@ class FasilitasRumahSakit extends Model
     protected $keyType = "string";
 
     public $incrementing = false;
+
+    public function getRumahSakit()
+    {
+        return $this->belongsTo("App\Models\Akun\RumahSakit", "id_rumah_sakit", "id_rumah_sakit");
+    }
 }
