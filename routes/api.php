@@ -21,7 +21,6 @@ use App\Http\Controllers\API\Master\Artikel\GroupingArtikelController;
 use App\Http\Controllers\API\Master\Artikel\KategoriArtikelController;
 use App\Http\Controllers\API\Master\DokterKeahlianController;
 use App\Http\Controllers\API\Master\KeahlianDokterController;
-use App\Http\Controllers\API\Master\Obat\DataObatController;
 use App\Http\Controllers\API\Master\Obat\GolonganObatController;
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatKeluarController;
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatMasukController;
@@ -125,7 +124,6 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::resource("grouping_artikel", GroupingArtikelController::class);
 
         Route::prefix("obat")->group(function () {
-            Route::resource("data_obat", DataObatController::class);
             Route::resource("golongan_obat", GolonganObatController::class);
             Route::resource("transaksi_obat_masuk", TransaksiObatMasukController::class);
             Route::resource("transaksi_obat_keluar", TransaksiObatKeluarController::class);
