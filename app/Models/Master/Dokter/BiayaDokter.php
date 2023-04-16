@@ -18,4 +18,9 @@ class BiayaDokter extends Model
     protected $keyType = "string";
 
     public $incrementing = false;
+
+    public function getDokter()
+    {
+        return $this->hasOne("App\Models\Akun\Dokter", "id_dokter", "id_dokter");
+    }
 }

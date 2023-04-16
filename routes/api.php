@@ -9,6 +9,7 @@ use App\Http\Controllers\API\Akun\OwnerApotekController;
 use App\Http\Controllers\API\Akun\PerawatController;
 use App\Http\Controllers\API\Akun\Profile\Admin\ProfileController;
 use App\Http\Controllers\API\Akun\Profile\Apotek\ProfileController as ApotekProfileController;
+use App\Http\Controllers\API\Akun\Profile\Dokter\ProfileController as ProfileDokterProfileController;
 use App\Http\Controllers\API\Akun\Profile\Konsumen\ProfileController as KonsumenProfileController;
 use App\Http\Controllers\API\Akun\Profile\Perawat\ProfileController as PerawatProfileController;
 use App\Http\Controllers\API\Akun\Public\ActivateAccountController;
@@ -34,6 +35,7 @@ use App\Http\Controllers\API\Master\RumahSakit\GetSpesialisDokterController;
 use App\Http\Controllers\API\Master\RumahSakit\SpesialisRumahSakitController;
 use App\Http\Controllers\API\Produk\DataProdukController;
 use App\Http\Controllers\API\Produk\ProdukKategoriController;
+use App\Http\Controllers\API\Profile\Dokter\ProfileController as DokterProfileController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\LocationController;
@@ -103,6 +105,11 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::prefix("konsumen")->group(function () {
                 Route::get("/profil", [KonsumenProfileController::class, "get_profil"]);
                 Route::put("/profil", [KonsumenProfileController::class, "update_profil"]);
+            });
+
+            Route::prefix("dokter")->group(function () {
+                Route::get("/profil", [ProfileDokterProfileController::class, "get_profil"]);
+                Route::put("/profil", [ProfileDokterProfileController::class, "update_profil"]);
             });
         });
 
