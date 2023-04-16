@@ -38,7 +38,6 @@ use App\Http\Controllers\API\Produk\ProdukKategoriController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\LocationController;
-use App\Http\Controllers\TesXenditController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -67,19 +66,11 @@ Route::prefix("autentikasi")->group(function () {
     })->name("login");
 });
 
-Route::resource("/tagihan", TesXenditController::class);
-Route::post("/callback", [TesXenditController::class, "callbackVa"]);
-
 Route::prefix("akun")->group(function () {
     Route::resource("/konsumen", KonsumenController::class);
 });
 
 Route::middleware("auth:sanctum")->group(function () {
-
-    Route::prefix("xendit")->group(function () {
-        Route::get("/list", [TesXenditController::class, "list"]);
-        Route::post("/create-customer", [TesXenditController::class, "create_customer"]);
-    });
 
     Route::prefix("akun")->group(function () {
 
