@@ -57,15 +57,7 @@ Route::get("/findNearest", [LocationController::class, "findNearest"]);
 
 Route::get("/create-api", [DashboardController::class, "create_api"]);
 
-Route::prefix("autentikasi")->group(function () {
-    Route::post("/login", [LoginController::class, "login"]);
-    Route::get("/login", function () {
-        return response()->json([
-            "pesan" => "Anda Harus Login Terlebih Dahulu",
-            "status" => 401
-        ]);
-    })->name("login");
-});
+require __DIR__ . '/auth/login.php';
 
 Route::prefix("akun")->group(function () {
     Route::resource("/konsumen", KonsumenController::class);
@@ -87,30 +79,16 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::resource("/apotek", OwnerApotekController::class);
 
         Route::prefix("profil")->group(function () {
-            Route::prefix("admin")->group(function () {
-                Route::get("/profil", [ProfileController::class, "get_profil"]);
-                Route::put("/profil", [ProfileController::class, "update_profil"]);
-            });
 
-            Route::prefix("apotek")->group(function () {
-                Route::get("/profil", [ApotekProfileController::class, "get_profil"]);
-                Route::put("/profil", [ApotekProfileController::class, "update_profil"]);
-            });
+            require __DIR__ . '/account/profil/admin/profil.php';
 
-            Route::prefix("perawat")->group(function () {
-                Route::get("/profil", [PerawatProfileController::class, "get_profil"]);
-                Route::put("/profil", [PerawatProfileController::class, "update_profil"]);
-            });
+            require __DIR__ . '/account/profil/apotek/login.php';
 
-            Route::prefix("konsumen")->group(function () {
-                Route::get("/profil", [KonsumenProfileController::class, "get_profil"]);
-                Route::put("/profil", [KonsumenProfileController::class, "update_profil"]);
-            });
+            require __DIR__ . '/account/profil/perawat/profil.php';
 
-            Route::prefix("dokter")->group(function () {
-                Route::get("/profil", [ProfileDokterProfileController::class, "get_profil"]);
-                Route::put("/profil", [ProfileDokterProfileController::class, "update_profil"]);
-            });
+            require __DIR__ . '/account/profil/konsumen/profil.php';
+
+            require __DIR__ . '/account/profil/dokter/profil.php';
         });
 
         Route::put("/active_account/{id_user}", [ActivateAccountController::class, "active_account"]);
