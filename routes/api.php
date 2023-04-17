@@ -7,11 +7,6 @@ use App\Http\Controllers\API\Akun\DokterController;
 use App\Http\Controllers\API\Akun\KonsumenController;
 use App\Http\Controllers\API\Akun\OwnerApotekController;
 use App\Http\Controllers\API\Akun\PerawatController;
-use App\Http\Controllers\API\Akun\Profile\Admin\ProfileController;
-use App\Http\Controllers\API\Akun\Profile\Apotek\ProfileController as ApotekProfileController;
-use App\Http\Controllers\API\Akun\Profile\Dokter\ProfileController as ProfileDokterProfileController;
-use App\Http\Controllers\API\Akun\Profile\Konsumen\ProfileController as KonsumenProfileController;
-use App\Http\Controllers\API\Akun\Profile\Perawat\ProfileController as PerawatProfileController;
 use App\Http\Controllers\API\Akun\Public\ActivateAccountController;
 use App\Http\Controllers\API\Akun\Public\PictureController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
@@ -33,9 +28,9 @@ use App\Http\Controllers\API\Master\RumahSakit\DataRumahSakitController;
 use App\Http\Controllers\API\Master\RumahSakit\FasilitasRumahSakitController;
 use App\Http\Controllers\API\Master\RumahSakit\GetSpesialisDokterController;
 use App\Http\Controllers\API\Master\RumahSakit\SpesialisRumahSakitController;
+use App\Http\Controllers\API\Member\Chating\ChatController;
 use App\Http\Controllers\API\Produk\DataProdukController;
 use App\Http\Controllers\API\Produk\ProdukKategoriController;
-use App\Http\Controllers\API\Profile\Dokter\ProfileController as DokterProfileController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\LocationController;
@@ -147,6 +142,13 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::prefix("produk")->group(function () {
             Route::resource("/data_produk", DataProdukController::class);
             Route::resource("/produk_kategori", ProdukKategoriController::class);
+        });
+    });
+
+    Route::prefix("member")->group(function () {
+        Route::prefix("chating")->group(function () {
+            Route::get("/chat/{user_id}", [ChatController::class, "index"]);
+            Route::post("/chat", [ChatController::class, "store"]);
         });
     });
 

@@ -15,7 +15,7 @@ class RoleController extends Controller
         return DB::transaction(function () {
             $role = Role::orderBy("created_at", "DESC")->get();
 
-            return GetRoleResource::collection($role);
+            return response()->json(["status" => 200, "data" => GetRoleResource::collection($role)]);
         });
     }
 

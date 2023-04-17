@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('chat_dokter', function (Blueprint $table) {
             $table->string("id_chat_dokter", 50)->primary();
             $table->string("id_dokter", 50);
+            $table->string("uid_partner", 100);
             $table->date("tanggal");
         });
     }
