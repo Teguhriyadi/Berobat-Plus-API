@@ -24,6 +24,8 @@ use Database\Seeders\Master\Penyakit\GejalaPenyakitSeeder;
 use Database\Seeders\Master\Penyakit\GejalaSeeder;
 use Database\Seeders\Master\Penyakit\SpesialisPenyakitSeeder;
 use Database\Seeders\Master\Produk\KategoriProdukSeeder;
+use Database\Seeders\Master\RajaOngkir\KurirSeeder;
+use Database\Seeders\Master\RajaOngkir\LokasiSeeder;
 use Database\Seeders\Master\RoleSeeder;
 use Database\Seeders\Master\RumahSakit\DetailPraktekDokterSeeder;
 use Database\Seeders\Master\RumahSakit\FasilitasRumahSakitSeeder;
@@ -64,5 +66,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GejalaSeeder::class);
         $this->call(GejalaPenyakitSeeder::class);
         $this->call(FasilitasRumahSakitSeeder::class);
+        $this->call(LokasiSeeder::class);
+        $this->call(KurirSeeder::class);
     }
 }

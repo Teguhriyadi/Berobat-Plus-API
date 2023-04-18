@@ -49,6 +49,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post("/tes_ongkir", [RajaOngkirController::class, "index"]);
 
 Route::get("/findNearest", [LocationController::class, "findNearest"]);
 
@@ -160,15 +161,3 @@ Route::middleware("auth:sanctum")->group(function () {
 });
 
 Route::post("/tes-diagnosa", [DiagnosaController::class, "diagnosa"]);
-
-Route::get("/coba", function () {
-    echo "hamdan";
-});
-
-Route::get("/ada", function () {
-    echo "makanan";
-});
-
-Route::get("/krisna", function () {
-    echo "Krisna";
-});

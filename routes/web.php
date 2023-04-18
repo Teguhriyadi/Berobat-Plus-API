@@ -20,11 +20,3 @@ Route::get('/', function () {
 });
 
 Route::resource("/tes-xendit", TesXenditController::class);
-
-Route::get("ada", function () {
-    echo "ada";
-});
-
-Route::get("/coba", function () {
-    echo "Tidak";
-});
