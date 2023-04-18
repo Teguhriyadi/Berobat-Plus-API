@@ -53,4 +53,21 @@ class ProfileController extends Controller
             return response()->json(["pesan" => "Data Profil Konsumen Berhasil di Simpan"]);
         });
     }
+
+    public function update_saldo(Request $request)
+    {
+        $this->user_id = Auth::user()->id;
+
+        return DB::transaction(function () use ($request) {
+            $id = $this->user_id;
+
+            User::where("id", $id)->update([
+                "saldo" => $request->saldo,
+                "bank_code" => $request->bank_code,
+                "biaya_admin" => 2000
+            ]);
+
+            return response()->json(["pesan" => "Data Saldo Berhasil di Ubah"]);
+        });
+    }
 }

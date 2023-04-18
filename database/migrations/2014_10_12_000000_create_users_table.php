@@ -35,6 +35,7 @@ return new class extends Migration
             $table->enum("status", [1, 0]);
             $table->double("saldo")->nullable();
             $table->string("bank_code")->nullable();
+            $table->double("biaya_admin")->nullable();
             $table->timestamps();
         });
     }

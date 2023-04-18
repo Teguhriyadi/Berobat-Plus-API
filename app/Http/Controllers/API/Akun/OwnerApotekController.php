@@ -42,7 +42,7 @@ class OwnerApotekController extends Controller
                 "user_id" => $user->id
             ]);
 
-            return response()->json(["pesan" => "Data Apotek Berhasil di Tambahkan"]);
+            return response()->json(["pesan" => "Data Owner Apotek Berhasil di Tambahkan"]);
         });
     }
 
@@ -68,7 +68,7 @@ class OwnerApotekController extends Controller
                 "alamat" => $request->alamat,
             ]);
 
-            return response()->json(["pesan" => "Data Apotek Berhasil di Simpan"]);
+            return response()->json(["pesan" => "Data Owner Apotek Berhasil di Simpan"]);
         });
     }
 
@@ -78,7 +78,7 @@ class OwnerApotekController extends Controller
 
             OwnerApotek::where("id_owner_apotek", $id_owner_apotek)->delete();
 
-            return response()->json(["pesan" => "Data Apotek Berhasil di Hapus"]);
+            return response()->json(["pesan" => "Data Owner Apotek Berhasil di Hapus"]);
         });
     }
 }
