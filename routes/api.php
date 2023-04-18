@@ -31,6 +31,7 @@ use App\Http\Controllers\API\Master\RumahSakit\SpesialisRumahSakitController;
 use App\Http\Controllers\API\Member\Chating\ChatController;
 use App\Http\Controllers\API\Produk\DataProdukController;
 use App\Http\Controllers\API\Produk\ProdukKategoriController;
+use App\Http\Controllers\API\Tes\RajaOngkirController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\LocationController;
@@ -47,6 +48,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 
 Route::get("/findNearest", [LocationController::class, "findNearest"]);
 
@@ -158,3 +160,15 @@ Route::middleware("auth:sanctum")->group(function () {
 });
 
 Route::post("/tes-diagnosa", [DiagnosaController::class, "diagnosa"]);
+
+Route::get("/coba", function () {
+    echo "hamdan";
+});
+
+Route::get("/ada", function () {
+    echo "makanan";
+});
+
+Route::get("/krisna", function () {
+    echo "Krisna";
+});

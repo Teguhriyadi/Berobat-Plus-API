@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Akun\Profile\Konsumen;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Akun\Profil\Konsumen\GetProfilResource;
+use App\Http\Resources\Akun\Profil\Konsumen\GetSaldoResource;
 use App\Models\Akun\Konsumen;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -51,6 +52,19 @@ class ProfileController extends Controller
             ]);
 
             return response()->json(["pesan" => "Data Profil Konsumen Berhasil di Simpan"]);
+        });
+    }
+
+    public function get_saldo()
+    {
+        $this->user_id = Auth::user()->id;
+
+        return DB::transaction(function () {
+            $id = $this->user_id;
+
+            $user = User::where("id", $id)->first();
+
+            return new GetSaldoResource($user);
         });
     }
 
