@@ -137,6 +137,7 @@ Route::middleware("auth:sanctum")->group(function () {
 
         Route::prefix("raja_ongkir")->group(function () {
             Route::get("/get_provinsi", [PengirimanRajaOngkirController::class, "get_provinsi"]);
+            Route::get("/get_kota/{province_id}", [PengirimanRajaOngkirController::class, "get_kota"]);
         });
     });
 

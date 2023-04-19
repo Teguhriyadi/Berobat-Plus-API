@@ -12,4 +12,9 @@ class Kota extends Model
     protected $table = "kota";
 
     protected $guarded = [''];
+
+    public function getProvinsi()
+    {
+        return $this->belongsTo("App\Models\Master\RajaOngkir\Provinsi", "province_id", "province_id");
+    }
 }
