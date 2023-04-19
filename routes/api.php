@@ -21,6 +21,7 @@ use App\Http\Controllers\API\Master\Obat\GolonganObatController;
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatKeluarController;
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatMasukController;
 use App\Http\Controllers\API\Master\Pengaturan\ProfilController;
+use App\Http\Controllers\API\Master\Pengiriman\RajaOngkirController as PengirimanRajaOngkirController;
 use App\Http\Controllers\API\Master\Penyakit\SpesialisPenyakitController;
 use App\Http\Controllers\API\Master\Produk\KategoriProdukController;
 use App\Http\Controllers\API\Master\RoleController;
@@ -132,6 +133,10 @@ Route::middleware("auth:sanctum")->group(function () {
 
         Route::prefix("penyakit")->group(function () {
             Route::resource("/spesialis_penyakit", SpesialisPenyakitController::class);
+        });
+
+        Route::prefix("raja_ongkir")->group(function () {
+            Route::get("/get_provinsi", [PengirimanRajaOngkirController::class, "get_provinsi"]);
         });
     });
 
