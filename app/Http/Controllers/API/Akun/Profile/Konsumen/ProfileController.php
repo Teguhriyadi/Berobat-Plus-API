@@ -77,7 +77,6 @@ class ProfileController extends Controller
 
             User::where("id", $id)->update([
                 "saldo" => $request->saldo,
-                "bank_code" => $request->bank_code,
                 "biaya_admin" => 2000
             ]);
 

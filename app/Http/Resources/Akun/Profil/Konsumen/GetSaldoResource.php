@@ -15,8 +15,8 @@ class GetSaldoResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "saldo" => $this->saldo,
-            "bank_code" => $this->bank_code
+            "value_saldo" => $this->saldo,
+            "saldo_akhir" => $this->saldo
         ];
     }
 }
