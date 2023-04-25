@@ -28,7 +28,6 @@ use App\Http\Controllers\API\Master\RumahSakit\DataRumahSakitController;
 use App\Http\Controllers\API\Master\RumahSakit\FasilitasRumahSakitController;
 use App\Http\Controllers\API\Master\RumahSakit\GetSpesialisDokterController;
 use App\Http\Controllers\API\Master\RumahSakit\SpesialisRumahSakitController;
-use App\Http\Controllers\API\Member\Chating\ChatController;
 use App\Http\Controllers\API\Produk\DataProdukController;
 use App\Http\Controllers\API\Produk\ProdukKategoriController;
 use App\Http\Controllers\API\Tes\RajaOngkirController;
@@ -147,13 +146,6 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::prefix("produk")->group(function () {
             Route::resource("/data_produk", DataProdukController::class);
             Route::resource("/produk_kategori", ProdukKategoriController::class);
-        });
-    });
-
-    Route::prefix("member")->group(function () {
-        Route::prefix("chating")->group(function () {
-            Route::get("/chat/{user_id}", [ChatController::class, "index"]);
-            Route::post("/chat", [ChatController::class, "store"]);
         });
     });
 

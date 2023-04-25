@@ -16,7 +16,7 @@ class DataProdukSeeder extends Seeder
     public function run()
     {
         ProdukApotek::create([
-            "id_produk" => "PRO-2003061",
+            "kode_produk" => "PRO-2003061",
             "id_owner_apotek" => "OWN-293293289",
             "nama_produk" => "Paramex",
             "slug_produk" => "paramex",
@@ -25,7 +25,7 @@ class DataProdukSeeder extends Seeder
         ]);
 
         ProdukApotek::create([
-            "id_produk" => "PRO-2003062",
+            "kode_produk" => "PRO-2003062",
             "id_owner_apotek" => "OWN-293293289",
             "nama_produk" => "Bodrex",
             "slug_produk" => "bodrex",
@@ -34,7 +34,7 @@ class DataProdukSeeder extends Seeder
         ]);
 
         ProdukApotek::create([
-            "id_produk" => "PRO-2003063",
+            "kode_produk" => "PRO-2003063",
             "id_owner_apotek" => "OWN-293293289",
             "nama_produk" => "Maag",
             "slug_produk" => "maag",
@@ -43,7 +43,7 @@ class DataProdukSeeder extends Seeder
         ]);
 
         ProdukApotek::create([
-            "id_produk" => "PRO-2003064",
+            "kode_produk" => "PRO-2003064",
             "id_owner_apotek" => "OWN-293293289",
             "nama_produk" => "Paracetamol",
             "slug_produk" => "paracetamol",

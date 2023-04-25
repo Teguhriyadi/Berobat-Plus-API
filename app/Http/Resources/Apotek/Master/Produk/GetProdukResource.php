@@ -15,11 +15,13 @@ class GetProdukResource extends JsonResource
     public function toArray($request)
     {
         return [
+            "id" => $this->id_produk,
+            "kode_produk" => $this->kode_produk,
             "owner" => $this->getOwnerApotek->getUser->nama,
             "nama_produk" => $this->nama_produk,
             "slug_produk" => $this->slug_produk,
             "deskripsi_produk" => $this->deskripsi_produk,
-            "harga_produk" => $this->harga_produk
+            "harga_produk" => "Rp." . number_format($this->harga_produk),
         ];
     }
 }

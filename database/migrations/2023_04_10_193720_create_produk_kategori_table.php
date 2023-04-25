@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('produk_kategori', function (Blueprint $table) {
             $table->string("id_produk_kategori", 50)->primary();
-            $table->string("id_produk", 50);
+            $table->string("kode_produk", 50);
             $table->string("id_kategori_produk", 50);
             $table->timestamps();
         });

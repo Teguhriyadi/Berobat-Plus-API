@@ -17,31 +17,31 @@ class ProdukKategoriSeeder extends Seeder
     {
         ProdukKategori::create([
             "id_produk_kategori" => "PRO-K-001",
-            "id_produk" => "PRO-2003061",
+            "kode_produk" => "PRO-2003061",
             "id_kategori_produk" => "KT-P-2001"
         ]);
 
         ProdukKategori::create([
             "id_produk_kategori" => "PRO-K-002",
-            "id_produk" => "PRO-2003061",
+            "kode_produk" => "PRO-2003061",
             "id_kategori_produk" => "KT-P-2002"
         ]);
 
         ProdukKategori::create([
             "id_produk_kategori" => "PRO-K-003",
-            "id_produk" => "PRO-2003061",
+            "kode_produk" => "PRO-2003061",
             "id_kategori_produk" => "KT-P-2003"
         ]);
 
         ProdukKategori::create([
             "id_produk_kategori" => "PRO-K-004",
-            "id_produk" => "PRO-2003062",
+            "kode_produk" => "PRO-2003062",
             "id_kategori_produk" => "KT-P-2001"
         ]);
 
         ProdukKategori::create([
             "id_produk_kategori" => "PRO-K-005",
-            "id_produk" => "PRO-2003062",
+            "kode_produk" => "PRO-2003062",
             "id_kategori_produk" => "KT-P-2002"
         ]);
     }

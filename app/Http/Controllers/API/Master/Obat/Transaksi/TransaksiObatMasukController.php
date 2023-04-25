@@ -25,7 +25,7 @@ class TransaksiObatMasukController extends Controller
         return DB::transaction(function () use ($request) {
             TransaksiObat::create([
                 "id_transaksi_obat" => "TRN-O-" . date("YmdHis"),
-                "obat_id" => $request->obat_id,
+                "kode_produk" => $request->kode_produk,
                 "tanggal" => $request->tanggal,
                 "qty" => $request->qty,
                 "apotek_id" => Auth::user()->getApotek->id_owner_apotek,
