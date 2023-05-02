@@ -15,7 +15,7 @@ class GetDokterKeahlianResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id_keahlian_dokter" => $this->id_keahlian_dokter,
+            "id_dokter_keahlian" => $this->id_dokter_keahlian,
             "get_dokter" => $this->getDokter->getUser,
             "get_keahlian" => $this->getKeahlian
         ];

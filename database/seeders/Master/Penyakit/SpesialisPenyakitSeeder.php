@@ -23,26 +23,26 @@ class SpesialisPenyakitSeeder extends Seeder
 
         SpesialisPenyakit::create([
             "id_penyakit" => "SPS-002",
-            "nama_spesialis" => "Panadol",
-            "slug_spesialis" => "panadol"
+            "nama_spesialis" => "THT",
+            "slug_spesialis" => "tht"
         ]);
 
         SpesialisPenyakit::create([
             "id_penyakit" => "SPS-003",
-            "nama_spesialis" => "Bodrex",
-            "slug_spesialis" => "bodrex"
+            "nama_spesialis" => "Orthopedi",
+            "slug_spesialis" => "orthopedi"
         ]);
 
         SpesialisPenyakit::create([
             "id_penyakit" => "SPS-004",
-            "nama_spesialis" => "Paramex",
-            "slug_spesialis" => "paramex"
+            "nama_spesialis" => "Jantung",
+            "slug_spesialis" => "jantung"
         ]);
 
         SpesialisPenyakit::create([
             "id_penyakit" => "SPS-005",
-            "nama_spesialis" => "Badan",
-            "slug_spesialis" => "badan"
+            "nama_spesialis" => "Penyakit-dalam",
+            "slug_spesialis" => "penyakit-dalam"
         ]);
 
         SpesialisPenyakit::create([
