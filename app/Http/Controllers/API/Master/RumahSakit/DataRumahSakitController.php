@@ -58,7 +58,6 @@ class DataRumahSakitController extends Controller
     {
         return DB::transaction(function () use ($id_rumah_sakit) {
             $rs = RumahSakit::where("id_rumah_sakit", $id_rumah_sakit)->first();
-
             return new GetRumahSakitResource($rs);
         });
     }
