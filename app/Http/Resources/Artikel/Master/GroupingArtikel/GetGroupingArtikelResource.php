@@ -16,8 +16,8 @@ class GetGroupingArtikelResource extends JsonResource
     {
         return [
             "id_grouping_artikel" => $this->id_grouping_artikel,
-            "id_artikel" => $this->id_artikel,
-            "id_kategori_artikel" => $this->id_kategori_artikel
+            "id_artikel" => $this->getArtikel,
+            "id_kategori_artikel" => $this->getKategoriArtikel
         ];
     }
 }

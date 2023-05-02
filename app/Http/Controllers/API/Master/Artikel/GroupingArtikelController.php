@@ -13,7 +13,7 @@ class GroupingArtikelController extends Controller
     public function index()
     {
         return DB::transaction(function () {
-            $grouping = GroupingArtikel::orderBy("created_at", "DESC")->paginate(10);
+            $grouping = GroupingArtikel::orderBy("created_at", "DESC")->with("getArtikel:id_artikel,judul_artikel")->with("getKategoriArtikel:id_kategori_artikel,nama_kategori")->paginate(10);
 
             return GetGroupingArtikelResource::collection($grouping);
         });
@@ -35,7 +35,7 @@ class GroupingArtikelController extends Controller
     public function edit($id_grouping_artikel)
     {
         return DB::transaction(function () use ($id_grouping_artikel) {
-            $grouping_artikel = GroupingArtikel::where("id_grouping_artikel", $id_grouping_artikel)->first();
+            $grouping_artikel = GroupingArtikel::where("id_grouping_artikel", $id_grouping_artikel)->with("getArtikel:id_artikel,judul_artikel")->with("getKategoriArtikel:id_kategori_artikel,nama_kategori")->first();
 
             return new GetGroupingArtikelResource($grouping_artikel);
         });
