@@ -32,7 +32,7 @@ class DataRumahSakitController extends Controller
             $user = User::create([
                 "nama" => $request->nama,
                 "email" => $request->email,
-                "password" => bcrypt("RS-" . $request->email),
+                "password" => bcrypt($request->password),
                 "nomor_hp" => $request->nomor_hp,
                 "alamat" => $request->alamat,
                 "id_role" => "RO-2003066",
