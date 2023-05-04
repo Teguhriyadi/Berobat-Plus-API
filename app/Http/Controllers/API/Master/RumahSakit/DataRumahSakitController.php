@@ -47,7 +47,9 @@ class DataRumahSakitController extends Controller
                 "slug_rs" => Str::slug($request->nama_rs),
                 "deskripsi_rs" => $request->deskripsi_rs,
                 "kategori_rs" => 1,
-                "alamat_rs" => $request->alamat_rs
+                "alamat_rs" => $request->alamat_rs,
+                "latitude" => $request->latitude,
+                "longitude" => $request->longitude
             ]);
 
             return response()->json(["pesan" => "Data Akun Rumah Sakit Berhasil di Tambahkan"]);
@@ -72,7 +74,9 @@ class DataRumahSakitController extends Controller
                 "slug_rs" => Str::slug($request->nama_rs),
                 "deskripsi_rs" => $request->deskripsi_rs,
                 "kategori_rs" => 1,
-                "alamat_rs" => $request->alamat_rs
+                "alamat_rs" => $request->alamat_rs,
+                "latitude" => $request->latitude,
+                "longitude" => $request->longitude
             ]);
 
             $rs = RumahSakit::where("id_rumah_sakit", $id_rumah_sakit)->first();
@@ -102,7 +106,7 @@ class DataRumahSakitController extends Controller
 
     public function get_rs_by_id($id_user)
     {
-        return DB::transaction(function() use($id_user) {
+        return DB::transaction(function () use ($id_user) {
             $rs = RumahSakit::where("id_user", $id_user)->get();
 
             return GetRumahSakitResource::collection($rs);

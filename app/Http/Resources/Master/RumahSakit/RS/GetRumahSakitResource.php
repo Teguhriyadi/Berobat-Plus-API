@@ -20,7 +20,9 @@ class GetRumahSakitResource extends JsonResource
             "slug_rs" => $this->slug_rs,
             "deskripsi_rs" => $this->deskripsi_rs,
             "kategori_rs" => $this->kategori_rs,
-            "alamat_rs" => $this->alamat_rs
+            "alamat_rs" => $this->alamat_rs,
+            "latitude" => $this->latitude,
+            "longitude" => $this->longitude
         ];
     }
 }
