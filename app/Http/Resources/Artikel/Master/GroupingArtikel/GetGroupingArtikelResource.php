@@ -9,15 +9,15 @@ class GetGroupingArtikelResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http \Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
     {
         return [
             "id_grouping_artikel" => $this->id_grouping_artikel,
-            "id_artikel" => $this->getArtikel,
-            "id_kategori_artikel" => $this->getKategoriArtikel
+            "get_artikel" => $this->getArtikel,
+            "get_kategori_artikel" => $this->getKategoriArtikel
         ];
     }
 }

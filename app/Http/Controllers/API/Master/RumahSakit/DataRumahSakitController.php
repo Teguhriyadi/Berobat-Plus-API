@@ -32,7 +32,7 @@ class DataRumahSakitController extends Controller
             $user = User::create([
                 "nama" => $request->nama,
                 "email" => $request->email,
-                "password" => bcrypt("RS-" . $request->email),
+                "password" => bcrypt($request->password),
                 "nomor_hp" => $request->nomor_hp,
                 "alamat" => $request->alamat,
                 "id_role" => "RO-2003066",
@@ -97,6 +97,15 @@ class DataRumahSakitController extends Controller
             $rs->delete();
 
             return response()->json(["pesan" => "Data Akun Rumah Sakit Berhasil di Hapus"]);
+        });
+    }
+
+    public function get_rs_by_id($id_user)
+    {
+        return DB::transaction(function() use($id_user) {
+            $rs = RumahSakit::where("id_user", $id_user)->get();
+
+            return GetRumahSakitResource::collection($rs);
         });
     }
 }
