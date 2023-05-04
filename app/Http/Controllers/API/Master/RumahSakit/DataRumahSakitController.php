@@ -112,4 +112,23 @@ class DataRumahSakitController extends Controller
             return GetRumahSakitResource::collection($rs);
         });
     }
+
+    public function find_nearest(Request $request)
+    {
+        return DB::transaction(function () use ($request) {
+
+            $lat = $request->latitude;
+            $long = $request->longitude;
+            // $lat = "-6.352326";
+            // $long = "108.3203647";
+
+            $locations = DB::table('rumah_sakit')
+                ->select('id_rumah_sakit', 'nama_rs', 'latitude', 'longitude')
+                ->selectRaw('(6371 * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $long . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance')
+                ->orderBy('distance', 'ASC')
+                ->get();
+
+            return response()->json($locations);
+        });
+    }
 }
