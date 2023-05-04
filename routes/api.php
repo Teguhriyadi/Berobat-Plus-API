@@ -21,6 +21,7 @@ use App\Http\Controllers\API\Master\Obat\GolonganObatController;
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatKeluarController;
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatMasukController;
 use App\Http\Controllers\API\Master\Pengaturan\ProfilController;
+use App\Http\Controllers\API\Master\Pengiriman\RajaOngkirController as PengirimanRajaOngkirController;
 use App\Http\Controllers\API\Master\Penyakit\SpesialisPenyakitController;
 use App\Http\Controllers\API\Master\Produk\KategoriProdukController;
 use App\Http\Controllers\API\Master\RoleController;
@@ -116,6 +117,8 @@ Route::middleware("auth:sanctum")->group(function () {
         });
 
         Route::resource("keahlian", KeahlianDokterController::class);
+
+        Route::get("/dokter_keahlian/{id_keahlian}/ambil_keahlian", [DokterKeahlianController::class, "show"]);
         Route::resource("dokter_keahlian", DokterKeahlianController::class);
 
         Route::prefix("rumah_sakit")->group(function () {

@@ -61,4 +61,17 @@ class DokterKeahlianController extends Controller
             return response()->json(["pesan" => "Data Dokter Keahlian Berhasil di Hapus"]);
         });
     }
+
+    public function show($id_keahlian)
+    {
+        return DB::transaction(function () use ($id_keahlian) {
+            $data_dokter = DokterKeahlian::where("keahlian_id", $id_keahlian)->with("getKeahlian:id_keahlian,nama_keahlian")->get();
+
+            // if ($data_dokter->count() == 0) {
+            //     return response()->json(["code" => 404]);
+            // }
+
+            return GetDokterKeahlianResource::collection($data_dokter);
+        });
+    }
 }
