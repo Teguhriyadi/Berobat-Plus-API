@@ -45,8 +45,6 @@ class UsersSeeder extends Seeder
             "tinggi_badan" => "22",
             "tempat_lahir" => "Jakarta",
             "tanggal_lahir" => "2023-02-02",
-            "longtitude" => "108.2825259",
-            "latitude" => "-6.4079173",
             "status" => "1"
         ]);
 
@@ -114,8 +112,6 @@ class UsersSeeder extends Seeder
             "tinggi_badan" => "161.5",
             "tempat_lahir" => "Bandung",
             "tanggal_lahir" => "2023-02-02",
-            "longtitude" => "108.28035",
-            "latitude" => "-6.401698",
             "status" => "1"
         ]);
 

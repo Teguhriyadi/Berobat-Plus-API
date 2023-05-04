@@ -53,7 +53,6 @@ use Illuminate\Support\Facades\Route;
 Route::post("/tes_ongkir", [RajaOngkirController::class, "index"]);
 
 Route::get("/findNearest", [LocationController::class, "findNearest"]);
-
 Route::get("/create-api", [DashboardController::class, "create_api"]);
 
 require __DIR__ . '/auth/login.php';

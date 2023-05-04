@@ -22,7 +22,9 @@ class RumahSakitSeeder extends Seeder
             "slug_rs" => "rs-plumbon",
             "deskripsi_rs" => "lorem ipsum dolor sit amet",
             "kategori_rs" => 1,
-            "alamat_rs" => "Indonesia"
+            "alamat_rs" => "Indonesia",
+            "latitude" => "-6.7016333",
+            "longitude" => "108.4789808"
         ]);
 
         RumahSakit::create([
@@ -32,7 +34,9 @@ class RumahSakitSeeder extends Seeder
             "slug_rs" => "rs-sumber-kasih",
             "deskripsi_rs" => "lorem ipsum dolor sit amet",
             "kategori_rs" => 1,
-            "alamat_rs" => "Indonesia"
+            "alamat_rs" => "Indonesia",
+            "latitude" => "-6.7082991",
+            "longitude" => "108.5578181"
         ]);
 
         RumahSakit::create([
@@ -42,7 +46,9 @@ class RumahSakitSeeder extends Seeder
             "slug_rs" => "rs-tangkil",
             "deskripsi_rs" => "lorem ipsum dolor sit amet",
             "kategori_rs" => 1,
-            "alamat_rs" => "Indonesia"
+            "alamat_rs" => "Indonesia",
+            "latitude" => "-6.7381389",
+            "longitude" => "108.5452108"
         ]);
 
         RumahSakit::create([
@@ -52,7 +58,9 @@ class RumahSakitSeeder extends Seeder
             "slug_rs" => "rs-ciremai",
             "deskripsi_rs" => "lorem ipsum dolor sit amet",
             "kategori_rs" => 1,
-            "alamat_rs" => "Indonesia"
+            "alamat_rs" => "Indonesia",
+            "latitude" => "-6.9332587",
+            "longitude" => "106.5986995"
         ]);
     }
 }

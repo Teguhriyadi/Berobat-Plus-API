@@ -32,14 +32,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo("App\Models\Akun\OwnerApotek", "id", "user_id");
     }
-
-    public function getNearestLocation($latitude, $longitude, $radius)
-    {
-        $locations = User::selectRaw('id, ( 6371 * acos( cos( radians(' . $latitude . ') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( latitude ) ) ) ) AS distance')
-            ->having('distance', '<', $radius)
-            ->orderBy('distance')
-            ->get();
-
-        return $locations;
-    }
 }

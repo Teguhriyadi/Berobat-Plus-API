@@ -24,8 +24,6 @@ return new class extends Migration
             $table->integer("created_by")->nullable();
             $table->enum("jenis_kelamin", ["L", "P"])->nullable();
             $table->string("token")->nullable();
-            $table->string("longtitude")->nullable();
-            $table->string("latitude")->nullable();
             $table->string("foto")->nullable();
             $table->integer("usia")->nullable();
             $table->double("berat_badan")->nullable();

@@ -21,6 +21,8 @@ return new class extends Migration
             $table->text("deskripsi_rs");
             $table->enum("kategori_rs", [1, 0]);
             $table->string("alamat_rs");
+            $table->string("latitude", 100)->nullable();
+            $table->string("longitude", 100)->nullable();
             $table->timestamps();
         });
     }

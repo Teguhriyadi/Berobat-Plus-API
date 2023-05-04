@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Location;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Torann\GeoIP\GeoIP;
 use Illuminate\Support\Facades\DB;
 
 class LocationController extends Controller
@@ -13,20 +10,15 @@ class LocationController extends Controller
 {
     public function findNearest(Request $request)
     {
-        $lat = "-6.4079173";
-        $long = "108.2825259";
+        $lat = "-6.352326";
+        $long = "108.3203647";
 
-        $data = DB::table("users")
-            ->select(
-                "users.id",
-                DB::raw("6371 * acos(cos(radians(' . $lat . '))
-            * cos(radians(users.latitude))
-            * cos(radians(users.longtitude) - radians(' . $long . '))
-            + sin(radians(' .$lat. '))
-            * sin(radians(users.latitude))) AS distance")
-            )->orderBy("distance", "DESC")
+        $locations = DB::table('rumah_sakit')
+            ->select('id_rumah_sakit', 'nama_rs', 'latitude', 'longitude')
+            ->selectRaw('(6371 * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $long . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance')
+            ->orderBy('distance', 'ASC')
             ->get();
 
-        return $data;
+        return response()->json($locations);
     }
 }
