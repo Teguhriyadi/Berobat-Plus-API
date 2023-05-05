@@ -22,7 +22,9 @@ class ProfilApotekResource extends JsonResource
             "alamat_apotek" => $this->alamat_apotek,
             "nomor_hp" => $this->nomor_hp,
             "status" => $this->status,
-            "user" => $this->getUser
+            "user" => $this->getUser,
+            "latitude" => $this->latitude,
+            "longitude" => $this->longitude
         ];
     }
 }

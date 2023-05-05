@@ -32,7 +32,9 @@ class ProfilApotekController extends Controller
                 "alamat_apotek" => $request->alamat_apotek,
                 "nomor_hp" => $request->nomor_hp,
                 "status" => 0,
-                "id_user" => Auth::user()->id
+                "id_user" => Auth::user()->id,
+                "latitude" => $request->latitude,
+                "longitude" => $request->longitude
             ]);
 
             return response()->json(["pesan" => "Data Berhasil di Tambahkan"]);
@@ -56,7 +58,9 @@ class ProfilApotekController extends Controller
                 "slug_apotek" => Str::slug($request->nama_apotek),
                 "deskripsi_apotek" => $request->deskripsi_apotek,
                 "alamat_apotek" => $request->alamat_apotek,
-                "nomor_hp" => $request->nomor_hp
+                "nomor_hp" => $request->nomor_hp,
+                "latitude" => $request->latitude,
+                "longitude" => $request->longitude
             ]);
 
             return response()->json(["pesan" => "Data Berhasil di Simpan"]);
@@ -91,6 +95,24 @@ class ProfilApotekController extends Controller
             ]);
 
             return response()->json(["pesan" => "Data Status Berhasil di Non - Aktifkan"]);
+        });
+    }
+
+    public function find_nearest(Request $request)
+    {
+        return DB::transaction(function () use ($request) {
+            $lat = $request->latitude;
+            $long = $request->longitude;
+            // $lat = "-6.352326";
+            // $long = "108.3203647";
+
+            $locations = DB::table('profil_apotek')
+                ->select('id_profil_apotek', 'nama_apotek', 'latitude', 'longitude')
+                ->selectRaw('(6371 * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $long . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance')
+                ->orderBy('distance', 'ASC')
+                ->get();
+
+            return response()->json($locations);
         });
     }
 }

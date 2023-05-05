@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string("foto_apotek")->nullable();
             $table->tinyInteger("status");
             $table->string("id_user");
+            $table->string("latitude", 100)->nullable();
+            $table->string("longitude", 100)->nullable();
             $table->timestamps();
         });
     }

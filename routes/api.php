@@ -22,7 +22,6 @@ use App\Http\Controllers\API\Master\Obat\GolonganObatController;
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatKeluarController;
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatMasukController;
 use App\Http\Controllers\API\Master\Pengaturan\ProfilController;
-use App\Http\Controllers\API\Master\Pengiriman\RajaOngkirController as PengirimanRajaOngkirController;
 use App\Http\Controllers\API\Master\Penyakit\SpesialisPenyakitController;
 use App\Http\Controllers\API\Master\Produk\KategoriProdukController;
 use App\Http\Controllers\API\Master\RoleController;
@@ -35,7 +34,6 @@ use App\Http\Controllers\API\Produk\ProdukKategoriController;
 use App\Http\Controllers\API\Tes\RajaOngkirController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\DiagnosaController;
-use App\Http\Controllers\LocationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -52,7 +50,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::post("/tes_ongkir", [RajaOngkirController::class, "index"]);
 
-Route::get("/findNearest", [LocationController::class, "findNearest"]);
 Route::get("/create-api", [DashboardController::class, "create_api"]);
 
 require __DIR__ . '/auth/login.php';
@@ -144,6 +141,7 @@ Route::middleware("auth:sanctum")->group(function () {
 
     Route::prefix("apotek")->group(function () {
         Route::prefix("pengaturan")->group(function () {
+            Route::post("/profil_apotek/find_nearest", [ProfilApotekController::class, "find_nearest"]);
             Route::put("/profil_apotek/aktifkan", [ProfilApotekController::class, "aktifkan"]);
             Route::put("/profil_apotek/non_aktifkan", [ProfilApotekController::class, "non_aktifkan"]);
             Route::resource("profil_apotek", ProfilApotekController::class);
