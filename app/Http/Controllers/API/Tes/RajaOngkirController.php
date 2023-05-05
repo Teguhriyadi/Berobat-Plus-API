@@ -17,13 +17,20 @@ class RajaOngkirController extends Controller
             "weight" => $request->weight
         ])->get();
 
+
+        $daftarCost = [];
+
+        foreach ($daftarProvinsi[0]["costs"] as $cost) {
+            $daftarCost[] = $cost;
+        }
+
+        return response()->json($daftarCost);
+
         // $daftarProvinsi = RajaOngkir::ongkosKirim([
         //     'origin'        => 155,     // ID kota/kabupaten asal
         //     'destination'   => 80,      // ID kota/kabupaten tujuan
         //     'weight'        => 1300,    // berat barang dalam gram
         //     'courier'       => 'jne'    // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
         // ])->get();
-
-        return response()->json($daftarProvinsi);
     }
 }

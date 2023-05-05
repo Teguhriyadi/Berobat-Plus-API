@@ -16,7 +16,8 @@ class GetKeahlianResource extends JsonResource
     {
         return [
             "id_keahlian" => $this->id_keahlian,
-            "nama_keahlian" => $this->nama_keahlian
+            "nama_keahlian" => $this->nama_keahlian,
+            "logo" => $this->logo
         ];
     }
 }
