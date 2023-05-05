@@ -6,6 +6,7 @@ use App\Http\Controllers\API\Akun\CompanyController;
 use App\Http\Controllers\API\Akun\DokterController;
 use App\Http\Controllers\API\Akun\KonsumenController;
 use App\Http\Controllers\API\Akun\OwnerApotekController;
+use App\Http\Controllers\API\Akun\OwnerRumahSakitController;
 use App\Http\Controllers\API\Akun\PerawatController;
 use App\Http\Controllers\API\Akun\Public\ActivateAccountController;
 use App\Http\Controllers\API\Akun\Public\PictureController;
@@ -74,6 +75,7 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::resource("/dokter", DokterController::class);
         Route::resource("/perawat", PerawatController::class);
         Route::resource("/apotek", OwnerApotekController::class);
+        Route::resource("/owner_rs", OwnerRumahSakitController::class);
 
         Route::prefix("profil")->group(function () {
 
