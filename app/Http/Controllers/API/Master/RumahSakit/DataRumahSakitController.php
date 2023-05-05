@@ -99,4 +99,13 @@ class DataRumahSakitController extends Controller
             return response()->json(["pesan" => "Data Akun Rumah Sakit Berhasil di Hapus"]);
         });
     }
+
+    public function get_rs_by_id($id_user)
+    {
+        return DB::transaction(function() use($id_user) {
+            $rs = RumahSakit::where("id_user", $id_user)->get();
+
+            return GetRumahSakitResource::collection($rs);
+        });
+    }
 }
