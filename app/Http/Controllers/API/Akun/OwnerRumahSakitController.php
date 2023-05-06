@@ -15,7 +15,7 @@ class OwnerRumahSakitController extends Controller
     public function index()
     {
         return DB::transaction(function() {
-            $data = OwnerRumahSakit::with("getUser:id,nama,email,nomor_hp")->orderBy("created_at", "DESC")->get();
+            $data = OwnerRumahSakit::with("getUser:id,nama,email,nomor_hp,alamat")->orderBy("created_at", "DESC")->get();
 
             return GetOwnerRumahSakitResource::collection($data);
         });
@@ -47,7 +47,7 @@ class OwnerRumahSakitController extends Controller
     public function edit($id_owner_rs)
     {
         return DB::transaction(function() use($id_owner_rs) {
-            $owner = OwnerRumahSakit::with("getUser:id,nama,email,nomor_hp")->where("id_owner_rumah_sakit", $id_owner_rs)->first();
+            $owner = OwnerRumahSakit::with("getUser:id,nama,email,nomor_hp,alamat")->where("id_owner_rumah_sakit", $id_owner_rs)->first();
             
             return new GetOwnerRumahSakitResource($owner);
         });
@@ -56,11 +56,12 @@ class OwnerRumahSakitController extends Controller
     public function update(Request $request, $id_owner_rs)
     {
         return DB::transaction(function() use($request, $id_owner_rs) {
-            $id_owner = OwnerRumahSakit::where("id_owner_rumah_sakit", $id_owner_rs)->update([
+            $ownerRumahSakit = OwnerRumahSakit::where("id_owner_rumah_sakit", $id_owner_rs)->first();
+            $ownerRumahSakit->update([
                 "no_ktp" => $request->no_ktp
             ]);
 
-            User::where("id", $id_owner)->update([
+            $ownerRumahSakit->getUser()->update([
                 "nama" => $request->nama,
                 "email" => $request->email,
                 "nomor_hp" => $request->nomor_hp,
