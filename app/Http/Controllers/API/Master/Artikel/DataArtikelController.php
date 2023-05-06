@@ -34,7 +34,7 @@ class DataArtikelController extends Controller
                 "id_artikel" => "ART-" . date("YmdHis"),
                 "judul_artikel" => $request->judul_artikel,
                 "slug_artikel" => Str::slug($request->judul_artikel),
-                // "foto" => url("/storage/" . $data),
+                "foto" => url("/storage/" . $data),
                 "deskripsi" => $request->deskripsi,
                 "user_id" => Auth::user()->id
             ]);
