@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo("App\Models\Akun\OwnerApotek", "id", "user_id");
     }
+
+    public function getOwnerRs()
+    {
+        return $this->belongsTo("App\Models\Akun\OwnerRumahSakit", "id", "user_id");
+    }
 }

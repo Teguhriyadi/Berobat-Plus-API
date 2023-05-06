@@ -18,4 +18,9 @@ class RumahSakit extends Model
     protected $keyType = "string";
 
     public $incrementing = false;
+
+    public function getOwnerRumahSakit()
+    {
+        return $this->belongsTo("App\Models\Akun\OwnerRumahSakit", "id_owner_rumah_sakit", "id_owner_rumah_sakit");
+    }
 }
