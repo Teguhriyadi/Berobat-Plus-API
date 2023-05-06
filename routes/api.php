@@ -120,6 +120,7 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::resource("dokter_keahlian", DokterKeahlianController::class);
 
         Route::prefix("rumah_sakit")->group(function () {
+            Route::post("/data/find_nearest/all", [DataRumahSakitController::class, "all_find_nearest"]);
             Route::post("/data/find_nearest", [DataRumahSakitController::class, "find_nearest"]);
             Route::get("/data/{user_id}", [DataRumahSakitController::class, "get_rs_by_id"]);
             Route::resource("/data", DataRumahSakitController::class);

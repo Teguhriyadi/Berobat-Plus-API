@@ -117,6 +117,10 @@ class DataRumahSakitController extends Controller
     {
         return DB::transaction(function () use ($request) {
 
+            $perPage = 4;
+            $page = $request->get('page', 1);
+            $offset = ($page - 1) * $perPage;
+
             $lat = $request->latitude;
             $long = $request->longitude;
             // $lat = "-6.352326";
@@ -126,9 +130,44 @@ class DataRumahSakitController extends Controller
                 ->select('id_rumah_sakit', 'nama_rs', 'latitude', 'longitude')
                 ->selectRaw('(6371 * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $long . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance')
                 ->orderBy('distance', 'ASC')
-                ->get();
+                ->offset($offset)
+                ->limit($perPage)
+                ->get()
+                ->map(function ($location) {
+                    $location->jarak = round($location->distance / 10, 1);
+                    return $location;
+                });
 
-            return response()->json($locations);
+            $locationsCount = DB::table('rumah_sakit')
+                ->selectRaw('COUNT(*) as count')
+                ->first();
+
+            $pagination = new \Illuminate\Pagination\LengthAwarePaginator(
+                $locations,
+                $locationsCount->count,
+                $perPage,
+                $page
+            );
+
+            return response()->json($pagination);
         });
+    }
+
+    public function all_find_nearest(Request $request)
+    {
+        $lat = $request->latitude;
+        $long = $request->longitude;
+
+        $locations = DB::table('rumah_sakit')
+            ->select('id_rumah_sakit', 'nama_rs', 'latitude', 'longitude')
+            ->selectRaw('(6371 * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $long . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance')
+            ->orderBy('distance', 'ASC')
+            ->get()
+            ->map(function ($location) {
+                $location->jarak = round($location->distance / 10, 1);
+                return $location;
+            });
+
+        return response()->json($locations);
     }
 }
