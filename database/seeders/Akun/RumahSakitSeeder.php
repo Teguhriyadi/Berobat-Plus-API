@@ -17,7 +17,7 @@ class RumahSakitSeeder extends Seeder
     {
         RumahSakit::create([
             "id_rumah_sakit" => "RS-123456789",
-            "id_user" => 11,
+            "id_owner_rumah_sakit" => "OWN-RS-2003061",
             "nama_rs" => "RS. Plumbon",
             "slug_rs" => "rs-plumbon",
             "deskripsi_rs" => "lorem ipsum dolor sit amet",
@@ -29,7 +29,7 @@ class RumahSakitSeeder extends Seeder
 
         RumahSakit::create([
             "id_rumah_sakit" => "RS-123456790",
-            "id_user" => 12,
+            "id_owner_rumah_sakit" => "OWN-RS-2003061",
             "nama_rs" => "RS. Sumber Kasih",
             "slug_rs" => "rs-sumber-kasih",
             "deskripsi_rs" => "lorem ipsum dolor sit amet",
@@ -41,7 +41,7 @@ class RumahSakitSeeder extends Seeder
 
         RumahSakit::create([
             "id_rumah_sakit" => "RS-123456791",
-            "id_user" => 13,
+            "id_owner_rumah_sakit" => "OWN-RS-2003062",
             "nama_rs" => "RS. Tangkil",
             "slug_rs" => "rs-tangkil",
             "deskripsi_rs" => "lorem ipsum dolor sit amet",
@@ -53,7 +53,7 @@ class RumahSakitSeeder extends Seeder
 
         RumahSakit::create([
             "id_rumah_sakit" => "RS-123456792",
-            "id_user" => 14,
+            "id_owner_rumah_sakit" => "OWN-RS-2003062",
             "nama_rs" => "RS. Ciremai",
             "slug_rs" => "rs-ciremai",
             "deskripsi_rs" => "lorem ipsum dolor sit amet",
