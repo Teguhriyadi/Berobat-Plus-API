@@ -34,7 +34,7 @@ class OwnerApotekController extends Controller
                 "nomor_hp" => $request->nomor_hp,
                 "alamat" => $request->alamat,
                 "id_role" => "RO-2003065",
-                "status" => 1
+                "status" => '0'
             ]);
 
             OwnerApotek::create([
