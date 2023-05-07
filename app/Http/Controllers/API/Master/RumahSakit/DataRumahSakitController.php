@@ -5,10 +5,10 @@ namespace App\Http\Controllers\API\Master\RumahSakit;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Master\RumahSakit\RS\GetRumahSakitResource;
 use App\Models\Akun\RumahSakit;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class DataRumahSakitController extends Controller
@@ -26,30 +26,23 @@ class DataRumahSakitController extends Controller
 
     public function store(Request $request)
     {
-        $this->user_id = Auth::user()->id;
-
         return DB::transaction(function () use ($request) {
-            $user = User::create([
-                "nama" => $request->nama,
-                "email" => $request->email,
-                "password" => bcrypt($request->password),
-                "nomor_hp" => $request->nomor_hp,
-                "alamat" => $request->alamat,
-                "id_role" => "RO-2003066",
-                "created_by" => $this->user_id,
-                "status" => 1
-            ]);
+
+            if ($request->file("foto_rs")) {
+                $data = $request->file("foto_rs")->store("rumah_sakit");
+            }
 
             RumahSakit::create([
                 "id_rumah_sakit" => "RS-" . date("YmdHis"),
-                "id_user" => $user["id"],
+                "id_owner_rumah_sakit" => Auth::user()->getOwnerRs->id_owner_rumah_sakit,
                 "nama_rs" => $request->nama_rs,
                 "slug_rs" => Str::slug($request->nama_rs),
                 "deskripsi_rs" => $request->deskripsi_rs,
                 "kategori_rs" => 1,
                 "alamat_rs" => $request->alamat_rs,
                 "latitude" => $request->latitude,
-                "longitude" => $request->longitude
+                "longitude" => $request->longitude,
+                "foto_rs" => url("/storage/" . $data)
             ]);
 
             return response()->json(["pesan" => "Data Akun Rumah Sakit Berhasil di Tambahkan"]);
@@ -66,8 +59,19 @@ class DataRumahSakitController extends Controller
 
     public function update(Request $request, $id_rumah_sakit)
     {
-        $this->user_id = Auth::user()->id;
         return DB::transaction(function () use ($request, $id_rumah_sakit) {
+
+            if ($request->file("foto_rs")) {
+                if ($request->gambarLama) {
+                    Storage::delete($request->gambarLama);
+                }
+
+                $nama_gambar = $request->file("foto_rs")->store("rumah_sakit");
+
+                $data = url("/storage/" . $nama_gambar);
+            } else {
+                $data = url('') . '/storage/' . $request->gambarLama;
+            }
 
             RumahSakit::where("id_rumah_sakit", $id_rumah_sakit)->update([
                 "nama_rs" => $request->nama_rs,
@@ -76,16 +80,8 @@ class DataRumahSakitController extends Controller
                 "kategori_rs" => 1,
                 "alamat_rs" => $request->alamat_rs,
                 "latitude" => $request->latitude,
-                "longitude" => $request->longitude
-            ]);
-
-            $rs = RumahSakit::where("id_rumah_sakit", $id_rumah_sakit)->first();
-
-            User::where("id", $rs["id_user"])->update([
-                "nama" => $request->nama,
-                "email" => $request->email,
-                "nomor_hp" => $request->nomor_hp,
-                "alamat" => $request->alamat,
+                "longitude" => $request->longitude,
+                "foto_rs" => $data
             ]);
 
             return response()->json(["pesan" => "Data Akun Rumah Sakit Berhasil di Simpan"]);
@@ -95,10 +91,13 @@ class DataRumahSakitController extends Controller
     public function destroy($id_rumah_sakit)
     {
         return DB::transaction(function () use ($id_rumah_sakit) {
-            $rs = RumahSakit::where("id_rumah_sakit", $id_rumah_sakit)->first();
 
-            User::where("id", $rs["id_user"])->delete();
-            $rs->delete();
+            $rumah_sakit = RumahSakit::where("id_rumah_sakit", $id_rumah_sakit)->first();
+
+            $data = str_replace(url('storage/'), "", $rumah_sakit->foto_rs);
+            Storage::delete($data);
+
+            $data->delete();
 
             return response()->json(["pesan" => "Data Akun Rumah Sakit Berhasil di Hapus"]);
         });
@@ -127,7 +126,7 @@ class DataRumahSakitController extends Controller
             // $long = "108.3203647";
 
             $locations = DB::table('rumah_sakit')
-                ->select('id_rumah_sakit', 'nama_rs', 'latitude', 'longitude')
+                ->select('id_rumah_sakit', 'nama_rs', 'latitude', 'longitude', 'foto_rs', 'kategori_rs')
                 ->selectRaw('(6371 * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $long . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance')
                 ->orderBy('distance', 'ASC')
                 ->offset($offset)

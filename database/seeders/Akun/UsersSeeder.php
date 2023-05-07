@@ -163,9 +163,9 @@ class UsersSeeder extends Seeder
         ]);
 
         User::create([
-            "nama" => "Lapu - Lapu",
-            "email" => "rs.lapu@gmail.com",
-            "password" => bcrypt("rumahsakit"),
+            "nama" => "Syarifudin",
+            "email" => "syarifudin@gmail.com",
+            "password" => bcrypt("owner_rs"),
             "nomor_hp" => "1234567891011",
             "alamat" => "Cirebon",
             "id_role" => "RO-2003066",
@@ -173,30 +173,10 @@ class UsersSeeder extends Seeder
         ]);
 
         User::create([
-            "nama" => "Sumber Kasih",
-            "email" => "rs.sumber_kasih@gmail.com",
-            "password" => bcrypt("rumahsakit"),
+            "nama" => "Dimas Prayogo",
+            "email" => "dimas_prayogo@gmail.com",
+            "password" => bcrypt("owner_rs"),
             "nomor_hp" => "121212",
-            "alamat" => "Cirebon",
-            "id_role" => "RO-2003066",
-            "status" => 1
-        ]);
-
-        User::create([
-            "nama" => "Tangkil",
-            "email" => "rs.tangkil@gmail.com",
-            "password" => bcrypt("rumahsakit"),
-            "nomor_hp" => "454545",
-            "alamat" => "Cirebon",
-            "id_role" => "RO-2003066",
-            "status" => 1
-        ]);
-
-        User::create([
-            "nama" => "Ciremai",
-            "email" => "rs.ciremai@gmail.com",
-            "password" => bcrypt("rumahsakit"),
-            "nomor_hp" => "909090",
             "alamat" => "Cirebon",
             "id_role" => "RO-2003066",
             "status" => 1

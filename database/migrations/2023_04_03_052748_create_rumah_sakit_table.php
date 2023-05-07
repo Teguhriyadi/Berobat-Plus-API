@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('rumah_sakit', function (Blueprint $table) {
             $table->string("id_rumah_sakit")->primary();
-            $table->integer("id_user");
+            $table->string("id_owner_rumah_sakit", 50);
             $table->string("nama_rs", 100);
             $table->string("slug_rs");
             $table->text("deskripsi_rs");
@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string("alamat_rs");
             $table->string("latitude", 100)->nullable();
             $table->string("longitude", 100)->nullable();
+            $table->string("foto_rs")->nullable();
             $table->timestamps();
         });
     }

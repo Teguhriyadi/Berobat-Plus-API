@@ -25,8 +25,6 @@ use App\Http\Controllers\API\Master\Pengaturan\ProfilController;
 use App\Http\Controllers\API\Master\Penyakit\SpesialisPenyakitController;
 use App\Http\Controllers\API\Master\Produk\KategoriProdukController;
 use App\Http\Controllers\API\Master\RoleController;
-use App\Http\Controllers\API\Master\RumahSakit\DataRumahSakitController;
-use App\Http\Controllers\API\Master\RumahSakit\FasilitasRumahSakitController;
 use App\Http\Controllers\API\Master\RumahSakit\GetSpesialisDokterController;
 use App\Http\Controllers\API\Master\RumahSakit\SpesialisRumahSakitController;
 use App\Http\Controllers\API\Produk\DataProdukController;
@@ -120,14 +118,12 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::resource("dokter_keahlian", DokterKeahlianController::class);
 
         Route::prefix("rumah_sakit")->group(function () {
-            Route::post("/data/find_nearest/all", [DataRumahSakitController::class, "all_find_nearest"]);
-            Route::post("/data/find_nearest", [DataRumahSakitController::class, "find_nearest"]);
-            Route::get("/data/{user_id}", [DataRumahSakitController::class, "get_rs_by_id"]);
-            Route::resource("/data", DataRumahSakitController::class);
+
+            require __DIR__ . '/master/rumah_sakit/data.php';
+
             Route::get("/spesialis/{id_rumah_sakit}", [SpesialisRumahSakitController::class, "index"]);
 
-            Route::get("/fasilitas_rs/rs/{id_rumah_sakit}", [FasilitasRumahSakitController::class, "get_list_fasilitas"]);
-            Route::resource("fasilitas_rs", FasilitasRumahSakitController::class);
+            require __DIR__ . '/master/rumah_sakit/fasilitas.php';
         });
         Route::prefix("spesialis")->group(function () {
             Route::get("/{id_spesialis}/{id_rumah_sakit}", [GetSpesialisDokterController::class, "index"]);
