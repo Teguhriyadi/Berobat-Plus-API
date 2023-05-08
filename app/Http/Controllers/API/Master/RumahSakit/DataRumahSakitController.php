@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API\Master\RumahSakit;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Master\RumahSakit\RS\GetRumahSakitResource;
+use App\Models\Akun\OwnerApotek;
+use App\Models\Akun\OwnerRumahSakit;
 use App\Models\Akun\RumahSakit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -97,7 +99,7 @@ class DataRumahSakitController extends Controller
             $data = str_replace(url('storage/'), "", $rumah_sakit->foto_rs);
             Storage::delete($data);
 
-            $data->delete();
+            $rumah_sakit->delete();
 
             return response()->json(["pesan" => "Data Akun Rumah Sakit Berhasil di Hapus"]);
         });
@@ -106,8 +108,11 @@ class DataRumahSakitController extends Controller
     public function get_rs_by_id($id_user)
     {
         return DB::transaction(function () use ($id_user) {
-            $rs = RumahSakit::where("id_user", $id_user)->get();
 
+            $owner = OwnerRumahSakit::where("user_id", $id_user)->first();
+
+            $rs = RumahSakit::where("id_owner_rumah_sakit", $owner["id_owner_rumah_sakit"])->get();
+            
             return GetRumahSakitResource::collection($rs);
         });
     }
