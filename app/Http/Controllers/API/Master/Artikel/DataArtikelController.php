@@ -93,4 +93,13 @@ class DataArtikelController extends Controller
             return response()->json(["pesan" => "Data Artikel Berhasil di Hapus"]);
         });
     }
+
+    public function get_by_id($user_id)
+    {
+        return DB::transaction(function() use($user_id) {
+            $artikel = DataArtikel::with("getUser:id,nama")->where("user_id", $user_id)->get();
+
+            return GetArtikelResource::collection($artikel);
+        });
+    }
 }

@@ -96,6 +96,7 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::resource("kategori_produk", KategoriProdukController::class);
         });
 
+        Route::get("/artikel/{user_id}/get", [DataArtikelController::class, "get_by_id"]);
         Route::get("/artikel/{slug}", [DetailArtikelController::class, "index"]);
         Route::resource("role", RoleController::class);
         Route::resource("kategori_artikel", KategoriArtikelController::class);
