@@ -139,8 +139,7 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::prefix("apotek")->group(function () {
         Route::prefix("pengaturan")->group(function () {
             Route::post("/profil_apotek/find_nearest", [ProfilApotekController::class, "find_nearest"]);
-            Route::put("/profil_apotek/aktifkan", [ProfilApotekController::class, "aktifkan"]);
-            Route::put("/profil_apotek/non_aktifkan", [ProfilApotekController::class, "non_aktifkan"]);
+            Route::put("/profil_apotek/ubah_status/{id_profil_apotek}", [ProfilApotekController::class, "ubah_status"]);
             Route::resource("profil_apotek", ProfilApotekController::class);
         });
 

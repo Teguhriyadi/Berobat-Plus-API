@@ -158,7 +158,7 @@ class DataRumahSakitController extends Controller
         $long = $request->longitude;
 
         $locations = DB::table('rumah_sakit')
-            ->select('id_rumah_sakit', 'nama_rs', 'latitude', 'longitude')
+            ->select('id_rumah_sakit', 'nama_rs', 'latitude', 'longitude', 'kategori_rs', 'alamat_rs', 'foto_rs')
             ->selectRaw('(6371 * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $long . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance')
             ->orderBy('distance', 'ASC')
             ->get()
