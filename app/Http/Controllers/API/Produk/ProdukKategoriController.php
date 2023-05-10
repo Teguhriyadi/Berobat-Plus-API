@@ -13,7 +13,7 @@ class ProdukKategoriController extends Controller
     public function index()
     {
         return DB::transaction(function () {
-            $produk_kategori = ProdukKategori::with("getProduk:id_produk,nama_produk,slug_produk,harga_produk,deskripsi_produk")->with("getKategori:id_kategori_produk,nama_kategori_produk")->paginate(10);
+            $produk_kategori = ProdukKategori::with("getProduk:id_produk,kode_produk,nama_produk,slug_produk,deskripsi_produk,harga_produk,foto_produk")->with("getKategori:id_kategori_produk,nama_kategori_produk")->paginate(10);
 
             return GetProdukKategoriResource::collection($produk_kategori);
         });
@@ -35,7 +35,7 @@ class ProdukKategoriController extends Controller
     public function edit($id_produk_kategori)
     {
         return DB::transaction(function () use ($id_produk_kategori) {
-            $apotek = ProdukKategori::with("getProduk:id_produk,nama_produk,slug_produk,harga_produk,deskripsi_produk")->with("getKategori:id_kategori_produk,nama_kategori_produk")->where("id_produk_kategori", $id_produk_kategori)->first();
+            $apotek = ProdukKategori::with("getProduk:id_produk,kode_produk,nama_produk,slug_produk,deskripsi_produk,harga_produk,foto_produk")->with("getKategori:id_kategori_produk,nama_kategori_produk")->where("id_produk_kategori", $id_produk_kategori)->first();
 
             return new GetProdukKategoriResource($apotek);
         });

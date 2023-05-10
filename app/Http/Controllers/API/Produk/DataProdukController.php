@@ -16,7 +16,7 @@ class DataProdukController extends Controller
     public function index()
     {
         return DB::transaction(function () {
-            $produk = ProdukApotek::paginate(10);
+            $produk = ProdukApotek::paginate(4);
 
             $data = [];
             foreach ($produk as $p) {
@@ -31,6 +31,7 @@ class DataProdukController extends Controller
                     "nama_produk" => $p["nama_produk"],
                     "slug_produk" => $p["slug_produk"],
                     "deskripsi_produk" => $p["deskripsi_produk"],
+                    "harga" => $p["harga_produk"],
                     "harga_produk" => "Rp. " . number_format($p["harga_produk"]),
                     "qty" => $total_stok
                 ];

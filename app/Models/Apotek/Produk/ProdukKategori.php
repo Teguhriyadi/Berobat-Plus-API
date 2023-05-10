@@ -21,7 +21,7 @@ class ProdukKategori extends Model
 
     public function getProduk()
     {
-        return $this->belongsTo("App\Models\Apotek\Produk\ProdukApotek", "id_produk", "id_produk");
+        return $this->belongsTo("App\Models\Apotek\Produk\ProdukApotek", "kode_produk", "kode_produk");
     }
 
     public function getKategori()
