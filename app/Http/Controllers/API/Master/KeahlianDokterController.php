@@ -31,7 +31,8 @@ class KeahlianDokterController extends Controller
             KeahlianDokter::create([
                 "id_keahlian" => "KHL-" . date("YmdHis"),
                 "nama_keahlian" => $request->nama_keahlian,
-                "logo" => url("/storage/" . $data)
+                "logo" => url("/storage/" . $data),
+                
             ]);
 
             return response()->json(["pesan" => "Data Berhasil di Tambahkan"]);
