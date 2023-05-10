@@ -96,12 +96,14 @@ class DataRumahSakitController extends Controller
 
             $rumah_sakit = RumahSakit::where("id_rumah_sakit", $id_rumah_sakit)->first();
 
-            $data = str_replace(url('storage/'), "", $rumah_sakit->foto_rs);
-            Storage::delete($data);
+            // $data = str_replace(url('storage/'), "", $rumah_sakit->foto_rs);
 
-            $rumah_sakit->delete();
+            echo str_replace(url("storage/"), "", $rumah_sakit["foto_rs"]);
+            // Storage::delete($data);
 
-            return response()->json(["pesan" => "Data Akun Rumah Sakit Berhasil di Hapus"]);
+            // $rumah_sakit->delete();
+
+            // return response()->json(["pesan" => "Data Akun Rumah Sakit Berhasil di Hapus"]);
         });
     }
 

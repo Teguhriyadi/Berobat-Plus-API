@@ -24,7 +24,7 @@ class ProdukKategoriController extends Controller
         return DB::transaction(function () use ($request) {
             ProdukKategori::create([
                 "id_produk_kategori" => "PRO-K-" . date("YmdHis"),
-                "id_produk" => $request->id_produk,
+                "kode_produk" => $request->kode_produk,
                 "id_kategori_produk" => $request->id_kategori_produk,
             ]);
 
