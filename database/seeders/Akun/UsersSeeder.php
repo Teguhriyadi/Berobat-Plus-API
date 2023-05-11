@@ -181,5 +181,35 @@ class UsersSeeder extends Seeder
             "id_role" => "RO-2003066",
             "status" => 1
         ]);
+
+        User::create([
+            "nama" => "Rizi Dimas",
+            "email" => "rizkidimas@gmail.com",
+            "password" => bcrypt("perawat"),
+            "nomor_hp" => "08373737",
+            "alamat" => "Cirebon",
+            "id_role" => "RO-2003063",
+            "status" => 1
+        ]);
+
+        User::create([
+            "nama" => "Rizki Anugrah",
+            "email" => "rizkianugrah@gmail.com",
+            "password" => bcrypt("perawat"),
+            "nomor_hp" => "2839232398",
+            "alamat" => "Cirebon",
+            "id_role" => "RO-2003063",
+            "status" => 1
+        ]);
+
+        User::create([
+            "nama" => "Fyou",
+            "email" => "fyou@gmail.com",
+            "password" => bcrypt("perawat"),
+            "nomor_hp" => "33384938493",
+            "alamat" => "Cirebon",
+            "id_role" => "RO-2003063",
+            "status" => 1
+        ]);
     }
 }

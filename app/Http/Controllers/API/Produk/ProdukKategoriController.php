@@ -46,7 +46,7 @@ class ProdukKategoriController extends Controller
         return DB::transaction(function () use ($id_produk_kategori, $request) {
 
             ProdukKategori::where("id_produk_kategori", $id_produk_kategori)->update([
-                "id_produk" => $request->id_produk,
+                "kode_produk" => $request->kode_produk,
                 "id_kategori_produk" => $request->id_kategori_produk,
             ]);
 
