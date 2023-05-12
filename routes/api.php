@@ -12,6 +12,7 @@ use App\Http\Controllers\API\Akun\Public\ActivateAccountController;
 use App\Http\Controllers\API\Akun\Public\PictureController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\DashboardController;
+use App\Http\Controllers\API\FlipController;
 use App\Http\Controllers\API\Master\Artikel\DataArtikelController;
 use App\Http\Controllers\API\Master\Artikel\DetailArtikelController;
 use App\Http\Controllers\API\Master\Artikel\GroupingArtikelController;
@@ -122,7 +123,13 @@ Route::middleware("auth:sanctum")->group(function () {
 
             require __DIR__ . '/master/rumah_sakit/data.php';
 
-            Route::get("/spesialis/{id_rumah_sakit}", [SpesialisRumahSakitController::class, "index"]);
+            Route::prefix("spesialis")->group(function() {
+                Route::get("/{id_rumah_sakit}", [SpesialisRumahSakitController::class, "index"]);
+                Route::post("/{id_rumah_sakit}", [SpesialisRumahSakitController::class, "store"]);
+                Route::get("/{id_rumah_sakit}/{id_spesialis}", [SpesialisRumahSakitController::class, "edit"]);
+                Route::put("/{id_spesialis}", [SpesialisRumahSakitController::class, "update"]);
+                Route::delete("/{id_spesialis}", [SpesialisRumahSakitController::class, "destroy"]);
+            });
 
             require __DIR__ . '/master/rumah_sakit/fasilitas.php';
         });
