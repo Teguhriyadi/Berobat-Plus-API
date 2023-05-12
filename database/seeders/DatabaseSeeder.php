@@ -4,9 +4,11 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Akun\Perawat;
 use Database\Seeders\Akun\CompanySeeder;
 use Database\Seeders\Akun\DokterSeeder;
 use Database\Seeders\Akun\KonsumenSeeder;
+use Database\Seeders\Akun\PerawatSeeder;
 use Database\Seeders\Akun\OwnerApotekSeeder;
 use Database\Seeders\Akun\OwnerRumahSakitSeeder;
 use Database\Seeders\Akun\RumahSakitSeeder;
@@ -62,6 +64,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BiayaDokterSeeder::class);
         $this->call(KategoriProdukSeeder::class);
         $this->call(DataProdukSeeder::class);
+        $this->call(PerawatSeeder::class);
         $this->call(ProdukKategoriSeeder::class);
         $this->call(DataPenyakitSeeder::class);
         $this->call(GejalaSeeder::class);

@@ -29,6 +29,7 @@ class DataProdukController extends Controller
                     "id" => $p["id_produk"],
                     "owner" => $p->getOwnerApotek->getUser->nama,
                     "nama_produk" => $p["nama_produk"],
+                    "kode_produk" => $p["kode_produk"],
                     "slug_produk" => $p["slug_produk"],
                     "deskripsi_produk" => $p["deskripsi_produk"],
                     "harga" => $p["harga_produk"],

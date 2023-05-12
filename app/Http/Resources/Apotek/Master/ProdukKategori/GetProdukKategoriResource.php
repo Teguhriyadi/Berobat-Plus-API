@@ -15,8 +15,9 @@ class GetProdukKategoriResource extends JsonResource
     public function toArray($request)
     {
         return [
+            "id_produk_kategori" => $this->id_produk_kategori,
             "produk" => $this->getProduk,
-            "kategori" => $this->getKategori
+            "kategori" => $this->getKategori    
         ];
     }
 }
