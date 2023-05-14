@@ -95,4 +95,13 @@ class DataProdukController extends Controller
             return response()->json(["pesan" => "Data Produk Berhasil di Hapus"]);
         });
     }
+
+    public function get_by_owner()
+    {
+        return DB::transaction(function() {
+            $produk_by_owner = ProdukApotek::where("id_owner_apotek", Auth::user()->getApotek->id_owner_apotek)->get();
+
+            return GetProdukResource::collection($produk_by_owner);
+        });
+    }
 }

@@ -152,6 +152,7 @@ Route::middleware("auth:sanctum")->group(function () {
         });
 
         Route::prefix("produk")->group(function () {
+            Route::get("/data_produk/by_owner", [DataProdukController::class, "get_by_owner"]);
             Route::resource("/data_produk", DataProdukController::class);
             Route::resource("/produk_kategori", ProdukKategoriController::class);
         });
