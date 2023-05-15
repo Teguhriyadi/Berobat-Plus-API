@@ -30,9 +30,9 @@ class DataRumahSakitController extends Controller
     {
         return DB::transaction(function () use ($request) {
 
-            if ($request->file("foto_rs")) {
-                $data = $request->file("foto_rs")->store("rumah_sakit");
-            }
+            // if ($request->file("foto_rs")) {
+            //     $data = $request->file("foto_rs")->store("rumah_sakit");
+            // }
 
             RumahSakit::create([
                 "id_rumah_sakit" => "RS-" . date("YmdHis"),
@@ -44,7 +44,7 @@ class DataRumahSakitController extends Controller
                 "alamat_rs" => $request->alamat_rs,
                 "latitude" => $request->latitude,
                 "longitude" => $request->longitude,
-                "foto_rs" => url("/storage/" . $data)
+                "foto_rs" => null
             ]);
 
             return response()->json(["pesan" => "Data Akun Rumah Sakit Berhasil di Tambahkan"]);
@@ -123,7 +123,7 @@ class DataRumahSakitController extends Controller
     {
         return DB::transaction(function () use ($request) {
 
-            $perPage = 4;
+            $perPage = 6;
             $page = $request->get('page', 1);
             $offset = ($page - 1) * $perPage;
 
