@@ -23,9 +23,13 @@ class PaymentController extends Controller
 
         $getVaBanks = \Xendit\VirtualAccounts::getVABanks();
 
-        return response()->json([
-            "data" => $getVaBanks
-        ])->setStatusCode(200);
+        $country = array_filter($getVaBanks, function($bank) {
+            return $bank["is_activated"] === true;
+        });
+
+        $country = array_values($country);
+
+        return response()->json(["data" => $country]);
     }
 
     public function post_va(Request $request)
