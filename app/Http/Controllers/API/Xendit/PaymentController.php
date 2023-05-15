@@ -10,9 +10,16 @@ use Xendit\Xendit;
 
 class PaymentController extends Controller
 {
+    protected $setApiKey;
+
+    public function __construct()
+    {
+        $this->setApiKey = "xnd_development_QOi9zsTa9TMIItjscrZtfTyJxATb0JUqUg92TqrRGrgvOzXAAsCafr01YbY";
+    }
+
     public function get_list()
     {
-        Xendit::setApiKey("xnd_development_QOi9zsTa9TMIItjscrZtfTyJxATb0JUqUg92TqrRGrgvOzXAAsCafr01YbY");
+        Xendit::setApiKey($this->setApiKey);
 
         $getVaBanks = \Xendit\VirtualAccounts::getVABanks();
 
@@ -23,7 +30,7 @@ class PaymentController extends Controller
 
     public function post_va(Request $request)
     {
-        Xendit::setApiKey("xnd_development_QOi9zsTa9TMIItjscrZtfTyJxATb0JUqUg92TqrRGrgvOzXAAsCafr01YbY");
+        Xendit::setApiKey($this->setApiKey);
 
         $external_id = "VA-" . date("YmdHis");
 
@@ -52,10 +59,10 @@ class PaymentController extends Controller
 
     public function balance()
     {
-        Xendit::setApiKey("xnd_development_QOi9zsTa9TMIItjscrZtfTyJxATb0JUqUg92TqrRGrgvOzXAAsCafr01YbY");
+        Xendit::setApiKey($this->setApiKey);
 
         $getBalance = \Xendit\Balance::getBalance('CASH');
-  var_dump($getBalance);
+        var_dump($getBalance);
     }
 
     public function callback(Request $request)
@@ -70,10 +77,10 @@ class PaymentController extends Controller
                     "status" => 1
                 ]);
                 if ($update > 0) {
-                    return "OK";
+                    return response()->json(["pesan" => "Data Berhasil di Simpan"]);
                 }
 
-                return "false";
+                return response()->json(["pesan" => "Data Gagal di Simpan"]);
             }
         } else {
             return response()->json([
