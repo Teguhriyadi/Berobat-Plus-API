@@ -12,7 +12,6 @@ use App\Http\Controllers\API\Akun\Public\ActivateAccountController;
 use App\Http\Controllers\API\Akun\Public\PictureController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\DashboardController;
-use App\Http\Controllers\API\FlipController;
 use App\Http\Controllers\API\Master\Artikel\DataArtikelController;
 use App\Http\Controllers\API\Master\Artikel\DetailArtikelController;
 use App\Http\Controllers\API\Master\Artikel\GroupingArtikelController;
@@ -31,6 +30,7 @@ use App\Http\Controllers\API\Master\RumahSakit\SpesialisRumahSakitController;
 use App\Http\Controllers\API\Produk\DataProdukController;
 use App\Http\Controllers\API\Produk\ProdukKategoriController;
 use App\Http\Controllers\API\Tes\RajaOngkirController;
+use App\Http\Controllers\API\Xendit\PaymentController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\DiagnosaController;
 use Illuminate\Http\Request;
@@ -157,6 +157,8 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::resource("/produk_kategori", ProdukKategoriController::class);
         });
     });
+
+    require __DIR__ . 'xendit/pembayaran.php';
 
     Route::get("/count_data", [DashboardController::class, "dashboard"]);
 
