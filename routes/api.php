@@ -158,7 +158,7 @@ Route::middleware("auth:sanctum")->group(function () {
         });
     });
 
-    require __DIR__ . 'xendit/pembayaran.php';
+    require __DIR__ . '/xendit/pembayaran.php';
 
     Route::get("/count_data", [DashboardController::class, "dashboard"]);
 
