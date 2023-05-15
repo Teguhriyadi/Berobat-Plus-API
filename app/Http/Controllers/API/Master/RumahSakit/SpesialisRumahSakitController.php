@@ -32,7 +32,7 @@ class SpesialisRumahSakitController extends Controller
             return response()->json(["pesan" => "Data Berhasil di Tambahkan"]);
         });
     }
-
+    
     public function edit($id_rumah_sakit, $id_spesialis)
     {
         return DB::transaction(function() use ($id_rumah_sakit, $id_spesialis) {
