@@ -37,6 +37,15 @@ class DashboardController extends Controller
         return response()->json(["data" => $dataRequest->object()]);
     }
 
+    public function callback(Request $request)
+    {
+        TestingPayment::where("external_id", $request->external_id)->update([
+            "status" => 1
+        ]);
+
+        return true;
+    }
+
     public function create_api()
     {
         $user = User::find(1);

@@ -49,6 +49,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post("invoice", [DashboardController::class, "invoice"]);
 
+Route::post("callback", [DashboardController::class, "callback"]);
+
 Route::post("/tes_ongkir", [RajaOngkirController::class, "index"]);
 
 Route::get("/create-api", [DashboardController::class, "create_api"]);
