@@ -7,11 +7,36 @@ use App\Models\Akun\Dokter;
 use App\Models\Akun\Konsumen;
 use App\Models\Akun\OwnerApotek;
 use App\Models\Akun\Perawat;
+use App\Models\TestingPayment;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class DashboardController extends Controller
 {
+
+    public function invoice(Request $request)
+    {
+        $secret_key = 'Basic ' . config("xendit.key_auth");
+        $external_id = Str::random(10);
+        $dataRequest = Http::withHeaders([
+            "Authorization" => $secret_key
+        ])->post("https://api.xendit.co/v2/invoices", [
+            "external_id" => $external_id,
+            "amount" => $request->expected_amount
+        ]);
+
+        TestingPayment::create([
+            "external_id" => $external_id,
+            "payment_channel" => "Simulasi Pembayaran",
+            "status" => 1,
+            "harga" => $request->expected_amount
+        ]);
+
+        return response()->json(["data" => $dataRequest->object()]);
+    }
+
     public function create_api()
     {
         $user = User::find(1);
