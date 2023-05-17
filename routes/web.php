@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\TesXenditController;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get("/pembayaran", [DashboardController::class, "pembayaran"]);
+Route::post("/pembayaran", [DashboardController::class, "invoice"]);
 
 Route::get('/', function () {
     return view('welcome');
