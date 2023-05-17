@@ -30,7 +30,8 @@ class DashboardController extends Controller
             "Authorization" => $secret_key
         ])->post("https://api.xendit.co/v2/invoices", [
             "external_id" => $external_id,
-            "amount" => 5000
+            "amount" => 5000,
+            "success_redirect_url" => "https://berobatplus.shop/"
         ]);
 
         TestingPayment::create([
@@ -40,8 +41,7 @@ class DashboardController extends Controller
             "harga" => 5000
         ]);
 
-        // return response()->json(["data" => $dataRequest->object()]);
-        return back();
+        return response()->json(["data" => $dataRequest->object()]);
     }
 
     public function callback(Request $request)
