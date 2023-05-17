@@ -9,8 +9,12 @@
     </title>
     <style>
         body {
+            background-image: url("images/download-boboiboy.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
             font-family: Arial, Helvetica, sans-serif;
             margin-top: 20px;
+            color: white;
         }
 
         i {
