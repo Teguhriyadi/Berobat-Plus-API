@@ -50,7 +50,7 @@ class DashboardController extends Controller
             "status" => 1
         ]);
 
-        return back("/pembayaran");
+        return true;
     }
 
     public function create_api()
