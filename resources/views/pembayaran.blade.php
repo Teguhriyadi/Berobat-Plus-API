@@ -14,6 +14,7 @@
             <thead>
                 <tr>
                     <th>No.</th>
+                    <th>ID</th>
                     <th>Price</th>
                     <th>Status</th>
                     <th>Aksi</th>
@@ -26,6 +27,7 @@
                 @foreach ($pembayaran as $item)
                     <tr>
                         <td>{{ ++$nomer }}.</td>
+                        <td>{{ $item->external_id }}</td>
                         <td>{{ $item->payment_channel }}</td>
                         <td>{{ $item->status }}</td>
                         <td>
