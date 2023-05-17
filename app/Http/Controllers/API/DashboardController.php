@@ -50,7 +50,7 @@ class DashboardController extends Controller
             "status" => 1
         ]);
 
-        return true;
+        return response()->json(["data" => "mohammad"]);
     }
 
     public function create_api()
