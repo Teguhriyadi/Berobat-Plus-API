@@ -5,11 +5,14 @@ namespace App\Http\Controllers\API\Master\Artikel;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Artikel\Master\DataArtikel\GetArtikelResource;
 use App\Models\Artikel\DataArtikel;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class DataArtikelController extends Controller
 {
@@ -24,8 +27,7 @@ class DataArtikelController extends Controller
 
     public function store(Request $request)
     {
-        return DB::transaction(function () use ($request) {
-
+        return DB::transaction(function() use($request) {
             if ($request->file("foto")) {
                 $data = $request->file("foto")->store("artikel");
             }
@@ -34,7 +36,7 @@ class DataArtikelController extends Controller
                 "id_artikel" => "ART-" . date("YmdHis"),
                 "judul_artikel" => $request->judul_artikel,
                 "slug_artikel" => Str::slug($request->judul_artikel),
-                "foto" => url("/storage/" . $data),
+                "foto" => url("storage/".$data),
                 "deskripsi" => $request->deskripsi,
                 "user_id" => Auth::user()->id
             ]);
