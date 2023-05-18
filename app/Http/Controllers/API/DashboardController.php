@@ -15,6 +15,12 @@ use Illuminate\Support\Str;
 
 class DashboardController extends Controller
 {
+    public function pembayaran()
+    {
+        $data["pembayaran"] = TestingPayment::get();
+
+        return view("pembayaran", $data);
+    }
 
     public function invoice(Request $request)
     {
@@ -24,14 +30,15 @@ class DashboardController extends Controller
             "Authorization" => $secret_key
         ])->post("https://api.xendit.co/v2/invoices", [
             "external_id" => $external_id,
-            "amount" => $request->expected_amount
+            "amount" => 5000,
+            "success_redirect_url" => "https://berobatplus.shop/"
         ]);
 
         TestingPayment::create([
-            "external_id" => $external_id,
+            "external_id" => $dataRequest->object()->id,
             "payment_channel" => "Simulasi Pembayaran",
-            "status" => 1,
-            "harga" => $request->expected_amount
+            "status" => 0,
+            "harga" => 5000
         ]);
 
         return response()->json(["data" => $dataRequest->object()]);
@@ -43,7 +50,7 @@ class DashboardController extends Controller
             "status" => 1
         ]);
 
-        return true;
+        return response()->json(["data" => "mohammad"]);
     }
 
     public function create_api()
