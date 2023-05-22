@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id("id_produk");
             $table->string("kode_produk", 50);
             $table->string("id_owner_apotek", 50);
+            $table->string("id_profil_apotek", 50);
             $table->string("nama_produk", 50);
             $table->string("slug_produk");
             $table->text("deskripsi_produk");

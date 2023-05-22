@@ -52,6 +52,7 @@ class DataProdukController extends Controller
             ProdukApotek::create([
                 "kode_produk" => "PRO-" . date("YmdHis"),
                 "id_owner_apotek" => $owner->id_owner_apotek,
+                "id_profil_apotek" => $request->id_profil_apotek,
                 "nama_produk" => $request->nama_produk,
                 "slug_produk" => Str::slug($request->nama_produk),
                 "deskripsi_produk" => $request->deskripsi_produk,
@@ -76,6 +77,7 @@ class DataProdukController extends Controller
         return DB::transaction(function () use ($kode_produk, $request) {
 
             ProdukApotek::where("kode_produk", $kode_produk)->update([
+                "id_profil_apotek" => $request->id_profil_apotek,
                 "nama_produk" => $request->nama_produk,
                 "slug_produk" => Str::slug($request->nama_produk),
                 "deskripsi_produk" => $request->deskripsi_produk,
