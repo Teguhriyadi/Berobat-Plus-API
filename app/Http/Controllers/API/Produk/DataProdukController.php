@@ -106,4 +106,13 @@ class DataProdukController extends Controller
             return GetProdukResource::collection($produk_by_owner);
         });
     }
+
+    public function get_produk_by_owner($id_profil_apotek)
+    {
+        return DB::transaction(function() use($id_profil_apotek) {
+            $produk = ProdukApotek::where("id_owner_apotek", Auth::user()->getApotek->id_owner_apotek)->where("id_profil_apotek", $id_profil_apotek)->get();
+
+            return GetProdukResource::collection($produk);
+        });
+    }
 }
