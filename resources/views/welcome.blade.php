@@ -39,7 +39,8 @@
         </i>
         <br><br>
         <i>
-            " ~ Need Someone to Talk ~ "
+            " ~ Need Someone to Talk ~ ",
+            "BOLEHHHHHHH"
         </i>
     </center>
 
