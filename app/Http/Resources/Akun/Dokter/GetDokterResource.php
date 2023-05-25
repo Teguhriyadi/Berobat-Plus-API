@@ -19,8 +19,8 @@ class GetDokterResource extends JsonResource
             "user_id" => $this->getUser,
             "nomor_str" => $this->nomor_str,
             "kelas" => $this->kelas,
-            "biaya" => $this->getBiaya,
-            "harga" => "Rp. " . number_format($this->getBiaya->biaya)
+            // "biaya" => $this->getBiaya,
+            // "harga" => "Rp. " . number_format($this->getBiaya->biaya)
         ];
     }
 }
