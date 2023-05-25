@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Akun;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Akun\Dokter\GetDokterResource;
 use App\Models\Akun\Dokter;
+use App\Models\Master\Dokter\BiayaDokter;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,12 +41,18 @@ class DokterController extends Controller
                 "status" => "0"
             ]);
 
-            Dokter::create([
+            $dokter = Dokter::create([
                 "id_dokter" => "DOC-" . date("YmdHis"),
                 "pendidikan_terakhir" => $request->pendidikan_terakhir,
                 "nomor_str" => $request->nomor_str,
                 "user_id" => $user->id,
                 "kelas" => $request->kelas
+            ]);
+
+            BiayaDokter::create([
+                "id_biaya_dokter" => "BIA-D-" . date("YmdHis"),
+                "id_dokter" => $dokter["id_dokter"],
+                "biaya" => 0
             ]);
 
             return response()->json(["pesan" => "Data Dokter Berhasil di Tambahkan"]);
