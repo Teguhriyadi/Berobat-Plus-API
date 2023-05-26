@@ -16,61 +16,61 @@ class SpesialisPenyakitSeeder extends Seeder
     public function run()
     {
         SpesialisPenyakit::create([
-            "id_penyakit" => "SPS-001",
+            "id_spesialis_penyakit" => "SPS-001",
             "nama_spesialis" => "Dentist",
             "slug_spesialis" => "dentist"
         ]);
 
         SpesialisPenyakit::create([
-            "id_penyakit" => "SPS-002",
+            "id_spesialis_penyakit" => "SPS-002",
             "nama_spesialis" => "THT",
             "slug_spesialis" => "tht"
         ]);
 
         SpesialisPenyakit::create([
-            "id_penyakit" => "SPS-003",
+            "id_spesialis_penyakit" => "SPS-003",
             "nama_spesialis" => "Orthopedi",
             "slug_spesialis" => "orthopedi"
         ]);
 
         SpesialisPenyakit::create([
-            "id_penyakit" => "SPS-004",
+            "id_spesialis_penyakit" => "SPS-004",
             "nama_spesialis" => "Jantung",
             "slug_spesialis" => "jantung"
         ]);
 
         SpesialisPenyakit::create([
-            "id_penyakit" => "SPS-005",
+            "id_spesialis_penyakit" => "SPS-005",
             "nama_spesialis" => "Penyakit-dalam",
             "slug_spesialis" => "penyakit-dalam"
         ]);
 
         SpesialisPenyakit::create([
-            "id_penyakit" => "SPS-006",
+            "id_spesialis_penyakit" => "SPS-006",
             "nama_spesialis" => "Kulit",
             "slug_spesialis" => "kulit"
         ]);
 
         SpesialisPenyakit::create([
-            "id_penyakit" => "SPS-007",
+            "id_spesialis_penyakit" => "SPS-007",
             "nama_spesialis" => "Mata",
             "slug_spesialis" => "mata"
         ]);
 
         SpesialisPenyakit::create([
-            "id_penyakit" => "SPS-008",
+            "id_spesialis_penyakit" => "SPS-008",
             "nama_spesialis" => "Neurologist",
             "slug_spesialis" => "neurologist"
         ]);
 
         SpesialisPenyakit::create([
-            "id_penyakit" => "SPS-009",
+            "id_spesialis_penyakit" => "SPS-009",
             "nama_spesialis" => "Internist",
             "slug_spesialis" => "internist"
         ]);
 
         SpesialisPenyakit::create([
-            "id_penyakit" => "SPS-010",
+            "id_spesialis_penyakit" => "SPS-010",
             "nama_spesialis" => "Obstetrics",
             "slug_spesialis" => "obstetics"
         ]);

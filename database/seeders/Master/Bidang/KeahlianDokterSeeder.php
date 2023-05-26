@@ -17,7 +17,7 @@ class KeahlianDokterSeeder extends Seeder
     {
         KeahlianDokter::create([
             "id_keahlian" => "KHLI-2001",
-            "nama_keahlian" => "Gangguan Kecemasan"
+            "nama_keahlian" => "Gangguan Kecemasan",
         ]);
 
         KeahlianDokter::create([
