@@ -24,7 +24,7 @@ class SpesialisPenyakitController extends Controller
     {
         return DB::transaction(function () use ($request) {
             SpesialisPenyakit::create([
-                "id_penyakit" => "SPS-" . date("YmdHis"),
+                "id_spesialis_penyakit" => "SPS-" . date("YmdHis"),
                 "nama_spesialis" => $request->nama_spesialis,
                 "slug_spesialis" => Str::slug($request->nama_spesialis)
             ]);
@@ -33,19 +33,19 @@ class SpesialisPenyakitController extends Controller
         });
     }
 
-    public function edit($id_penyakit)
+    public function edit($id_spesialis_penyakit)
     {
-        return DB::transaction(function () use ($id_penyakit) {
-            $spesialis_penyakit = SpesialisPenyakit::where("id_penyakit", $id_penyakit)->first();
+        return DB::transaction(function () use ($id_spesialis_penyakit) {
+            $spesialis_penyakit = SpesialisPenyakit::where("id_spesialis_penyakit", $id_spesialis_penyakit)->first();
 
             return new GetSpesialisResource($spesialis_penyakit);
         });
     }
 
-    public function update(Request $request, $id_penyakit)
+    public function update(Request $request, $id_spesialis_penyakit)
     {
-        return DB::transaction(function () use ($request, $id_penyakit) {
-            SpesialisPenyakit::where("id_penyakit", $id_penyakit)->update([
+        return DB::transaction(function () use ($request, $id_spesialis_penyakit) {
+            SpesialisPenyakit::where("id_spesialis_penyakit", $id_spesialis_penyakit)->update([
                 "nama_spesialis" => $request->nama_spesialis,
                 "slug_spesialis" => Str::slug($request->nama_spesialis)
             ]);
@@ -54,10 +54,10 @@ class SpesialisPenyakitController extends Controller
         });
     }
 
-    public function destroy($id_penyakit)
+    public function destroy($id_spesialis_penyakit)
     {
-        return DB::transaction(function () use ($id_penyakit) {
-            SpesialisPenyakit::where("id_penyakit", $id_penyakit)->delete();
+        return DB::transaction(function () use ($id_spesialis_penyakit) {
+            SpesialisPenyakit::where("id_spesialis_penyakit", $id_spesialis_penyakit)->delete();
 
             return response()->json(["pesan" => "Data Berhasil di Hapus"]);
         });

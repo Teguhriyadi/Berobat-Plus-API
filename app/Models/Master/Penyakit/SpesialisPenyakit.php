@@ -13,7 +13,7 @@ class SpesialisPenyakit extends Model
 
     protected $guarded = [''];
 
-    public $primaryKey = "id_penyakit";
+    public $primaryKey = "id_spesialis_penyakit";
 
     protected $keyType = "string";
 

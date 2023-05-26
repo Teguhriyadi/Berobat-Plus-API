@@ -15,7 +15,7 @@ class GetSpesialisResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id_penyakit" => $this->id_penyakit,
+            "id_spesialis_penyakit" => $this->id_spesialis_penyakit,
             "nama_spesialis" => $this->nama_spesialis,
             "slug_spesialis" => $this->slug_spesialis
         ];
