@@ -19,13 +19,10 @@ use Database\Seeders\Apotek\ProfilApotekSeeder;
 use Database\Seeders\Master\Artikel\ContentArtikelSeeder;
 use Database\Seeders\Master\Bidang\DokterKeahlianSeeder;
 use Database\Seeders\Master\Bidang\KeahlianDokterSeeder;
+use Database\Seeders\Master\Bidang\PerawatKeahlianSeeder;
 use Database\Seeders\Master\Dokter\BiayaDokterSeeder;
 use Database\Seeders\Master\GroupingArtikel\GroupingSeeder;
 use Database\Seeders\Master\Kategori\KategoriArtikelSeeder;
-use Database\Seeders\Master\Obat\GolonganObatSeeder;
-use Database\Seeders\Master\Penyakit\DataPenyakitSeeder;
-use Database\Seeders\Master\Penyakit\GejalaPenyakitSeeder;
-use Database\Seeders\Master\Penyakit\GejalaSeeder;
 use Database\Seeders\Master\Penyakit\SpesialisPenyakitSeeder;
 use Database\Seeders\Master\Produk\KategoriProdukSeeder;
 use Database\Seeders\Master\RajaOngkir\KurirSeeder;
@@ -51,7 +48,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(OwnerApotekSeeder::class);
         $this->call(KonsumenSeeder::class);
-        $this->call(GolonganObatSeeder::class);
         $this->call(ProfilApotekSeeder::class);
         $this->call(KategoriArtikelSeeder::class);
         $this->call(ContentArtikelSeeder::class);
@@ -67,11 +63,11 @@ class DatabaseSeeder extends Seeder
         $this->call(DataProdukSeeder::class);
         $this->call(PerawatSeeder::class);
         $this->call(ProdukKategoriSeeder::class);
-        $this->call(DataPenyakitSeeder::class);
         $this->call(FasilitasRumahSakitSeeder::class);
-        $this->call(LokasiSeeder::class);
-        $this->call(KurirSeeder::class);
         $this->call(OwnerRumahSakitSeeder::class);
         $this->call(DokterKeahlianSeeder::class);
+        $this->call(PerawatKeahlianSeeder::class);
+        $this->call(LokasiSeeder::class);
+        $this->call(KurirSeeder::class);
     }
 }
