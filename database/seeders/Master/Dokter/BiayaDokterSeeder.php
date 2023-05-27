@@ -32,5 +32,17 @@ class BiayaDokterSeeder extends Seeder
             "id_dokter" => "DKTR-09022004",
             "biaya" => 40000
         ]);
+
+        BiayaDokter::create([
+            "id_biaya_dokter" => "BIA-D-004",
+            "id_dokter" => "DKTR-09022005",
+            "biaya" => 40000
+        ]);
+
+        BiayaDokter::create([
+            "id_biaya_dokter" => "BIA-D-005",
+            "id_dokter" => "DKTR-09022006",
+            "biaya" => 40000
+        ]);
     }
 }
