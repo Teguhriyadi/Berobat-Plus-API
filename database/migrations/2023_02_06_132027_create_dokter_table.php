@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('dokter', function (Blueprint $table) {
             $table->string("id_dokter", 50)->primary();
             $table->integer("user_id");
-            $table->string("nomor_str", 50);
-            $table->tinyInteger("kelas");
+            $table->string("nomor_str", 50)->nullable();
+            $table->tinyInteger("kelas")->nullable();
+            $table->string("file_dokumen")->nullable();
             $table->timestamps();
         });
     }

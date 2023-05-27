@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API\Autentikasi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Akun\Dokter;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -54,5 +56,38 @@ class LoginController extends Controller
         $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
 
         return response()->json(["pesan" => "Anda Berhasil Logout"]);
+    }
+
+    public function register(Request $request)
+    {
+        return DB::transaction(function() use($request) {
+
+            if ($request->file("foto")) {
+                $data = $request->file("foto")->store("profil_dokter");
+            }
+
+            if ($request->file("file_dokumen")) {
+                $dokumen = $request->file("file_dokumen")->store("dokumen");
+            }
+
+            $user = User::create([
+                "nama" => $request->nama,
+                "password" => bcrypt($request->password),
+                "nomor_hp" => $request->nomor_hp,
+                "id_role" => "RO-2003062",
+                "jenis_kelamin" => $request->jenis_kelamin,
+                "nomor_hp" => $request->nomor_hp,
+                "foto" => url("storage/" . $data),
+                "status" => "0"
+            ]);
+
+            Dokter::create([
+                "id_dokter" => "DKTR-" . date("YmdHis"),
+                "user_id" => $user["id"],
+                "file_dokumen" => url("storage/".$dokumen)
+            ]);
+
+            return response()->json(["pesan" => "Data Dokter Berhasil di Tambahkan"]);
+        });
     }
 }

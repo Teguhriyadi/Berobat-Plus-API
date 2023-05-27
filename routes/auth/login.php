@@ -11,4 +11,5 @@ Route::prefix("autentikasi")->group(function () {
             "status" => 401
         ]);
     })->name("login");
+    Route::post("/register", [LoginController::class, "register"]);
 });

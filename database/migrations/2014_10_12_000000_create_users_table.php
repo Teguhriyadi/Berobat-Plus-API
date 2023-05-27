@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string("nama", 100);
-            $table->string("email", 100)->unique();
+            $table->string("email", 100)->nullable()->unique();
             $table->string("password");
             $table->string("nomor_hp", 20);
-            $table->text("alamat");
+            $table->text("alamat")->nullable();
             $table->string("id_role", 50);
             $table->integer("created_by")->nullable();
             $table->enum("jenis_kelamin", ["L", "P"])->nullable();
