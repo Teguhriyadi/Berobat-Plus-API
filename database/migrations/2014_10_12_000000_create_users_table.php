@@ -31,8 +31,6 @@ return new class extends Migration
             $table->string("tempat_lahir", 50)->nullable();
             $table->date("tanggal_lahir")->nullable();
             $table->enum("status", [1, 0]);
-            $table->double("saldo")->nullable();
-            $table->double("biaya_admin")->nullable();
             $table->timestamps();
         });
     }

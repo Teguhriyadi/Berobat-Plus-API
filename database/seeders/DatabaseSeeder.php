@@ -24,7 +24,9 @@ use Database\Seeders\Master\Dokter\BiayaDokterSeeder;
 use Database\Seeders\Master\GroupingArtikel\GroupingSeeder;
 use Database\Seeders\Master\Kategori\KategoriArtikelSeeder;
 use Database\Seeders\Master\Penyakit\SpesialisPenyakitSeeder;
+use Database\Seeders\Master\Produk\JualObatSeeder;
 use Database\Seeders\Master\Produk\KategoriProdukSeeder;
+use Database\Seeders\Master\Produk\TransaksiObatSeeder;
 use Database\Seeders\Master\RajaOngkir\KurirSeeder;
 use Database\Seeders\Master\RajaOngkir\LokasiSeeder;
 use Database\Seeders\Master\RoleSeeder;
@@ -67,6 +69,8 @@ class DatabaseSeeder extends Seeder
         $this->call(OwnerRumahSakitSeeder::class);
         $this->call(DokterKeahlianSeeder::class);
         $this->call(PerawatKeahlianSeeder::class);
+        $this->call(JualObatSeeder::class);
+        $this->call(TransaksiObatSeeder::class);
         $this->call(LokasiSeeder::class);
         $this->call(KurirSeeder::class);
     }
