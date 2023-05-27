@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Master\Keahlian\GetDokterKeahlianResource;
 use App\Models\Master\DokterKeahlian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class DokterKeahlianController extends Controller
 {
@@ -22,11 +24,14 @@ class DokterKeahlianController extends Controller
     public function store(Request $request)
     {
         return DB::transaction(function () use ($request) {
-            DokterKeahlian::create([
-                "id_dokter_keahlian" => "KHL-" . date("YmdHis"),
-                "dokter_id" => $request->dokter_id,
-                "keahlian_id" => $request->keahlian_id
-            ]);
+
+            foreach ($request->keahlian_id as $value) {
+                DokterKeahlian::create([
+                    "id_dokter_keahlian" => "DKTR-A-" . Str::random(10),
+                    "dokter_id" => Auth::user()->getDokter->id_dokter,
+                    "keahlian_id" => $value
+                ]);
+            }
 
             return response()->json(["pesan" => "Data Dokter Keahlian Berhasil di Tambahkan"]);
         });

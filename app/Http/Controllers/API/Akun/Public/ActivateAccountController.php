@@ -38,7 +38,6 @@ class ActivateAccountController extends Controller
 
             User::where("id", $dokter["user_id"])->update([
                 "created_by" => Auth::user()->id,
-                "status" => "1",
             ]);
 
             return response()->json(["pesan" => "Data Berhasil di Simpan"]);
