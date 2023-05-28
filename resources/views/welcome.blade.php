@@ -22,9 +22,25 @@
             font-weight: bold;
         }
     </style>
+
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script>
+
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('479649479fb239e1fd25', {
+            cluster: 'ap1'
+        });
+
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+            alert(JSON.stringify(data));
+        });
+    </script>
 </head>
 <body>
-    
+
     <center>
         <i>
             " Hallo, Ini Adalah Sekedar Kata - Kata Penyemangat TA, (insya Allah) "

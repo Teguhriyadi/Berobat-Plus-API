@@ -8,12 +8,12 @@
         "php": "^8.0.2",
         "geocoder-php/geonames-provider": "^4.4",
         "guzzlehttp/guzzle": "^7.2",
-        "kavist/rajaongkir": "1.1",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "nesbot/carbon": "^2.66",
         "php-http/guzzle7-adapter": "^1.0",
+        "pusher/pusher-php-server": "^7.2",
         "torann/geoip": "^3.0",
         "xendit/xendit-php": "^2.19"
     },
