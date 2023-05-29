@@ -32,6 +32,7 @@ use App\Http\Controllers\API\Produk\ProdukKategoriController;
 use App\Http\Controllers\API\Tes\RajaOngkirController;
 use App\Http\Controllers\API\Xendit\PaymentController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
+use App\Http\Controllers\ChatingController;
 use App\Http\Controllers\DiagnosaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::post("/kirim-pesan", [ChatingController::class, "index"]);
 
 Route::post("invoice", [DashboardController::class, "invoice"]);
 
