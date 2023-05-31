@@ -21,6 +21,7 @@ use Database\Seeders\Master\Bidang\DokterKeahlianSeeder;
 use Database\Seeders\Master\Bidang\KeahlianDokterSeeder;
 use Database\Seeders\Master\Bidang\PerawatKeahlianSeeder;
 use Database\Seeders\Master\Dokter\BiayaDokterSeeder;
+use Database\Seeders\Master\Dokter\JadwalPraktekSeeder;
 use Database\Seeders\Master\GroupingArtikel\GroupingSeeder;
 use Database\Seeders\Master\Kategori\KategoriArtikelSeeder;
 use Database\Seeders\Master\Penyakit\SpesialisPenyakitSeeder;
@@ -71,6 +72,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PerawatKeahlianSeeder::class);
         $this->call(JualObatSeeder::class);
         $this->call(TransaksiObatSeeder::class);
+        $this->call(JadwalPraktekSeeder::class);
         // $this->call(LokasiSeeder::class);
         // $this->call(KurirSeeder::class);
     }
