@@ -16,6 +16,7 @@ use App\Http\Controllers\API\Master\Artikel\DataArtikelController;
 use App\Http\Controllers\API\Master\Artikel\DetailArtikelController;
 use App\Http\Controllers\API\Master\Artikel\GroupingArtikelController;
 use App\Http\Controllers\API\Master\Artikel\KategoriArtikelController;
+use App\Http\Controllers\API\Master\CariKeahlianController;
 use App\Http\Controllers\API\Master\DokterKeahlianController;
 use App\Http\Controllers\API\Master\KeahlianDokterController;
 use App\Http\Controllers\API\Master\Obat\GolonganObatController;
@@ -101,6 +102,10 @@ Route::middleware("auth:sanctum")->group(function () {
     });
 
     Route::prefix("master")->group(function () {
+
+        Route::prefix("cari")->group(function() {
+            Route::post("/keahlian", [CariKeahlianController::class, "index"]);
+        });
 
         Route::prefix("produk")->group(function () {
             Route::resource("kategori_produk", KategoriProdukController::class);
