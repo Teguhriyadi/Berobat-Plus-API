@@ -15,7 +15,6 @@ class CariKeahlianController extends Controller
             $results = DB::table("dokter_keahlian")
                 ->join("keahlian", "dokter_keahlian.keahlian_id", "=", "keahlian.id_keahlian")
                 ->where("keahlian.nama_keahlian", "LIKE", "%".$request->search."%")
-
                 ->get();
 
             return response()->json($results);
