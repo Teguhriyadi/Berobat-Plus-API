@@ -20,4 +20,9 @@ class JadwalPraktek extends Model
     public $incrementing = false;
 
     public $timestamps = false;
+
+    public function praktek()
+    {
+        return $this->belongsTo("App\Models\Master\RumahSakit\DetailPraktekDokter", "id_detail_praktek", "id_detail_praktek");
+    }
 }

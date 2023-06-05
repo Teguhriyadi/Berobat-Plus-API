@@ -46,7 +46,7 @@ class LoginController extends Controller
 
         $user['token'] = $token->plainTextToken;
 
-        return response()->json(["message" => "Berhasil Login",  "data" => $user]);
+        return response()->json(["message" => "Berhasil Login",  "data"=> $user]);
     }
 
     public function logout()

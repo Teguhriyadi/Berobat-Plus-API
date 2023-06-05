@@ -18,4 +18,14 @@ class DetailPraktekDokter extends Model
     protected $keyType = "string";
 
     public $incrementing = false;
+
+    public function rumah_sakit()
+    {
+        return $this->belongsTo("App\Models\Akun\RumahSakit", "id_rumah_sakit", "id_rumah_sakit");
+    }
+
+    public function dokter()
+    {
+        return $this->belongsTo("App\Models\Akun\Dokter", "id_dokter", "id_dokter");
+    }
 }

@@ -18,6 +18,8 @@ use App\Http\Controllers\API\Master\Artikel\GroupingArtikelController;
 use App\Http\Controllers\API\Master\Artikel\KategoriArtikelController;
 use App\Http\Controllers\API\Master\CariKeahlianController;
 use App\Http\Controllers\API\Master\CariRumahSakitController;
+use App\Http\Controllers\API\Master\Dokter\DetailPraktekDokter;
+use App\Http\Controllers\API\Master\Dokter\JadwalPraktekController;
 use App\Http\Controllers\API\Master\DokterKeahlianController;
 use App\Http\Controllers\API\Master\KeahlianDokterController;
 use App\Http\Controllers\API\Master\Obat\GolonganObatController;
@@ -104,6 +106,8 @@ Route::middleware("auth:sanctum")->group(function () {
 
     Route::prefix("master")->group(function () {
 
+        require __DIR__ . '/ahli/jadwal/antrian.php';
+
         Route::prefix("cari")->group(function() {
             Route::post("/keahlian", [CariKeahlianController::class, "index"]);
             Route::post("/rumah_sakit", [CariRumahSakitController::class, "index"]);
@@ -111,6 +115,11 @@ Route::middleware("auth:sanctum")->group(function () {
 
         Route::prefix("produk")->group(function () {
             Route::resource("kategori_produk", KategoriProdukController::class);
+        });
+
+        Route::prefix("dokter")->group(function() {
+            Route::resource("/praktek", DetailPraktekDokter::class);
+            Route::resource("jadwal", JadwalPraktekController::class);
         });
 
         Route::get("/artikel/{user_id}/get", [DataArtikelController::class, "get_by_id"]);
