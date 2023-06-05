@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('biaya_dokter', function (Blueprint $table) {
-            $table->string("id_biaya_dokter", 50)->primary();
-            $table->string("id_dokter", 50);
+        Schema::create('biaya_praktek', function (Blueprint $table) {
+            $table->string("id_biaya_praktek", 50)->primary();
+            $table->tinyInteger("ahli_id");
             $table->double("biaya");
             $table->timestamps();
         });

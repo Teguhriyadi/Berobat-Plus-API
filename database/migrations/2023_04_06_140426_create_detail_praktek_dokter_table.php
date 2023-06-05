@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('detail_praktek_dokter', function (Blueprint $table) {
-            $table->string("id_detail_praktek")->primary();
-            $table->string("id_dokter");
+        Schema::create('detail_praktek', function (Blueprint $table) {
+            $table->string("id_detail_praktek", 50)->primary();
+            $table->tinyInteger("ahli_id");
             $table->string("id_rumah_sakit");
-            $table->double("biaya_dokter");
+            $table->double("biaya_praktek");
             $table->timestamps();
         });
     }

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API\Akun;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Akun\Dokter\GetDokterResource;
+use App\Models\Ahli\BiayaPraktek;
 use App\Models\Akun\Dokter;
-use App\Models\Master\Dokter\BiayaDokter;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +16,7 @@ class DokterController extends Controller
     public function index()
     {
         return DB::transaction(function () {
-            $dokter = Dokter::orderBy(DB::raw("RAND()"))->with("getUser:id,nama,email,jenis_kelamin,nomor_hp,alamat,tempat_lahir,tempat_lahir,tanggal_lahir,status")->with("getBiaya:id_biaya_dokter,id_dokter,biaya")->paginate(2);
+            $dokter = Dokter::orderBy(DB::raw("RAND()"))->with("getUser:id,nama,email,jenis_kelamin,nomor_hp,alamat,tempat_lahir,tempat_lahir,tanggal_lahir,status")->with("getBiaya:id_biaya_praktek,ahli_id,biaya")->paginate(2);
 
             return GetDokterResource::collection($dokter);
         });
@@ -41,7 +41,7 @@ class DokterController extends Controller
                 "status" => "0"
             ]);
 
-            $dokter = Dokter::create([
+            Dokter::create([
                 "id_dokter" => "DOC-" . date("YmdHis"),
                 "pendidikan_terakhir" => $request->pendidikan_terakhir,
                 "nomor_str" => $request->nomor_str,
@@ -49,9 +49,9 @@ class DokterController extends Controller
                 "kelas" => $request->kelas
             ]);
 
-            BiayaDokter::create([
-                "id_biaya_dokter" => "BIA-D-" . date("YmdHis"),
-                "id_dokter" => $dokter["id_dokter"],
+            BiayaPraktek::create([
+                "id_biaya_praktek" => "BIA-P-" . date("YmdHis"),
+                "ahli_id" => $user["id"],
                 "biaya" => 0
             ]);
 
@@ -101,6 +101,7 @@ class DokterController extends Controller
 
             $cek_data = Dokter::where("id_dokter", $id_dokter)->first();
 
+            BiayaPraktek::where("ahli_id", $cek_data->ahli_id)->delete();
             User::where("id", $cek_data->user_id)->delete();
 
             $cek_data->delete();

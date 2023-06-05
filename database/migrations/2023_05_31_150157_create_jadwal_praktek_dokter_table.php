@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jadwal_praktek_dokter', function (Blueprint $table) {
-            $table->string("id_jadwal_praktek_dokter", 50)->primary();
+        Schema::create('jadwal_praktek', function (Blueprint $table) {
+            $table->string("id_jadwal_praktek", 50)->primary();
             $table->string("id_detail_praktek", 50);
             $table->string("hari", 20);
             $table->time("mulai_jam");

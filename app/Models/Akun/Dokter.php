@@ -25,7 +25,7 @@ class Dokter extends Model
     }
 
     public function getBiaya()
-    {
-        return $this->hasOne("App\Models\Master\Dokter\BiayaDokter", "id_dokter", "id_dokter");
+    {   
+        return $this->belongsTo("App\Models\Ahli\BiayaPraktek", "user_id", "ahli_id");
     }
 }

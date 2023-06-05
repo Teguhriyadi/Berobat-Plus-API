@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Master\Dokter;
+namespace App\Http\Resources\Master\Ahli;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GetDetailPraktekResource extends JsonResource
+class GetDetailPraktekrResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,9 @@ class GetDetailPraktekResource extends JsonResource
     {
         return [
             "id_detail_praktek" => $this->id_detail_praktek,
-            "dokter" => $this->dokter->getUser->nama,
-            "rumah_sakit" => $this->rumah_sakit->nama_rs,
-            "biaya" => $this->biaya_dokter
+            "ahli" => $this->user,
+            "rumah_sakit" => $this->rumah_sakit,
+            "biaya_praktek" => $this->biaya_praktek
         ];
     }
 }

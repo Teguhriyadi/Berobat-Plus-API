@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Master\Dokter;
+namespace App\Models\Ahli;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,11 +9,11 @@ class JadwalPraktek extends Model
 {
     use HasFactory;
 
-    protected $table = "jadwal_praktek_dokter";
+    protected $table = "jadwal_praktek";
 
     protected $guarded = [''];
 
-    public $primaryKey = "id_jadwal_praktek_dokter";
+    public $primaryKey = "id_jadwal_praktek";
 
     protected $keyType = "string";
 
@@ -21,8 +21,8 @@ class JadwalPraktek extends Model
 
     public $timestamps = false;
 
-    public function praktek()
+    public function detail_praktek()
     {
-        return $this->belongsTo("App\Models\Master\RumahSakit\DetailPraktekDokter", "id_detail_praktek", "id_detail_praktek");
+        return $this->belongsTo("App\Models\Ahli\DetailPraktek", "id_detail_praktek", "id_detail_praktek");
     }
 }

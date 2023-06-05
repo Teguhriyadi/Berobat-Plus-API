@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API\Akun\Profile\Dokter;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Akun\Profil\Dokter\GetProfilResource;
+use App\Models\Ahli\BiayaPraktek;
 use App\Models\Akun\Dokter;
-use App\Models\Master\Dokter\BiayaDokter;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,9 +45,7 @@ class ProfileController extends Controller
                 "nomor_str" => $request->nomor_str
             ]);
 
-            $dokter = Dokter::where("user_id", $this->user_id)->first();
-
-            BiayaDokter::where("id_dokter", $dokter["id_dokter"])->update([
+            BiayaPraktek::where("ahli_id", $this->user_id)->update([
                 "biaya" => $request->biaya
             ]);
 

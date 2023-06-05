@@ -107,6 +107,8 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::prefix("master")->group(function () {
 
         require __DIR__ . '/ahli/jadwal/antrian.php';
+        require __DIR__ . '/ahli/jadwal/praktek.php';
+        require __DIR__ . '/ahli/detail/praktek.php';
 
         Route::prefix("cari")->group(function() {
             Route::post("/keahlian", [CariKeahlianController::class, "index"]);
@@ -115,11 +117,6 @@ Route::middleware("auth:sanctum")->group(function () {
 
         Route::prefix("produk")->group(function () {
             Route::resource("kategori_produk", KategoriProdukController::class);
-        });
-
-        Route::prefix("dokter")->group(function() {
-            Route::resource("/praktek", DetailPraktekDokter::class);
-            Route::resource("jadwal", JadwalPraktekController::class);
         });
 
         Route::get("/artikel/{user_id}/get", [DataArtikelController::class, "get_by_id"]);
