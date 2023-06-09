@@ -31,6 +31,7 @@ use App\Http\Controllers\API\Master\RumahSakit\GetSpesialisDokterController;
 use App\Http\Controllers\API\Master\RumahSakit\SpesialisRumahSakitController;
 use App\Http\Controllers\API\Produk\DataProdukController;
 use App\Http\Controllers\API\Produk\ProdukKategoriController;
+use App\Http\Controllers\API\Tes\CekResiController;
 use App\Http\Controllers\API\Tes\RajaOngkirController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\ChatingController;
@@ -121,6 +122,7 @@ Route::middleware("auth:sanctum")->group(function () {
 
         Route::get("/artikel/{user_id}/get", [DataArtikelController::class, "get_by_id"]);
         Route::get("/artikel/{slug}", [DetailArtikelController::class, "index"]);
+        Route::get("/resi", [CekResiController::class, "index"]);
         Route::resource("role", RoleController::class);
         Route::resource("kategori_artikel", KategoriArtikelController::class);
         Route::resource("artikel", DataArtikelController::class);
