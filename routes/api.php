@@ -59,6 +59,7 @@ Route::post("callback", [DashboardController::class, "callback"]);
 Route::post("/tes_ongkir", [RajaOngkirController::class, "index"]);
 
 Route::get("/create-api", [DashboardController::class, "create_api"]);
+Route::get("/resi", [CekResiController::class, "index"]);
 
 require __DIR__ . '/auth/login.php';
 
@@ -67,18 +68,18 @@ Route::prefix("akun")->group(function () {
 });
 
 Route::middleware("auth:sanctum")->group(function () {
-
+    
     Route::prefix("akun")->group(function () {
-
+        
         Route::put("/update-picture", [PictureController::class, "update_picture"]);
 
         Route::get("/all_account", [AllAccountController::class, "index"]);
         Route::resource("/company", CompanyController::class);
-
+        
         Route::get("/dokter/data", [DokterController::class, "data"]);
         Route::get("/dokter/{uid_partner}", [DokterController::class, "uid_partner"]);
         Route::resource("/dokter", DokterController::class);
-
+        
         Route::get("/perawat/data", [PerawatController::class, "data"]);
         Route::resource("/perawat", PerawatController::class);
         
@@ -86,31 +87,31 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::resource("/owner_rs", OwnerRumahSakitController::class);
 
         Route::prefix("profil")->group(function () {
-
+            
             require __DIR__ . '/account/profil/admin/profil.php';
-
+            
             require __DIR__ . '/account/profil/apotek/login.php';
-
+            
             require __DIR__ . '/account/profil/perawat/profil.php';
-
+            
             require __DIR__ . '/account/profil/konsumen/profil.php';
-
+            
             require __DIR__ . '/account/profil/dokter/profil.php';
         });
-
+        
         Route::put("/active_account/{id_user}", [ActivateAccountController::class, "active_account"]);
-
+        
         Route::put("/active_account/{id_dokter}/dokter", [ActivateAccountController::class, "active_account_dokter"]);
 
         Route::put("/change_password", [ChangePasswordController::class, "change_password"]);
     });
 
     Route::prefix("master")->group(function () {
-
+        
         require __DIR__ . '/ahli/jadwal/antrian.php';
         require __DIR__ . '/ahli/jadwal/praktek.php';
         require __DIR__ . '/ahli/detail/praktek.php';
-
+        
         Route::prefix("cari")->group(function() {
             Route::post("/keahlian", [CariKeahlianController::class, "index"]);
             Route::post("/rumah_sakit", [CariRumahSakitController::class, "index"]);
@@ -122,7 +123,6 @@ Route::middleware("auth:sanctum")->group(function () {
 
         Route::get("/artikel/{user_id}/get", [DataArtikelController::class, "get_by_id"]);
         Route::get("/artikel/{slug}", [DetailArtikelController::class, "index"]);
-        Route::get("/resi", [CekResiController::class, "index"]);
         Route::resource("role", RoleController::class);
         Route::resource("kategori_artikel", KategoriArtikelController::class);
         Route::resource("artikel", DataArtikelController::class);
