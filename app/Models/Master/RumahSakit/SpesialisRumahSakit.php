@@ -21,6 +21,6 @@ class SpesialisRumahSakit extends Model
 
     public function getSpesialisPenyakit()
     {
-        return $this->belongsTo("App\Models\Master\Penyakit\SpesialisPenyakit", "id_penyakit", "id_penyakit");
+        return $this->belongsTo("App\Models\Master\Penyakit\SpesialisPenyakit", "id_penyakit", "id_spesialis_penyakit");
     }
 }

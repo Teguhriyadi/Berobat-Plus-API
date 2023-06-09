@@ -79,4 +79,13 @@ class DokterKeahlianController extends Controller
             return GetDokterKeahlianResource::collection($data_dokter);
         });
     }
+
+    public function get_data_by_dokter($id_dokter)
+    {
+        return DB::transaction(function() use($id_dokter) {
+            $dokter = DokterKeahlian::where("dokter_id", $id_dokter)->with("getDokter:id_dokter,user_id")->get();
+            
+            return GetDokterKeahlianResource::collection($dokter);
+        });
+    }
 }

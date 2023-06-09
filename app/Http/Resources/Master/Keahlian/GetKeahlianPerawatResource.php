@@ -4,7 +4,7 @@ namespace App\Http\Resources\Master\Keahlian;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GetDokterKeahlianResource extends JsonResource
+class GetKeahlianPerawatResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,9 +15,9 @@ class GetDokterKeahlianResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id_dokter_keahlian" => $this->id_dokter_keahlian,
-            "get_dokter" => $this->getDokter,
-            "get_keahlian" => $this->getKeahlian
+            "id_perawat_keahlian" => $this->id_perawat_keahlian,
+            "perawat" => $this->perawat,
+            "keahlian" => $this->keahlian
         ];
     }
 }

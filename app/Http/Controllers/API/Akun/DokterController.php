@@ -110,10 +110,10 @@ class DokterController extends Controller
         });
     }
 
-    public function all_data()
+    public function data()
     {
         return DB::transaction(function () {
-            $dokter = Dokter::orderBy(DB::raw("RAND()"))->with("getUser:id,nama,email,jenis_kelamin,nomor_hp,alamat,tempat_lahir,tempat_lahir,tanggal_lahir,status")->paginate(10);
+            $dokter = Dokter::orderBy(DB::raw("RAND()"))->with("getUser:id,nama,email,jenis_kelamin,nomor_hp,alamat,tempat_lahir,tempat_lahir,tanggal_lahir,status")->with("getBiaya:id_biaya_praktek,ahli_id,biaya")->get();
 
             return GetDokterResource::collection($dokter);
         });

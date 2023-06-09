@@ -99,4 +99,13 @@ class PerawatController extends Controller
             return response()->json(["pesan" => "Data Perawat Berhasil di Hapus"]);
         });
     }
+    
+    public function data()
+    {
+        return DB::transaction(function () {
+            $perawat = Perawat::orderBy("created_at", "DESC")->with("getUser:id,nama,email,nomor_hp,alamat,jenis_kelamin,foto,usia,berat_badan,tinggi_badan,tempat_lahir,tanggal_lahir,status")->get();
+
+            return GetPerawatResource::collection($perawat);
+        });
+    }
 }

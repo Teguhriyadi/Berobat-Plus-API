@@ -18,8 +18,6 @@ use App\Http\Controllers\API\Master\Artikel\GroupingArtikelController;
 use App\Http\Controllers\API\Master\Artikel\KategoriArtikelController;
 use App\Http\Controllers\API\Master\CariKeahlianController;
 use App\Http\Controllers\API\Master\CariRumahSakitController;
-use App\Http\Controllers\API\Master\Dokter\DetailPraktekDokter;
-use App\Http\Controllers\API\Master\Dokter\JadwalPraktekController;
 use App\Http\Controllers\API\Master\DokterKeahlianController;
 use App\Http\Controllers\API\Master\KeahlianDokterController;
 use App\Http\Controllers\API\Master\Obat\GolonganObatController;
@@ -34,7 +32,6 @@ use App\Http\Controllers\API\Master\RumahSakit\SpesialisRumahSakitController;
 use App\Http\Controllers\API\Produk\DataProdukController;
 use App\Http\Controllers\API\Produk\ProdukKategoriController;
 use App\Http\Controllers\API\Tes\RajaOngkirController;
-use App\Http\Controllers\API\Xendit\PaymentController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\ChatingController;
 use App\Http\Controllers\DiagnosaController;
@@ -77,10 +74,13 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::get("/all_account", [AllAccountController::class, "index"]);
         Route::resource("/company", CompanyController::class);
 
+        Route::get("/dokter/data", [DokterController::class, "data"]);
         Route::get("/dokter/{uid_partner}", [DokterController::class, "uid_partner"]);
-        Route::get("/dokter/semua_data", [DokterController::class, "all_data"]);
         Route::resource("/dokter", DokterController::class);
+
+        Route::get("/perawat/data", [PerawatController::class, "data"]);
         Route::resource("/perawat", PerawatController::class);
+        
         Route::resource("/apotek", OwnerApotekController::class);
         Route::resource("/owner_rs", OwnerRumahSakitController::class);
 
@@ -138,6 +138,9 @@ Route::middleware("auth:sanctum")->group(function () {
 
         Route::resource("keahlian", KeahlianDokterController::class);
 
+        require __DIR__ . '/master/perawat/keahlian/keahlian_perawat.php';
+
+        Route::get("/dokter_keahlian/{id_dokter}", [DokterKeahlianController::class, "get_data_by_dokter"]);
         Route::get("/dokter_keahlian/{id_keahlian}/ambil_keahlian", [DokterKeahlianController::class, "show"]);
         Route::resource("dokter_keahlian", DokterKeahlianController::class);
 
