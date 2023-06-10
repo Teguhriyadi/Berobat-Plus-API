@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\Master;
+namespace App\Models\Ahli;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class KeahlianDokter extends Model
+class Keahlian extends Model
 {
     use HasFactory;
 

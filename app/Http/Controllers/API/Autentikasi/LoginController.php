@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Autentikasi;
 
 use App\Http\Controllers\Controller;
 use App\Models\Akun\Dokter;
+use App\Models\Akun\Perawat;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -61,9 +62,9 @@ class LoginController extends Controller
     public function register(Request $request)
     {
         return DB::transaction(function() use($request) {
-
+            
             if ($request->file("foto")) {
-                $data = $request->file("foto")->store("profil_dokter");
+                $data = $request->file("foto")->store("profil_ahli");
             }
 
             if ($request->file("file_dokumen")) {
@@ -74,20 +75,27 @@ class LoginController extends Controller
                 "nama" => $request->nama,
                 "password" => bcrypt($request->password),
                 "nomor_hp" => $request->nomor_hp,
-                "id_role" => "RO-2003062",
+                "id_role" =>  $request->option == "dokter" ? "RO-2003062" : "RO-2003063",
                 "jenis_kelamin" => $request->jenis_kelamin,
-                "nomor_hp" => $request->nomor_hp,
                 "foto" => url("storage/" . $data),
                 "status" => "0"
             ]);
 
-            Dokter::create([
-                "id_dokter" => "DKTR-" . date("YmdHis"),
-                "user_id" => $user["id"],
-                "file_dokumen" => url("storage/".$dokumen)
-            ]);
+            if ($request->option == "dokter") {
+                Dokter::create([
+                    "id_dokter" => "DKTR-" . date("YmdHis"),
+                    "user_id" => $user["id"],
+                    "file_dokumen" => url("storage/".$dokumen)
+                ]);
+            } else if ($request->option == "perawat") {
+                Perawat::create([
+                    "id_perawat" => "PWT-" . date("YmdHis"),
+                    "user_id" => $user["id"],
+                    "file_dokumen" => url("storage" . $dokumen)
+                ]);
+            }
 
-            return response()->json(["pesan" => "Data Dokter Berhasil di Tambahkan"]);
+            return response()->json(["pesan" => "Data Ahli Berhasil di Tambahkan"]);
         });
     }
 }

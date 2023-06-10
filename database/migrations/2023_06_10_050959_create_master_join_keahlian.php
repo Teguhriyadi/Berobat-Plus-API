@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('perawat', function (Blueprint $table) {
-            $table->string("id_perawat", 50)->primary();
-            $table->integer("user_id");
-            $table->string("nomor_strp", 50)->nullable();
-            $table->string("file_dokumen")->nullable();
+        Schema::create('master_join_keahlian', function (Blueprint $table) {
+            $table->string("id_master_join_keahlian", 50)->primary();
+            $table->integer("user_ahli_id");
+            $table->string("keahlian_id", 50);
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perawat');
+        Schema::dropIfExists('master_join_keahlian');
     }
 };

@@ -111,6 +111,7 @@ Route::middleware("auth:sanctum")->group(function () {
         require __DIR__ . '/ahli/jadwal/antrian.php';
         require __DIR__ . '/ahli/jadwal/praktek.php';
         require __DIR__ . '/ahli/detail/praktek.php';
+        require __DIR__ . '/ahli/keahlian/master_keahlian.php';
         
         Route::prefix("cari")->group(function() {
             Route::post("/keahlian", [CariKeahlianController::class, "index"]);

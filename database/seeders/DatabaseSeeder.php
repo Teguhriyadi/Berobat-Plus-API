@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Akun\Perawat;
-use Database\Seeders\Akun\CompanySeeder;
 use Database\Seeders\Akun\DokterSeeder;
 use Database\Seeders\Akun\KonsumenSeeder;
 use Database\Seeders\Akun\PerawatSeeder;
@@ -16,10 +14,9 @@ use Database\Seeders\Akun\UsersSeeder;
 use Database\Seeders\Apotek\Produk\DataProdukSeeder;
 use Database\Seeders\Apotek\Produk\ProdukKategoriSeeder;
 use Database\Seeders\Apotek\ProfilApotekSeeder;
+use Database\Seeders\Master\Ahli\KeahlianSeeder;
+use Database\Seeders\Master\Ahli\MasterJoinKeahlianSeeder;
 use Database\Seeders\Master\Artikel\ContentArtikelSeeder;
-use Database\Seeders\Master\Bidang\DokterKeahlianSeeder;
-use Database\Seeders\Master\Bidang\KeahlianDokterSeeder;
-use Database\Seeders\Master\Bidang\PerawatKeahlianSeeder;
 use Database\Seeders\Master\CekResi\CekResiSeeder;
 use Database\Seeders\Master\Dokter\BiayaDokterSeeder;
 use Database\Seeders\Master\Dokter\JadwalPraktekSeeder;
@@ -29,8 +26,6 @@ use Database\Seeders\Master\Penyakit\SpesialisPenyakitSeeder;
 use Database\Seeders\Master\Produk\JualObatSeeder;
 use Database\Seeders\Master\Produk\KategoriProdukSeeder;
 use Database\Seeders\Master\Produk\TransaksiObatSeeder;
-use Database\Seeders\Master\RajaOngkir\KurirSeeder;
-use Database\Seeders\Master\RajaOngkir\LokasiSeeder;
 use Database\Seeders\Master\RoleSeeder;
 use Database\Seeders\Master\RumahSakit\DetailPraktekDokterSeeder;
 use Database\Seeders\Master\RumahSakit\FasilitasRumahSakitSeeder;
@@ -57,7 +52,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ContentArtikelSeeder::class);
         $this->call(GroupingSeeder::class);
         $this->call(RumahSakitSeeder::class);
-        $this->call(KeahlianDokterSeeder::class);
+        $this->call(KeahlianSeeder::class);
         $this->call(DetailPraktekDokterSeeder::class);
         $this->call(SpesialisRumahSakitSeeder::class);
         $this->call(PraktekDokterSeeder::class);
@@ -69,12 +64,10 @@ class DatabaseSeeder extends Seeder
         $this->call(ProdukKategoriSeeder::class);
         $this->call(FasilitasRumahSakitSeeder::class);
         $this->call(OwnerRumahSakitSeeder::class);
-        $this->call(DokterKeahlianSeeder::class);
-        $this->call(PerawatKeahlianSeeder::class);
         $this->call(JualObatSeeder::class);
         $this->call(TransaksiObatSeeder::class);
         $this->call(JadwalPraktekSeeder::class);
         $this->call(CekResiSeeder::class);
-        // $this->call(KurirSeeder::class);
+        $this->call(MasterJoinKeahlianSeeder::class);
     }
 }
