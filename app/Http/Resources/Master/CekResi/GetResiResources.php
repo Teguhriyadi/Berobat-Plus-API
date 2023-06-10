@@ -17,6 +17,7 @@ class GetResiResources extends JsonResource
         return[
             "id_resi" => $this->id_resi,
             "nama_jasa_pengiriman" => $this->nama_jasa_pengiriman,
+            "kode_ekspedisi" => $this->kode_ekspedisi,
         ];
     }
 }
