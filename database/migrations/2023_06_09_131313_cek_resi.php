@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('cek_resi', function (Blueprint $table) {
             $table->string("id_resi", 50)->primary();
             $table->string("nama_jasa_pengiriman");
+            $table->string("kode_ekspedisi");
             $table->timestamps();
         });
     }

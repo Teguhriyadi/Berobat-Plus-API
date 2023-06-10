@@ -14,7 +14,7 @@ class JadwalAntrianController extends Controller
     public function index()
     {
         return DB::transaction(function() {
-            $jadwal = JadwalAntrian::orderBy("ASC", "DESC")->get();
+            $jadwal = JadwalAntrian::orderBy("id_jadwal_antrian", "DESC")->get();
 
             return GetJadwalAntrianResource::collection($jadwal);
         });
