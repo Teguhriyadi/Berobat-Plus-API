@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API\Master\Dokter;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Master\Dokter\JadwalPraktekResource;
-use App\Models\Master\Dokter\JadwalPraktek;
+use App\Models\Ahli\JadwalPraktek;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

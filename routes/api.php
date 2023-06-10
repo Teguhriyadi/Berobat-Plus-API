@@ -12,14 +12,13 @@ use App\Http\Controllers\API\Akun\Public\ActivateAccountController;
 use App\Http\Controllers\API\Akun\Public\PictureController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\DashboardController;
+use App\Http\Controllers\API\Master\Ahli\KeahlianController;
 use App\Http\Controllers\API\Master\Artikel\DataArtikelController;
 use App\Http\Controllers\API\Master\Artikel\DetailArtikelController;
 use App\Http\Controllers\API\Master\Artikel\GroupingArtikelController;
 use App\Http\Controllers\API\Master\Artikel\KategoriArtikelController;
 use App\Http\Controllers\API\Master\CariKeahlianController;
 use App\Http\Controllers\API\Master\CariRumahSakitController;
-use App\Http\Controllers\API\Master\DokterKeahlianController;
-use App\Http\Controllers\API\Master\KeahlianDokterController;
 use App\Http\Controllers\API\Master\Obat\GolonganObatController;
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatKeluarController;
 use App\Http\Controllers\API\Master\Obat\Transaksi\TransaksiObatMasukController;
@@ -139,13 +138,7 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::resource("profil", ProfilController::class);
         });
 
-        Route::resource("keahlian", KeahlianDokterController::class);
-
-        require __DIR__ . '/master/perawat/keahlian/keahlian_perawat.php';
-
-        Route::get("/dokter_keahlian/{id_dokter}", [DokterKeahlianController::class, "get_data_by_dokter"]);
-        Route::get("/dokter_keahlian/{id_keahlian}/ambil_keahlian", [DokterKeahlianController::class, "show"]);
-        Route::resource("dokter_keahlian", DokterKeahlianController::class);
+        Route::resource("keahlian", KeahlianController::class);
 
         Route::prefix("rumah_sakit")->group(function () {
 
