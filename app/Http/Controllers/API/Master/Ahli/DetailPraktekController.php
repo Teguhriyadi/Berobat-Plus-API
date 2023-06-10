@@ -4,9 +4,7 @@ namespace App\Http\Controllers\API\Master\Ahli;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Master\Ahli\GetDetailPraktekrResource;
-use App\Http\Resources\Master\Ahli\GetJadwalPraktekResource;
 use App\Models\Ahli\DetailPraktek;
-use App\Models\Ahli\JadwalPraktek;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -63,15 +61,6 @@ class DetailPraktekController extends Controller
             DetailPraktek::where("id_detail_praktek", $id_detail_praktek)->delete();
 
             return response()->json(["pesan" => "Data Berhasil di Hapus"]);
-        });
-    }
-
-    public function list_jadwal_praktek($id_jadwal_praktek)
-    {
-        return DB::transaction(function() use($id_jadwal_praktek) {
-            $list_data = JadwalPraktek::where("id_detail_praktek", $id_jadwal_praktek)->with("detail_praktek:id_detail_praktek,ahli_id")->get();
-
-            return GetJadwalPraktekResource::collection($list_data);
         });
     }
 }

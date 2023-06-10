@@ -9,6 +9,5 @@ Route::prefix("ahli")->group(function() {
         Route::post("/{id_rumah_sakit}", [DetailPraktekController::class, "store"]);
         Route::get("/{id_detail_praktek}", [DetailPraktekController::class, "edit"]);
         Route::delete("/{id_detail_praktek}", [DetailPraktekController::class, "destroy"]);
-        Route::get("/{id_jadwal_praktek}/get_data", [DetailPraktekController::class, "list_jadwal_praktek"]);
     });
 });
