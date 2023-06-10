@@ -25,7 +25,7 @@ class JadwalPraktekController extends Controller
             JadwalPraktek::create([
                 "id_jadwal_praktek" => "JDWL-P-" . date("YmdHis"),
                 "id_detail_praktek" => $id_detail_praktek,
-                "hari" => $request->hari,
+                "tanggal" => $request->tanggal,
                 "mulai_jam" => $request->mulai_jam,
                 "selesai_jam" => $request->selesai_jam
             ]);
@@ -47,7 +47,7 @@ class JadwalPraktekController extends Controller
     {
         return DB::transaction(function() use($request, $id_jadwal_praktek) {
             JadwalPraktek::where("id_jadwal_praktek", $id_jadwal_praktek)->update([
-                "hari" => $request->hari,
+                "tanggal" => $request->tanggal,
                 "mulai_jam" => $request->mulai_jam,
                 "selesai_jam" => $request->selesai_jam
             ]);
