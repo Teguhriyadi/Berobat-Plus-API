@@ -44,7 +44,7 @@ class RumahSakitSeeder extends Seeder
             "id_owner_rumah_sakit" => "OWN-RS-2003062",
             "nama_rs" => "Rumah Sakit Mitra Plumbon Indramayu",
             "slug_rs" => "rumah-sakit-mitra-plumbon-indramayu",
-            "deskripsi_rs" => "Jl. Raya Pantura, Ujungaris, Kec. Widasari, Kabupaten Indramayu, Jawa Barat 45271",
+            "deskripsi_rs" => "lorem ipsum dolor sit amet",
             "kategori_rs" => 1,
             "alamat_rs" => "Indonesia",
             "latitude" => "-6.4583944367163815",
