@@ -126,6 +126,7 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::resource("role", RoleController::class);
         Route::resource("kategori_artikel", KategoriArtikelController::class);
         Route::resource("artikel", DataArtikelController::class);
+        Route::get("/grouping_artikel/{id_artikel}/get", [GroupingArtikelController::class, "list_by_artikel"]);
         Route::resource("grouping_artikel", GroupingArtikelController::class);
 
         Route::prefix("obat")->group(function () {

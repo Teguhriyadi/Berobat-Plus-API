@@ -38,17 +38,6 @@ class JadwalAntrianController extends Controller
                 if (empty($deteksi)) {
                     $nomer_antrian = 1;
                 } else {
-                    // $data = JadwalAntrian::get();
-
-                    // $awal = 0;
-
-                    // foreach ($data as $d) {
-                    //     if ($d["nomer_antrian"] > $awal) {
-                    //         $cetak = $d["nomer_antrian"];
-                    //     }
-                    // }
-
-                    // $nomer_antrian = $cetak + 1;
                     $praktek = JadwalAntrian::where("id_jadwal_praktek", $request->id_jadwal_praktek)->count();
 
                     if ($praktek > 0) {
