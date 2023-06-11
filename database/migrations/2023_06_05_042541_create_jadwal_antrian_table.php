@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("id_jadwal_antrian", 50)->primary();
             $table->string("konsumen_id", 50);
             $table->string("ahli_id", 50);
+            $table->string("id_jadwal_praktek", 50);
             $table->tinyInteger("nomer_antrian");
             $table->enum("status", ["1", "0"]);
             $table->date("tanggal");
