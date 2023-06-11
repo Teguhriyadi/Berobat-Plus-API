@@ -13,7 +13,7 @@ class JadwalPraktekController extends Controller
     public function index($id_detail_praktek)
     {
         return DB::transaction(function() use($id_detail_praktek) {
-            $jadwal = JadwalPraktek::where("id_detail_praktek", $id_detail_praktek)->with("detail_praktek:id_detail_praktek,ahli_id,id_rumah_sakit")->get();
+            $jadwal = JadwalPraktek::where("id_detail_praktek", $id_detail_praktek)->get();
 
             return GetJadwalPraktekResource::collection($jadwal);
         });
@@ -37,7 +37,7 @@ class JadwalPraktekController extends Controller
     public function edit($id_jadwal_praktek)
     {
         return DB::transaction(function() use($id_jadwal_praktek) {
-            $jadwal = JadwalPraktek::where("id_jadwal_praktek", $id_jadwal_praktek)->with("detail_praktek:id_detail_praktek,ahli_id,id_rumah_sakit,biaya_praktek")->first();
+            $jadwal = JadwalPraktek::where("id_jadwal_praktek", $id_jadwal_praktek)->first();
 
             return new GetJadwalPraktekResource($jadwal);
         });

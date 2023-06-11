@@ -18,7 +18,11 @@ class GetJadwalPraktekResource extends JsonResource
 
         return [
             "id_jadwal_praktek" => $this->id_jadwal_praktek,
-            "detail_praktek" => $this->detail_praktek,
+            "praktek" => [
+                "dokter" => $this->detail_praktek->user->nama,
+                "rumah_sakit" => $this->detail_praktek->rumah_sakit->nama_rs,
+                "biaya" => $this->detail_praktek->biaya_praktek
+            ],
             "tanggal" => Carbon::parse($this->tanggal)->isoFormat("dddd") . ", " . Carbon::createFromFormat('Y-m-d', $this->tanggal)->isoFormat('D MMMM Y'),
             "mulai_jam" => $this->mulai_jam,
             "selesai_jam" => $this->selesai_jam,
