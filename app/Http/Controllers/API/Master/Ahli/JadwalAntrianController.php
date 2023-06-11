@@ -31,37 +31,40 @@ class JadwalAntrianController extends Controller
             if (empty($cek)) {
                 $nomer_antrian = 1;
             } else {
+                $praktek = JadwalAntrian::where("id_jadwal_praktek", $request->id_jadwal_praktek)->count();
+
                 $deteksi = JadwalAntrian::where("tanggal", date("Y-m-d"))->first();
 
                 if (empty($deteksi)) {
                     $nomer_antrian = 1;
                 } else {
-                    $i = 0;
+                    $praktek = JadwalAntrian::where("id_jadwal_praktek", $request->id_jadwal_praktek)->count();
 
-                    $data = JadwalAntrian::get();
-
-                    $awal = 0;
-
-                    foreach ($data as $d) {
-                        if ($d["nomer_antrian"] > $awal) {
-                            $cetak = $d["nomer_antrian"];
-                        }
+                    if ($praktek > 0) {
+                        $nomer_antrian = JadwalAntrian::where("id_jadwal_praktek", $request->id_jadwal_praktek)->max("nomer_antrian") + 1;
+                    } else {
+                        $nomer_antrian = 1;
                     }
-
-                    $nomer_antrian = $cetak + 1;
                 }
             }
 
-            JadwalAntrian::create([
+            $jadwal = JadwalAntrian::create([
                 "id_jadwal_antrian" => "JDWL-A-" . date("YmdHis"),
                 "konsumen_id" => Auth::user()->konsumen->id_konsumen,
                 "ahli_id" => $request->ahli_id,
+                "id_jadwal_praktek" => $request->id_jadwal_praktek,
                 "nomer_antrian" => $nomer_antrian,
                 "status" => 1,
                 "tanggal" => date("Y-m-d")
             ]);
 
-            return response()->json(["pesan" => "Data Berhasil di Tambahkan"]);
+            return response()->json([
+                "pesan" => "Data Berhasil di Tambahkan", 
+                "data" => [
+                    "antrian" => $jadwal["nomer_antrian"],
+                    "tanggal" => $jadwal["tanggal"]
+                ]
+            ]);
         });
     }
 }

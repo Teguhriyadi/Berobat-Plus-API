@@ -63,4 +63,13 @@ class GroupingArtikelController extends Controller
             return response()->json(["pesan" => "Data Grouping Artikel Berhasil di Hapus"]);
         });
     }
+
+    public function list_by_artikel($id_artikel)
+    {
+        return DB::transaction(function() use($id_artikel) {
+            $artikel = GroupingArtikel::with("getArtikel:id_artikel,judul_artikel,slug_artikel")->with("getKategoriArtikel:id_kategori_artikel,nama_kategori")->where("id_artikel", $id_artikel)->get();
+
+            return GetGroupingArtikelResource::collection($artikel);
+        });
+    }
 }
