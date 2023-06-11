@@ -67,51 +67,51 @@ Route::prefix("akun")->group(function () {
 });
 
 Route::middleware("auth:sanctum")->group(function () {
-    
+
     Route::prefix("akun")->group(function () {
-        
+
         Route::put("/update-picture", [PictureController::class, "update_picture"]);
 
         Route::get("/all_account", [AllAccountController::class, "index"]);
         Route::resource("/company", CompanyController::class);
-        
+
         Route::get("/dokter/data", [DokterController::class, "data"]);
         Route::get("/dokter/{uid_partner}", [DokterController::class, "uid_partner"]);
         Route::resource("/dokter", DokterController::class);
-        
+
         Route::get("/perawat/data", [PerawatController::class, "data"]);
         Route::resource("/perawat", PerawatController::class);
-        
+
         Route::resource("/apotek", OwnerApotekController::class);
         Route::resource("/owner_rs", OwnerRumahSakitController::class);
 
         Route::prefix("profil")->group(function () {
-            
+
             require __DIR__ . '/account/profil/admin/profil.php';
-            
+
             require __DIR__ . '/account/profil/apotek/login.php';
-            
+
             require __DIR__ . '/account/profil/perawat/profil.php';
-            
+
             require __DIR__ . '/account/profil/konsumen/profil.php';
-            
+
             require __DIR__ . '/account/profil/dokter/profil.php';
         });
-        
+
         Route::put("/active_account/{id_user}", [ActivateAccountController::class, "active_account"]);
-        
+
         Route::put("/active_account/{id_dokter}/dokter", [ActivateAccountController::class, "active_account_dokter"]);
 
         Route::put("/change_password", [ChangePasswordController::class, "change_password"]);
     });
 
     Route::prefix("master")->group(function () {
-        
+
         require __DIR__ . '/ahli/jadwal/antrian.php';
         require __DIR__ . '/ahli/jadwal/praktek.php';
         require __DIR__ . '/ahli/detail/praktek.php';
         require __DIR__ . '/ahli/keahlian/master_keahlian.php';
-        
+
         Route::prefix("cari")->group(function() {
             Route::post("/keahlian", [CariKeahlianController::class, "index"]);
             Route::post("/rumah_sakit", [CariRumahSakitController::class, "index"]);
@@ -127,6 +127,7 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::resource("kategori_artikel", KategoriArtikelController::class);
         Route::resource("artikel", DataArtikelController::class);
         Route::get("/grouping_artikel/{id_artikel}/get", [GroupingArtikelController::class, "list_by_artikel"]);
+        Route::get("/grouping_artikel/{id_kategori_artikel}/kategori", [GroupingArtikelController::class, "list_artikel_kategori"]);
         Route::resource("grouping_artikel", GroupingArtikelController::class);
 
         Route::prefix("obat")->group(function () {

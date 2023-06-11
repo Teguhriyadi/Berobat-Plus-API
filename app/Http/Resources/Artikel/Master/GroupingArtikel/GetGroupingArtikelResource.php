@@ -16,8 +16,12 @@ class GetGroupingArtikelResource extends JsonResource
     {
         return [
             "id_grouping_artikel" => $this->id_grouping_artikel,
-            "get_artikel" => $this->getArtikel,
-            "get_kategori_artikel" => $this->getKategoriArtikel
+            "judul_artikel" => $this->getArtikel->judul_artikel,
+            "deskripsi" => $this->getArtikel->deskripsi,
+            "foto" => $this->getArtikel->foto,
+            "id_artikel" => $this->getArtikel->id_artikel,
+            "id_grouping_artikel" => $this->id_grouping_artikel,
+            "nama_kategori" => $this->getKategoriArtikel->nama_kategori
         ];
     }
 }
