@@ -42,25 +42,25 @@ class RumahSakitSeeder extends Seeder
         RumahSakit::create([
             "id_rumah_sakit" => "RS-123456791",
             "id_owner_rumah_sakit" => "OWN-RS-2003062",
-            "nama_rs" => "RS. Tangkil",
-            "slug_rs" => "rs-tangkil",
-            "deskripsi_rs" => "lorem ipsum dolor sit amet",
+            "nama_rs" => "Rumah Sakit Mitra Plumbon Indramayu",
+            "slug_rs" => "rumah-sakit-mitra-plumbon-indramayu",
+            "deskripsi_rs" => "Jl. Raya Pantura, Ujungaris, Kec. Widasari, Kabupaten Indramayu, Jawa Barat 45271",
             "kategori_rs" => 1,
             "alamat_rs" => "Indonesia",
-            "latitude" => "-6.7381389",
-            "longitude" => "108.5452108"
+            "latitude" => "-6.4583944367163815",
+            "longitude" => "108.28790140932364"
         ]);
 
         RumahSakit::create([
             "id_rumah_sakit" => "RS-123456792",
             "id_owner_rumah_sakit" => "OWN-RS-2003062",
-            "nama_rs" => "RS. Ciremai",
-            "slug_rs" => "rs-ciremai",
+            "nama_rs" => "RS Medissina Lohbener",
+            "slug_rs" => "rs-medissina-lohbener",
             "deskripsi_rs" => "lorem ipsum dolor sit amet",
             "kategori_rs" => 1,
-            "alamat_rs" => "Indonesia",
-            "latitude" => "-6.9332587",
-            "longitude" => "106.5986995"
+            "alamat_rs" => "Jl. Nasional 7, Lohbener, Kec. Lohbener, Kabupaten Indramayu, Jawa Barat 45252",
+            "latitude" => "-6.40216",
+            "longitude" => "108.27085"
         ]);
     }
 }
