@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Artikel\Master\DataArtikel;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class GetArtikelResource extends JsonResource
@@ -20,7 +21,8 @@ class GetArtikelResource extends JsonResource
             "slug_artikel" => $this->slug_artikel,
             "foto" => $this->foto,
             "deskripsi" => $this->deskripsi,
-            "get_user" => $this->getUser
+            "get_user" => $this->getUser,
+            "tanggal" => Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)->isoFormat('D MMMM Y')
         ];
     }
 }

@@ -18,4 +18,9 @@ class Keahlian extends Model
     protected $keyType = "string";
 
     public $incrementing = false;
+
+    public function master_keahlian()
+    {
+        return $this->hasMany("App\Models\Ahli\MasterJoinKeahlian", "keahlian_id", "id_keahlian");
+    }
 }

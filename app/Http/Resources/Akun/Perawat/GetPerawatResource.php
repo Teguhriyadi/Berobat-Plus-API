@@ -16,8 +16,8 @@ class GetPerawatResource extends JsonResource
     {
         return [
             "id_perawat" => $this->id_perawat,
-            "nip" => $this->nip,
-            "get_user" => $this->getUser
+            "nomor_strp" => $this->nomor_strp,
+            "user" => $this->getUser
         ];
     }
 }

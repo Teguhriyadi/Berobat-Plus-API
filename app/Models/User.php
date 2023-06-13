@@ -43,6 +43,11 @@ class User extends Authenticatable
         return $this->belongsTo("App\Models\Akun\Dokter", "id", "user_id");
     }
 
+    public function getPerawat()
+    {
+        return $this->belongsTo("App\Models\Akun\Perawat", "id", "user_id");
+    }
+
     public function konsumen()
     {
         return $this->belongsTo("App\Models\Akun\Konsumen", "id", "user_id");
