@@ -25,4 +25,9 @@ class JadwalPraktek extends Model
     {
         return $this->belongsTo("App\Models\Ahli\DetailPraktek", "id_detail_praktek", "id_detail_praktek");
     }
+
+    public function hamdan()
+    {
+        return $this->belongsTo("App\Models\Ahli\DetailPraktek", "id_detail_praktek", "id_detail_praktek");
+    }
 }

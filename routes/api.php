@@ -182,6 +182,10 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::resource("/produk_kategori", ProdukKategoriController::class);
         });
     });
+    
+    Route::prefix("dokter")->group(function() {
+        Route::get("/is_active", [DashboardController::class, "is_active"]);
+    });
 
     require __DIR__ . '/xendit/pembayaran.php';
 

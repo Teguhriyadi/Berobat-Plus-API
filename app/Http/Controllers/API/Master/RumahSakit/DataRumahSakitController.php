@@ -123,14 +123,12 @@ class DataRumahSakitController extends Controller
     {
         return DB::transaction(function () use ($request) {
 
-            $perPage = 6;
+            $perPage = 4;
             $page = $request->get('page', 1);
             $offset = ($page - 1) * $perPage;
 
             $lat = $request->latitude;
             $long = $request->longitude;
-            // $lat = "-6.352326";
-            // $long = "108.3203647";
 
             $locations = DB::table('rumah_sakit')
                 ->select('id_rumah_sakit', 'nama_rs', 'latitude', 'longitude', 'foto_rs', 'kategori_rs', 'alamat_rs', 'deskripsi_rs')

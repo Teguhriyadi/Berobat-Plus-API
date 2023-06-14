@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Master\Ahli;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class GetJadwalAntrianResource extends JsonResource
@@ -16,8 +17,13 @@ class GetJadwalAntrianResource extends JsonResource
     {
         return [
             "id_jadwal_antrian" => $this->id_jadwal_antrian,
-            "konsumen" => $this->konsumen,
-            "ahli" => $this->user,
+            "detail" => [
+                "id_jadwal_praktek" => $this->jadwal_praktek->id_jadwal_praktek,
+                "tanggal" => Carbon::createFromFormat('Y-m-d', $this->jadwal_praktek->tanggal)->isoFormat('D MMMM Y'),
+                "mulai_jam" => $this->jadwal_praktek->mulai_jam,
+                "selesai_jam" => $this->jadwal_praktek->selesai_jam
+            ],
+            "ahli" => $this->jadwal_praktek->detail_praktek->user->nama,
             "nomer_antrian" => $this->nomer_antrian,
             "status" => $this->status,
             "tanggal" => $this->tanggal

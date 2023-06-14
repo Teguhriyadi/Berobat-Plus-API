@@ -17,12 +17,8 @@ class ProfileController extends Controller
 
     public function get_profil()
     {
-        $this->user_id = Auth::user()->id;
-
         return DB::transaction(function () {
-            $id = $this->user_id;
-
-            $user = Dokter::where("user_id", $id)->with("getUser:id,nama,email,nomor_hp,alamat,status")->first();
+            $user = Dokter::where("user_id", Auth::user()->id)->with("getUser:id,nama,email,nomor_hp,alamat,status")->first();
 
             return new GetProfilResource($user);
         });

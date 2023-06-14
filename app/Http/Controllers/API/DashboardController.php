@@ -10,6 +10,8 @@ use App\Models\Akun\Perawat;
 use App\Models\TestingPayment;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
@@ -78,5 +80,16 @@ class DashboardController extends Controller
         ];
 
         return response()->json(["jumlah_data" => [$data]]);
+    }
+
+    public function is_active()
+    {
+        return DB::transaction(function() {
+            Dokter::where("user_id", Auth::user()->id)->update([
+                "is_online" => 0
+            ]);
+
+            return response()->json(["pesan" => "Data Berhasil di Simpan"]);
+        });
     }
 }

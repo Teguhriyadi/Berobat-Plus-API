@@ -59,12 +59,12 @@ class CariKeahlianController extends Controller
 
                     foreach ($master as $masters) {
                         if ($masters["user"]["getPerawat"]) {
-                            $idPerawat = $masters["user"]["getPerawat"]["id_dokter"];
+                            $id_perawat = $masters["user"]["getPerawat"]["id_perawat"];
 
-                            if (!in_array($idPerawat, $idPerawatArray)) {
+                            if (!in_array($id_perawat, $idPerawatArray)) {
                                 $data[] = [
-                                    "id_dokter" => $masters["user"]["getPerawat"]["id_dokter"],
-                                    "user_id" => [
+                                    "id_perawat" => $masters["user"]["getPerawat"]["id_perawat"],
+                                    "user" => [
                                         "id" => $masters["user"]["id"],
                                         "nama" => $masters["user"]["nama"],
                                         "email" => $masters["user"]["email"],
@@ -74,7 +74,7 @@ class CariKeahlianController extends Controller
                                     ]
                                 ];
 
-                                $idPerawatArray[] = $idPerawat;
+                                $idPerawatArray[] = $id_perawat;
                             }
 
                         }
