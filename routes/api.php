@@ -107,6 +107,7 @@ Route::middleware("auth:sanctum")->group(function () {
 
     Route::prefix("master")->group(function () {
 
+        require __DIR__ . '/ahli/praktek/praktek_ahli.php';
         require __DIR__ . '/ahli/jadwal/antrian.php';
         require __DIR__ . '/ahli/jadwal/praktek.php';
         require __DIR__ . '/ahli/detail/praktek.php';
