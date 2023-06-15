@@ -99,7 +99,7 @@ class PerawatController extends Controller
             return response()->json(["pesan" => "Data Perawat Berhasil di Hapus"]);
         });
     }
-    
+
     public function data()
     {
         return DB::transaction(function () {

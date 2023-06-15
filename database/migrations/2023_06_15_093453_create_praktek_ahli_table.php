@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dokter', function (Blueprint $table) {
-            $table->string("id_dokter", 50)->primary();
-            $table->integer("user_id");
-            $table->string("nomor_str", 50)->nullable();
-            $table->tinyInteger("kelas")->nullable();
-            $table->string("file_dokumen")->nullable();
-            $table->enum("is_online", [1, 0])->default(1);
+        Schema::create('praktek_ahli', function (Blueprint $table) {
+            $table->string("id_praktek_ahli", 50)->primary();
+            $table->string("ahli_id", 50);
+            $table->string("id_keahlian", 50);
+            $table->string("id_spesialis", 50);
+            $table->string("id_rumah_sakit", 50);
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dokter');
+        Schema::dropIfExists('praktek_ahli');
     }
 };

@@ -5,22 +5,22 @@ namespace App\Models\Ahli;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Keahlian extends Model
+class PraktekAhli extends Model
 {
     use HasFactory;
 
-    protected $table = "keahlian";
-
+    protected $table = "praktek_ahli";
+    
     protected $guarded = [''];
 
-    public $primaryKey = "id_keahlian";
+    public $primaryKey = "id_praktek_ahli";
 
     protected $keyType = "string";
 
     public $incrementing = false;
 
-    public function master_keahlian()
+    public function rumah_sakit()
     {
-        return $this->hasMany("App\Models\Ahli\MasterJoinKeahlian", "keahlian_id", "id_keahlian");
+        return $this->belongsTo("App\Models\Akun\RumahSakit", "id_rumah_sakit", "id_rumah_sakit");
     }
 }

@@ -13,7 +13,7 @@ class GroupingArtikelController extends Controller
     public function index()
     {
         return DB::transaction(function () {
-            $grouping = GroupingArtikel::orderBy("created_at", "DESC")->with("getArtikel:id_artikel,judul_artikel,slug_artikel")->with("getKategoriArtikel:id_kategori_artikel,nama_kategori")->paginate(10);
+            $grouping = GroupingArtikel::orderBy("created_at", "DESC")->paginate(10);
 
             return GetGroupingArtikelResource::collection($grouping);
         });
@@ -67,7 +67,16 @@ class GroupingArtikelController extends Controller
     public function list_by_artikel($id_artikel)
     {
         return DB::transaction(function() use($id_artikel) {
-            $artikel = GroupingArtikel::with("getArtikel:id_artikel,judul_artikel,slug_artikel")->with("getKategoriArtikel:id_kategori_artikel,nama_kategori")->where("id_artikel", $id_artikel)->get();
+            $artikel = GroupingArtikel::where("id_artikel", $id_artikel)->get();
+
+            return GetGroupingArtikelResource::collection($artikel);
+        });
+    }
+
+    public function list_artikel_kategori($id_kategori_artikel)
+    {
+        return DB::transaction(function() use ($id_kategori_artikel) {
+            $artikel = GroupingArtikel::where("id_kategori_artikel", $id_kategori_artikel)->get();
 
             return GetGroupingArtikelResource::collection($artikel);
         });

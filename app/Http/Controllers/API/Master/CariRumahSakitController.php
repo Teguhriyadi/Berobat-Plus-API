@@ -12,9 +12,14 @@ class CariRumahSakitController extends Controller
     public function index(Request $request)
     {
         return DB::transaction(function() use($request) {
-            $rumah_sakit = RumahSakit::where("nama_rs", "LIKE", "%" . $request->search . "%")->get();
+            $search = $request->search;
+            
+            $rumah_sakit = RumahSakit::where(function($query) use($search) {
+                $query->where("nama_rs", "LIKE", '%' . $search . '%')
+                        ->orWhere("alamat_rs", "LIKE", "%" . $search . '%');
+            })->get();
 
-            return response()->json($rumah_sakit);
+            return response()->json(["data" => $rumah_sakit]);
         });
     }
 }

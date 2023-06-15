@@ -14,7 +14,8 @@ class JadwalAntrianController extends Controller
     public function index()
     {
         return DB::transaction(function() {
-            $jadwal = JadwalAntrian::orderBy("id_jadwal_antrian", "DESC")->get();
+
+            $jadwal = JadwalAntrian::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->where("status", 1)->get();
 
             return GetJadwalAntrianResource::collection($jadwal);
         });
@@ -24,7 +25,11 @@ class JadwalAntrianController extends Controller
     {
         return DB::transaction(function() use ($request) {
 
-            $nomer = 0;
+            $ada = JadwalAntrian::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->where("id_jadwal_praktek", $request->id_jadwal_praktek)->count();
+            
+            if ($ada > 0) {
+                return response()->json(["pesan" => "Maaf, Anda Sudah Membuat Antrian Pada Jadwal Praktek Ini"]);
+            } else {
 
             $cek = JadwalAntrian::first();
 
@@ -51,7 +56,6 @@ class JadwalAntrianController extends Controller
             $jadwal = JadwalAntrian::create([
                 "id_jadwal_antrian" => "JDWL-A-" . date("YmdHis"),
                 "konsumen_id" => Auth::user()->konsumen->id_konsumen,
-                "ahli_id" => $request->ahli_id,
                 "id_jadwal_praktek" => $request->id_jadwal_praktek,
                 "nomer_antrian" => $nomer_antrian,
                 "status" => 1,
@@ -65,6 +69,7 @@ class JadwalAntrianController extends Controller
                     "tanggal" => $jadwal["tanggal"]
                 ]
             ]);
+            }
         });
     }
 }

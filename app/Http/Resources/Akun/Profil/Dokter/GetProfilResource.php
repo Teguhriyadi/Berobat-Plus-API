@@ -15,11 +15,11 @@ class GetProfilResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id_dokter" => $this->id_dokter,
             "nomor_str" => $this->nomor_str,
             "kelas" => $this->kelas,
             "user" => $this->getUser,
-            "biaya" => $this->getBiaya->biaya
+            "biaya" => $this->getBiaya->biaya,
+            "is_online" => $this->is_online
         ];
     }
 }

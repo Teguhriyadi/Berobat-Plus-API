@@ -61,4 +61,13 @@ class MasterJoinKeahlianController extends Controller
             return response()->json(["pesan" => "Data Berhasil di Hapus"]);
         });
     }
+
+    public function list_master($id_user)
+    {
+        return DB::transaction(function() use ($id_user) {
+            $master = MasterJoinKeahlian::with("user:id,nama,id_role,nomor_hp")->with("keahlian:id_keahlian,nama_keahlian")->where("user_ahli_id", $id_user)->get();
+
+            return GetMasterKeahlianResource::collection($master);
+        });
+    }
 }

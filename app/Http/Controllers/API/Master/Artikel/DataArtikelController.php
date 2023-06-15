@@ -4,7 +4,9 @@ namespace App\Http\Controllers\API\Master\Artikel;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Artikel\Master\DataArtikel\GetArtikelResource;
+use App\Http\Resources\Artikel\Master\GroupingArtikel\GetGroupingArtikelResource;
 use App\Models\Artikel\DataArtikel;
+use App\Models\Artikel\GroupingArtikel;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -102,6 +104,15 @@ class DataArtikelController extends Controller
             $artikel = DataArtikel::with("getUser:id,nama")->where("user_id", $user_id)->get();
 
             return GetArtikelResource::collection($artikel);
+        });
+    }
+
+    public function get($id_artikel)
+    {
+        return DB::transaction(function() use($id_artikel) {
+            $artikel = GroupingArtikel::where("id_artikel", $id_artikel)->get();
+
+            return GetGroupingArtikelResource::collection($artikel);
         });
     }
 }

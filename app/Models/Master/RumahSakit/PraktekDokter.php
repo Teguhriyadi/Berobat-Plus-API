@@ -26,6 +26,6 @@ class PraktekDokter extends Model
 
     public function getKeahlian()
     {
-        return $this->belongsTo("App\Models\Master\Keahlian", "id_keahlian", "id_keahlian");
+        return $this->belongsTo("App\Models\Ahli\Keahlian", "id_keahlian", "id_keahlian");
     }
 }

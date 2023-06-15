@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('jadwal_antrian', function (Blueprint $table) {
             $table->string("id_jadwal_antrian", 50)->primary();
             $table->string("konsumen_id", 50);
-            $table->string("ahli_id", 50);
             $table->string("id_jadwal_praktek", 50);
             $table->tinyInteger("nomer_antrian");
             $table->enum("status", ["1", "0"]);
