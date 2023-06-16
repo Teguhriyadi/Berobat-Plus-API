@@ -74,7 +74,7 @@ class LoginController extends Controller
             $user = User::create([
                 "nama" => $request->nama,
                 "password" => bcrypt($request->password),
-                " B  " => $request->nomor_hp,
+                "nomor_hp" => $request->nomor_hp,
                 "id_role" =>  $request->option == "dokter" ? "RO-2003062" : "RO-2003063",
                 "jenis_kelamin" => $request->jenis_kelamin,
                 "foto" => url("storage/" . $data),
