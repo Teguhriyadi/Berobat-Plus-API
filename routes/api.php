@@ -100,7 +100,7 @@ Route::middleware("auth:sanctum")->group(function () {
 
         Route::put("/active_account/{id_user}", [ActivateAccountController::class, "active_account"]);
 
-        Route::put("/active_account/{id_dokter}/dokter", [ActivateAccountController::class, "active_account_dokter"]);
+        Route::put("/active_account/{id_user}/account", [ActivateAccountController::class, "active_account_status"]);
 
         Route::put("/change_password", [ChangePasswordController::class, "change_password"]);
     });
