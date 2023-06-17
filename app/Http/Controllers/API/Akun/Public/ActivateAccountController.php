@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API\Akun\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\Akun\Dokter;
+use App\Models\Akun\OwnerApotek;
+use App\Models\Akun\Perawat;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,17 +33,27 @@ class ActivateAccountController extends Controller
         });
     }
 
-    public function active_account_dokter(Request $request, $id_dokter)
+    public function active_account_status(Request $request, $id_user)
     {
-        return DB::transaction(function() use ($request, $id_dokter) {
+        return DB::transaction(function() use ($request, $id_user) {
 
-            Dokter::where("id_dokter", $id_dokter)->update([
-                "nomor_str" => $request->nomor_str
-            ]);
+            $user = User::where("id", $id_user)->first();
 
-            $dokter = Dokter::where("id_dokter", $id_dokter)->first();
+            if ($user["id_role"] == "RO-2003062") {
+                $dokter = Dokter::where("user_id", $user["id"])->first();
 
-            User::where("id", $dokter["user_id"])->update([
+                Dokter::where("id_dokter", $dokter["id_dokter"])->update([
+                    "nomor_str" => $request->nomor_str
+                ]);
+            } else if($user["id_role"] == "RO-2003063") {
+                $perawat = Perawat::where("user_id", $user["id"])->first();
+
+                Perawat::where("id_perawat", $perawat["id_perawat"])->update([
+                    "nomor_strp" => $request->nomor_strp
+                ]);
+            }
+
+            User::where("id", $user["id"])->update([
                 "created_by" => Auth::user()->id,
                 "status" => 1
             ]);
