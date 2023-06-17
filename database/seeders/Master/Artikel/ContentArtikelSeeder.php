@@ -40,5 +40,26 @@ class ContentArtikelSeeder extends Seeder
             "deskripsi" => "Henti jantung, atau cardiac arrest, terjadi ketika detak jantung tiba-tiba berhenti. Ini berarti jantung tidak lagi memompa darah ke seluruh tubuh. Ini merupakan kondisi darurat yang mengancam nyawa dan memerlukan tindakan medis segera, seperti resusitasi jantung paru (CPR) dan defibrilasi.",
             "user_id" => 2
         ]);
+        DataArtikel::create([
+            "id_artikel" => "ART-12345681",
+            "judul_artikel" => "Henti Jantung Tak Sama dengan Serangan Jantung, Ini Perbedaannya",
+            "slug_artikel" => "henti-jantung-tak-sama-dengan-serangan-jantung-ini-perbedaannya",
+            "deskripsi" => "Henti jantung, atau cardiac arrest, terjadi ketika detak jantung tiba-tiba berhenti. Ini berarti jantung tidak lagi memompa darah ke seluruh tubuh. Ini merupakan kondisi darurat yang mengancam nyawa dan memerlukan tindakan medis segera, seperti resusitasi jantung paru (CPR) dan defibrilasi.",
+            "user_id" => 2
+        ]);
+        DataArtikel::create([
+            "id_artikel" => "ART-12345682",
+            "judul_artikel" => "Tak Sama dengan Serangan Jantung, Ini Perbedaannya",
+            "slug_artikel" => "tak-sama-dengan-serangan-jantung-ini-perbedaannya",
+            "deskripsi" => "Henti jantung, atau cardiac arrest, terjadi ketika detak jantung tiba-tiba berhenti. Ini berarti jantung tidak lagi memompa darah ke seluruh tubuh. Ini merupakan kondisi darurat yang mengancam nyawa dan memerlukan tindakan medis segera, seperti resusitasi jantung paru (CPR) dan defibrilasi.",
+            "user_id" => 2
+        ]);
+        DataArtikel::create([
+            "id_artikel" => "ART-12345683",
+            "judul_artikel" => "Henti Jantung",
+            "slug_artikel" => "henti-jantung",
+            "deskripsi" => "Henti jantung, atau cardiac arrest, terjadi ketika detak jantung tiba-tiba berhenti. Ini berarti jantung tidak lagi memompa darah ke seluruh tubuh. Ini merupakan kondisi darurat yang mengancam nyawa dan memerlukan tindakan medis segera, seperti resusitasi jantung paru (CPR) dan defibrilasi.",
+            "user_id" => 2
+        ]);
     }
 }
