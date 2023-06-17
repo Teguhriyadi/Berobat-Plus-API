@@ -15,12 +15,17 @@ class ActivateAccountController extends Controller
     {
         return DB::transaction(function () use ($id_user) {
 
+            echo $id_user;
+
+            die();
             $cek = User::where("id", $id_user)->first();
 
             User::where("id", $id_user)->update([
                 "created_by" => Auth::user()->id,
                 "status" => $cek->status == "1" ? "0" : "1"
             ]);
+
+
 
             return response()->json(["pesan" => "Status Akun Berhasil Diubah"]);
         });
@@ -38,6 +43,7 @@ class ActivateAccountController extends Controller
 
             User::where("id", $dokter["user_id"])->update([
                 "created_by" => Auth::user()->id,
+                "status" => 1
             ]);
 
             return response()->json(["pesan" => "Data Berhasil di Simpan"]);
