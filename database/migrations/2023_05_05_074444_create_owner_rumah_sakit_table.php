@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("id_owner_rumah_sakit", 50)->primary();
             $table->string("no_ktp", 50);
             $table->integer("user_id");
+            $table->string("file_dokumen")->nullable();
             $table->timestamps();
         });
     }

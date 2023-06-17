@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Autentikasi;
 use App\Http\Controllers\Controller;
 use App\Models\Akun\Dokter;
 use App\Models\Akun\Perawat;
+use App\Models\Akun\RumahSakit;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -93,9 +94,16 @@ class LoginController extends Controller
                     "user_id" => $user["id"],
                     "file_dokumen" => url("storage" . $dokumen)
                 ]);
+            } else if ($request->option == "rumah_sakit") {
+                RumahSakit::create([
+                    "id_owner_rumah_sakit" => "OWN-RS-" . date("YmdHis"),
+                    "no_ktp" => $request->no_ktp,
+                    "user_id" => $user["id"],
+                    "file_dokumen" => url("storage/" . $dokumen)
+                ]);
             }
 
-            return response()->json(["pesan" => "Data Ahli Berhasil di Tambahkan"]);
+            return response()->json(["pesan" => "Data Berhasil di Tambahkan"]);
         });
     }
 }
