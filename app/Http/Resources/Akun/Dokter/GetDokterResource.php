@@ -20,6 +20,7 @@ class GetDokterResource extends JsonResource
             "nomor_str" => $this->nomor_str,
             "kelas" => $this->kelas,
             "biaya" => $this->getBiaya,
+            "file_dokumen" => $this->file_dokumen == null ? null : $this->file_dokumen 
         ];
     }
 }
