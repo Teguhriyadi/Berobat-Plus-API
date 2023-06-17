@@ -4,8 +4,9 @@ namespace App\Http\Controllers\API\Autentikasi;
 
 use App\Http\Controllers\Controller;
 use App\Models\Akun\Dokter;
+use App\Models\Akun\OwnerApotek;
+use App\Models\Akun\OwnerRumahSakit;
 use App\Models\Akun\Perawat;
-use App\Models\Akun\RumahSakit;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -72,11 +73,21 @@ class LoginController extends Controller
                 $dokumen = $request->file("file_dokumen")->store("dokumen");
             }
 
+            if ($request->option == "dokter") {
+                $role = "RO-2003062";
+            } else if($request->option == "perawat") {
+                $role = "RO-2003063";
+            } else if($request->option == "rumah_sakit") {
+                $role = "RO-2003066";
+            } else if($request->option == "apotek") {
+                $role = "RO-2003065";
+            }
+
             $user = User::create([
                 "nama" => $request->nama,
                 "password" => bcrypt($request->password),
                 "nomor_hp" => $request->nomor_hp,
-                "id_role" =>  $request->option == "dokter" ? "RO-2003062" : "RO-2003063",
+                "id_role" =>  $role,
                 "jenis_kelamin" => $request->jenis_kelamin,
                 "foto" => url("storage/" . $data),
                 "status" => "0"
@@ -95,11 +106,16 @@ class LoginController extends Controller
                     "file_dokumen" => url("storage" . $dokumen)
                 ]);
             } else if ($request->option == "rumah_sakit") {
-                RumahSakit::create([
+                OwnerRumahSakit::create([
                     "id_owner_rumah_sakit" => "OWN-RS-" . date("YmdHis"),
                     "no_ktp" => $request->no_ktp,
                     "user_id" => $user["id"],
                     "file_dokumen" => url("storage/" . $dokumen)
+                ]);
+            } else if ($request->option == "apotek") {
+                OwnerApotek::create([
+                    "id_owner_apotek" => "OWN-" . date("YmdHis"),
+                    "user_id" => $user["id"]
                 ]);
             }
 
