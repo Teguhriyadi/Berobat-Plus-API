@@ -159,6 +159,7 @@ Route::middleware("auth:sanctum")->group(function () {
             require __DIR__ . '/master/rumah_sakit/fasilitas.php';
         });
         Route::prefix("spesialis")->group(function () {
+            Route::get("/{id_spesialis}/get_dokter", [GetSpesialisDokterController::class, "get_dokter"]);
             Route::get("/{id_spesialis}/{id_rumah_sakit}", [GetSpesialisDokterController::class, "index"]);
         });
 

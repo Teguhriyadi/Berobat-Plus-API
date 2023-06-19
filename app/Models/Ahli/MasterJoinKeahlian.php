@@ -2,6 +2,7 @@
 
 namespace App\Models\Ahli;
 
+use App\Models\Master\Penyakit\SpesialisPenyakit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,5 +28,10 @@ class MasterJoinKeahlian extends Model
     public function keahlian()
     {
         return $this->belongsTo("App\Models\Ahli\Keahlian", "keahlian_id", "id_keahlian");
+    }
+
+    public function relasi()
+    {
+        return $this->hasOneThrough(SpesialisPenyakit::class, Keahlian::class, "id_keahlian", "id_spesialis", "id_keahlian", "id_spesialis");
     }
 }
