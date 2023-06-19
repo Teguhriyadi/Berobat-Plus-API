@@ -7,6 +7,7 @@ use App\Models\Akun\Dokter;
 use App\Models\Akun\Konsumen;
 use App\Models\Akun\OwnerApotek;
 use App\Models\Akun\Perawat;
+use App\Models\Akun\RumahSakit;
 use App\Models\TestingPayment;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -76,7 +77,8 @@ class DashboardController extends Controller
             "dokter" => Dokter::count(),
             "perawat" => Perawat::count(),
             "konsumen" => Konsumen::count(),
-            "apotek" => OwnerApotek::count()
+            "apotek" => OwnerApotek::count(),
+            "rumah_sakit"=> RumahSakit::count()
         ];
 
         return response()->json(["jumlah_data" => [$data]]);
