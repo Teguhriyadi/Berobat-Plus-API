@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Akun;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Akun\Dokter\GetDokterResource;
 use App\Models\Ahli\BiayaPraktek;
+use App\Models\Ahli\DetailPraktek;
 use App\Models\Akun\Dokter;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -113,9 +114,39 @@ class DokterController extends Controller
     public function data()
     {
         return DB::transaction(function () {
-            $dokter = Dokter::orderBy(DB::raw("RAND()"))->with("getUser:id,nama,email,jenis_kelamin,nomor_hp,alamat,tempat_lahir,tempat_lahir,tanggal_lahir,status")->with("getBiaya:id_biaya_praktek,ahli_id,biaya")->get();
+            $masterdokter = Dokter::get();
 
-            return GetDokterResource::collection($dokter);
+            $data = [];
+            foreach ($masterdokter as $item) {
+                $detail_praktek = DetailPraktek::where("ahli_id", $item["user_id"])->first();
+
+                if ($detail_praktek) {
+                } else {
+                    $data[] = [
+                        "id_dokter" => $item["id_dokter"],
+                        "user_id" => [
+                            "id" => $item["getUser"]["id"],
+                            "nama" => $item["getUser"]["nama"],
+                            "email" => $item["getUser"]["email"],
+                            "jenis_kelamin" => $item["getUser"]["jenis_kelamin"],
+                            "nomor_hp" => $item["getUser"]["nomor_hp"],
+                            "alamat" => $item["getUser"]["alamat"],
+                            "tempat_lahir" => $item["getUser"]["tempat_lahir"],
+                            "tanggal_lahir" => $item["getUser"]["tanggal_lahir"],
+                            "status" => $item["getUser"]["status"],
+                        ],
+                        "nomor_str" => $item["nomor_str"],
+                        "kelas" => $item["kelas"],
+                        "biaya" => [
+                            "id_biaya_praktek" => $item["getBiaya"]["id_biaya_praktek"],
+                            "ahli_id" => $item["getBiaya"]["ahli_id"],
+                            "biaya" => $item["getBiaya"]["biaya"],
+                        ]
+                    ];
+                }
+            }
+
+            return response()->json(["data" => $data]);
         });
     }
 
