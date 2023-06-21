@@ -26,6 +26,7 @@ class SpesialisPenyakitController extends Controller
             SpesialisPenyakit::create([
                 "id_spesialis_penyakit" => "SPS-" . date("YmdHis"),
                 "nama_spesialis" => $request->nama_spesialis,
+                "icon" => $request->icon,
                 "slug_spesialis" => Str::slug($request->nama_spesialis)
             ]);
 
@@ -47,6 +48,7 @@ class SpesialisPenyakitController extends Controller
         return DB::transaction(function () use ($request, $id_spesialis_penyakit) {
             SpesialisPenyakit::where("id_spesialis_penyakit", $id_spesialis_penyakit)->update([
                 "nama_spesialis" => $request->nama_spesialis,
+                "icon" => $request->icon,
                 "slug_spesialis" => Str::slug($request->nama_spesialis)
             ]);
 

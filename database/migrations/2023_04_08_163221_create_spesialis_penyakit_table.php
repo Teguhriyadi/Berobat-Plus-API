@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("id_spesialis_penyakit", 50)->primary();
             $table->string("nama_spesialis", 50);
             $table->string("slug_spesialis", 100);
-            $table->string("logo")->nullable();
+            $table->string("icon")->nullable();
             $table->timestamps();
         });
     }
