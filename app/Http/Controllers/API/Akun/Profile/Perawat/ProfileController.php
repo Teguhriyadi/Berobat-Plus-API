@@ -40,9 +40,9 @@ class ProfileController extends Controller
                 "alamat" => $request->alamat
             ]);
 
-            Perawat::where("user_id", $this->user_id)->update([
-                "nomorStrp" => $request->nomorStrp
-            ]);
+            // Perawat::where("user_id", $this->user_id)->update([
+            //     "nomorStrp" => $request->nomorStrp
+            // ]);
 
             return response()->json(["pesan" => "Data Profil Perawat Berhasil di Simpan"]);
         });
