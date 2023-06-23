@@ -39,8 +39,7 @@ class ProfileController extends Controller
                 "nomor_hp" => $request->nomor_hp,
                 "alamat" => $request->alamat
             ]);
-
-            // Perawat::where("user_id", $this->user_id)->update([
+            //     Perawat::where("user_id", $this->user_id)->update([
             //     "nomorStrp" => $request->nomorStrp
             // ]);
 
