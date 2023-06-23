@@ -41,7 +41,7 @@ class ProfileController extends Controller
             ]);
 
             Perawat::where("user_id", $this->user_id)->update([
-                "nip" => $request->nip
+                "nomorStrp" => $request->nomorStrp
             ]);
 
             return response()->json(["pesan" => "Data Profil Perawat Berhasil di Simpan"]);
