@@ -17,6 +17,7 @@ class GetSpesialisResource extends JsonResource
         return [
             "id_spesialis_penyakit" => $this->id_spesialis_penyakit,
             "nama_spesialis" => $this->nama_spesialis,
+            "icon" => $this->icon,
             "slug_spesialis" => $this->slug_spesialis
         ];
     }
