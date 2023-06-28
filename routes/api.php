@@ -13,6 +13,7 @@ use App\Http\Controllers\API\Akun\Public\PictureController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\API\Master\Ahli\KeahlianController;
+use App\Http\Controllers\API\Master\Alamat\AlamatUserController;
 use App\Http\Controllers\API\Master\Artikel\DataArtikelController;
 use App\Http\Controllers\API\Master\Artikel\DetailArtikelController;
 use App\Http\Controllers\API\Master\Artikel\GroupingArtikelController;
@@ -117,6 +118,8 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::post("/keahlian", [CariKeahlianController::class, "index"]);
             Route::post("/rumah_sakit", [CariRumahSakitController::class, "index"]);
         });
+
+        Route::resource("alamat_user", AlamatUserController::class);
 
         Route::prefix("produk")->group(function () {
             Route::resource("kategori_produk", KategoriProdukController::class);
