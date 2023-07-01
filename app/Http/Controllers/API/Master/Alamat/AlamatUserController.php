@@ -14,7 +14,7 @@ class AlamatUserController extends Controller
     public function index()
     {
         return DB::transaction(function() {
-            $data = Alamatuser::where("user_id", Auth::user()->id)->get();
+            $data = Alamatuser::where("user_id", Auth::user()->id)->orderBy("created_at", "DESC")->get();
 
             return AlamatUserResource::collection($data);
         });

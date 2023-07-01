@@ -34,6 +34,7 @@ use App\Http\Controllers\API\Produk\ProdukKategoriController;
 use App\Http\Controllers\API\Tes\CekResiController;
 use App\Http\Controllers\API\Tes\RajaOngkirController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
+use App\Http\Controllers\ChatingAppController;
 use App\Http\Controllers\ChatingController;
 use App\Http\Controllers\DiagnosaController;
 use Illuminate\Http\Request;
@@ -49,6 +50,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::get("/send-message", [ChatingAppController::class, "send"]);
 
 Route::post("/kirim-pesan", [ChatingController::class, "index"]);
 
@@ -181,8 +184,11 @@ Route::middleware("auth:sanctum")->group(function () {
         });
 
         Route::prefix("produk")->group(function () {
-            Route::get("/data_produk/by_owner", [DataProdukController::class, "get_by_owner"]);
-            Route::get("/data_produk/by_owner/{id_profil_apotek}/get", [DataProdukController::class, "get_produk_by_owner"]);
+            Route::prefix("data_produk")->group(function() {
+                Route::get("/by_owner", [DataProdukController::class, "get_by_owner"]);
+                Route::get("/by_owner/{id_profil_apotek}/get", [DataProdukController::class, "get_produk_by_owner"]);
+                Route::get("/all", [DataProdukController::class, "all"]);
+            });
             Route::resource("/data_produk", DataProdukController::class);
             Route::resource("/produk_kategori", ProdukKategoriController::class);
         });
