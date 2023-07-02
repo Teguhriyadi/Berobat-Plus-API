@@ -8,6 +8,7 @@ use App\Http\Controllers\API\Akun\KonsumenController;
 use App\Http\Controllers\API\Akun\OwnerApotekController;
 use App\Http\Controllers\API\Akun\OwnerRumahSakitController;
 use App\Http\Controllers\API\Akun\PerawatController;
+use App\Http\Controllers\API\Akun\Profile\Konsumen\ProfileController;
 use App\Http\Controllers\API\Akun\Public\ActivateAccountController;
 use App\Http\Controllers\API\Akun\Public\PictureController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
@@ -67,6 +68,7 @@ Route::get("/resi", [CekResiController::class, "index"]);
 require __DIR__ . '/auth/login.php';
 
 Route::prefix("akun")->group(function () {
+    Route::put("/konsumen/uid", [ProfileController::class, "update_uid"]);
     Route::resource("/konsumen", KonsumenController::class);
 });
 

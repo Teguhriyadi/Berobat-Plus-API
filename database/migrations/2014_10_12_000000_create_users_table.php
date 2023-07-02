@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string("tempat_lahir", 50)->nullable();
             $table->date("tanggal_lahir")->nullable();
             $table->enum("status", [1, 0]);
+            $table->string("uuid_firebase", 100)->nullable();
             $table->timestamps();
         });
     }

@@ -40,7 +40,7 @@ class KonsumenController extends Controller
                 "nik" => $request->nik
             ]);
 
-            return response()->json(["pesan" => "Data Konsumen Berhasil di Tambahkan"]);
+            return response()->json(["pesan" => "Data Konsumen Berhasil di Tambahkan", "user" => $user["id"]]);
         });
     }
 
