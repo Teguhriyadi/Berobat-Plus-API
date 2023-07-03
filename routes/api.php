@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\EveryoneChannel;
 use App\Http\Controllers\API\Akun\AllAccountController;
 use App\Http\Controllers\API\Akun\ChangePasswordController;
 use App\Http\Controllers\API\Akun\CompanyController;
@@ -52,7 +53,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/send-message", [ChatingAppController::class, "send"]);
+// Route::get("/send-message", [ChatingController::class, "handle"]);
 
 Route::post("/kirim-pesan", [ChatingController::class, "index"]);
 
@@ -68,7 +69,7 @@ Route::get("/resi", [CekResiController::class, "index"]);
 require __DIR__ . '/auth/login.php';
 
 Route::prefix("akun")->group(function () {
-    Route::put("/konsumen/uid", [ProfileController::class, "update_uid"]);
+    Route::put("/user/uid", [ProfileController::class, "update_uid"]);
     Route::resource("/konsumen", KonsumenController::class);
 });
 
