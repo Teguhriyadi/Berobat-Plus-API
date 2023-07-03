@@ -103,7 +103,7 @@ class LoginController extends Controller
                 Perawat::create([
                     "id_perawat" => "PWT-" . date("YmdHis"),
                     "user_id" => $user["id"],
-                    "file_dokumen" => url("storage" . $dokumen)
+                    "file_dokumen" => url("storage/" . $dokumen)
                 ]);
             } else if ($request->option == "rumah_sakit") {
                 OwnerRumahSakit::create([
@@ -115,7 +115,8 @@ class LoginController extends Controller
             } else if ($request->option == "apotek") {
                 OwnerApotek::create([
                     "id_owner_apotek" => "OWN-" . date("YmdHis"),
-                    "user_id" => $user["id"]
+                    "user_id" => $user["id"],
+                    "file_dokumen" => url("storage/" . $dokumen)
                 ]);
             }
 

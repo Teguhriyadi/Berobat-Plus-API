@@ -16,7 +16,8 @@ class GetOwnerApotekResource extends JsonResource
     {
         return [
             "id_owner" => $this->id_owner_apotek,
-            "get_user" => $this->getUser
+            "get_user" => $this->getUser,
+            "file_dokumen" => $this->file_dokumen
         ];
     }
 }

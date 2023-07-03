@@ -17,7 +17,8 @@ class GetOwnerRumahSakitResource extends JsonResource
         return [
             "id_owner" => $this->id_owner_rumah_sakit,
             "no_ktp" => $this->no_ktp,
-            "user" => $this->getUser
+            "user" => $this->getUser,
+            "file_dokumen" => $this->file_dokumen
         ];
     }
 }
