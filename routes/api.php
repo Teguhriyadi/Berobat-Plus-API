@@ -202,6 +202,7 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::prefix("ahli")->group(function() {
         Route::get("/jadwal_antrian", [JadwalAntrianController::class, "data_antrian"]);
         Route::get("/jadwal_antrian/{id_jadwal_antrian}", [JadwalAntrianController::class, "detail"]);
+        Route::put("/jadwal_antrian/{id_jadwal_antrian}", [JadwalAntrianController::class, "update"]);
     });
     
     Route::prefix("dokter")->group(function() {

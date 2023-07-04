@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Ahli\Antrian\GetAntrianResource;
 use App\Http\Resources\Master\Ahli\GetJadwalAntrianResource;
 use App\Models\Master\Dokter\JadwalAntrian;
+use App\Models\Transaksi\RiwayatTransaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -103,6 +104,33 @@ class JadwalAntrianController extends Controller
             $jadwal_antrian = JadwalAntrian::where("id_jadwal_antrian", $id_jadwal_antrian)->first();
 
             return new GetAntrianResource($jadwal_antrian);
+        });
+    }
+
+    public function update($id_jadwal_antrian)
+    {
+        return DB::transaction(function() use ($id_jadwal_antrian) {
+            $jadwal_antrian = JadwalAntrian::where("id_jadwal_antrian", $id_jadwal_antrian)->first();
+            
+            RiwayatTransaksi::create([
+                "id_transaksi_buat_janji" => "TRN-BJ-" . date("YmdHis"),
+                "nama" => $jadwal_antrian->konsumen->getUsers->nama,
+                "nomor_hp" => $jadwal_antrian->konsumen->getUsers->nomor_hp,
+                "nomer_antrian" => $jadwal_antrian->nomer_antrian,
+                "nama_ahli" => $jadwal_antrian->jadwal_praktek->detail_praktek->user->nama,
+                "nomor_hp_ahli" => $jadwal_antrian->jadwal_praktek->detail_praktek->user->nomor_hp,
+                "foto_ahli" => null,
+                "biaya_praktek" => $jadwal_antrian->jadwal_praktek->detail_praktek->biaya_praktek,
+                "nama_rs" => $jadwal_antrian->jadwal_praktek->detail_praktek->rumah_sakit->nama_rs,
+                "tanggal_transaksi" => date("Y-m-d"),
+                "status" => 1
+            ]);
+
+            JadwalAntrian::where("id_jadwal_antrian", $id_jadwal_antrian)->update([
+                "status" => "0"
+            ]);
+
+            return response()->json(["message" => "Data Berhasil di Simpan"]);
         });
     }
 }
