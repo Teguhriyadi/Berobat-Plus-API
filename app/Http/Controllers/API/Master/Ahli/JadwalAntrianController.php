@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Master\Ahli;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Ahli\Antrian\GetAntrianResource;
 use App\Http\Resources\Master\Ahli\GetJadwalAntrianResource;
 use App\Models\Master\Dokter\JadwalAntrian;
 use Illuminate\Http\Request;
@@ -15,9 +16,17 @@ class JadwalAntrianController extends Controller
     {
         return DB::transaction(function() {
 
-            $jadwal = JadwalAntrian::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->where("status", 1)->get();
+            $cek = JadwalAntrian::where("status", 1)->first();
 
-            return GetJadwalAntrianResource::collection($jadwal);
+            if (empty($cek)) {
+                return response()->json(["message" => "Tidak Ada Antrian"]);
+            } else {
+                $jadwal = JadwalAntrian::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->where("status", 1)->first();
+    
+                return new GetJadwalAntrianResource($jadwal);
+            }
+
+
         });
     }
 
@@ -70,6 +79,30 @@ class JadwalAntrianController extends Controller
                 ]
             ]);
             }
+        });
+    }
+
+    public function data_antrian()
+    {
+        return DB::transaction(function() {
+            $logged_in = Auth::user()->id;
+
+            $jadwal = JadwalAntrian::whereHas('jadwal_praktek', function($query) use ($logged_in) {
+                $query->whereHas('detail_praktek', function($subquery) use ($logged_in) {
+                    $subquery->where('ahli_id', $logged_in);
+                });
+            })->where("status", 1)->orderBy("nomer_antrian", "ASC")->get();
+
+            return GetAntrianResource::collection($jadwal);
+        });
+    }
+
+    public function detail($id_jadwal_antrian)
+    {
+        return DB::transaction(function() use ($id_jadwal_antrian) {
+            $jadwal_antrian = JadwalAntrian::where("id_jadwal_antrian", $id_jadwal_antrian)->first();
+
+            return new GetAntrianResource($jadwal_antrian);
         });
     }
 }

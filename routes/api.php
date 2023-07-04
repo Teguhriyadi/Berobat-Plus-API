@@ -14,6 +14,7 @@ use App\Http\Controllers\API\Akun\Public\ActivateAccountController;
 use App\Http\Controllers\API\Akun\Public\PictureController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\DashboardController;
+use App\Http\Controllers\API\Master\Ahli\JadwalAntrianController;
 use App\Http\Controllers\API\Master\Ahli\KeahlianController;
 use App\Http\Controllers\API\Master\Alamat\AlamatUserController;
 use App\Http\Controllers\API\Master\Artikel\DataArtikelController;
@@ -196,6 +197,11 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::resource("/data_produk", DataProdukController::class);
             Route::resource("/produk_kategori", ProdukKategoriController::class);
         });
+    });
+
+    Route::prefix("ahli")->group(function() {
+        Route::get("/jadwal_antrian", [JadwalAntrianController::class, "data_antrian"]);
+        Route::get("/jadwal_antrian/{id_jadwal_antrian}", [JadwalAntrianController::class, "detail"]);
     });
     
     Route::prefix("dokter")->group(function() {

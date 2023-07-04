@@ -10,13 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class RatingController extends Controller
 {
-    public function index($ahli_id)
-    {
-        return DB::transaction(function() use ($ahli_id) {
-            $rating = Rating::where("ahli_id", $ahli_id)->count();
-        });
-    }
-
     public function store(Request $request)
     {
         return DB::transaction(function() use ($request) {
