@@ -1,31 +1,26 @@
 <?php
 
-namespace App\Models\Akun;
+namespace App\Models\Master\Ahli;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Perawat extends Model
+class Rating extends Model
 {
     use HasFactory;
 
-    protected $table = "perawat";
+    protected $table = "rating";
 
     protected $guarded = [''];
 
-    public $primaryKey = "id_perawat";
+    public $primaryKey = "id_rating";
 
     protected $keyType = "string";
 
     public $incrementing = false;
 
-    public function getUser()
+    public function user()
     {
         return $this->belongsTo("App\Models\User", "user_id", "id");
-    }
-
-    public function ratings()
-    {
-        return $this->hasMany("App\Models\Master\Ahli\Rating", "ahli_id", "user_id");
     }
 }

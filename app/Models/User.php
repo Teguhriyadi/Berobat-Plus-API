@@ -52,4 +52,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo("App\Models\Akun\Konsumen", "id", "user_id");
     }
+
+    public function perawat()
+    {
+        return $this->hasOne(Perawat::class, 'user_id');
+    }
+
+    public function rating()
+    {
+        return $this->hasOne(Rating::class, 'user_id');
+    }
 }
