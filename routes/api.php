@@ -14,6 +14,7 @@ use App\Http\Controllers\API\Akun\Public\ActivateAccountController;
 use App\Http\Controllers\API\Akun\Public\PictureController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\DashboardController;
+use App\Http\Controllers\API\Konsumen\RiwayatTransaksiBuatJanjiController;
 use App\Http\Controllers\API\Master\Ahli\JadwalAntrianController;
 use App\Http\Controllers\API\Master\Ahli\KeahlianController;
 use App\Http\Controllers\API\Master\Alamat\AlamatUserController;
@@ -197,6 +198,10 @@ Route::middleware("auth:sanctum")->group(function () {
             Route::resource("/data_produk", DataProdukController::class);
             Route::resource("/produk_kategori", ProdukKategoriController::class);
         });
+    });
+
+    Route::prefix("konsumen")->group(function() {
+        Route::resource("/riwayat_transaksi_buat_janji", RiwayatTransaksiBuatJanjiController::class);
     });
 
     Route::prefix("ahli")->group(function() {

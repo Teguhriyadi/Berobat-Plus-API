@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('transaksi_buat_janji', function (Blueprint $table) {
             $table->string("id_transaksi_buat_janji", 50)->primary();
+            $table->string("konsumen_id", 50);
             $table->string("nama", 100);
             $table->string("nomor_hp", 30);
             $table->integer("nomer_antrian");

@@ -114,6 +114,7 @@ class JadwalAntrianController extends Controller
             
             RiwayatTransaksi::create([
                 "id_transaksi_buat_janji" => "TRN-BJ-" . date("YmdHis"),
+                "konsumen_id" => $jadwal_antrian->konsumen_id,
                 "nama" => $jadwal_antrian->konsumen->getUsers->nama,
                 "nomor_hp" => $jadwal_antrian->konsumen->getUsers->nomor_hp,
                 "nomer_antrian" => $jadwal_antrian->nomer_antrian,
