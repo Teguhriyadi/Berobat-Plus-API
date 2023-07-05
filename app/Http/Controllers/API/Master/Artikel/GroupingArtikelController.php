@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class GroupingArtikelController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return DB::transaction(function () {
-            $grouping = GroupingArtikel::orderBy("created_at", "DESC")->paginate(10);
+        return DB::transaction(function () use($request) { 
+            $grouping = GroupingArtikel::orderBy("created_at", "DESC")->paginate($request->per_page);
 
             return GetGroupingArtikelResource::collection($grouping);
         });

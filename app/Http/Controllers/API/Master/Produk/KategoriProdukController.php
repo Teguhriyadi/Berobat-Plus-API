@@ -11,10 +11,10 @@ use Illuminate\Support\Str;
 
 class KategoriProdukController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return DB::transaction(function () {
-            $kategori_produk = KategoriProduk::paginate(10);
+        return DB::transaction(function () use($request) {
+            $kategori_produk = KategoriProduk::paginate($request->per_page);
 
             return GetKategoriResource::collection($kategori_produk);
         });

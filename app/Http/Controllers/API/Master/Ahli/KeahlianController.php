@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Storage;
 
 class KeahlianController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return DB::transaction(function () {
-            $keahlian = Keahlian::orderBy("created_at", "DESC")->paginate(10);
+        return DB::transaction(function () use($request) {
+            $keahlian = Keahlian::orderBy("created_at", "DESC")->paginate($request->per_page);
 
             return GetKeahlianResource::collection($keahlian);
         });

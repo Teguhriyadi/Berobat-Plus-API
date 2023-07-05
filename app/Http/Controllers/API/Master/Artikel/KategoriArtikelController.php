@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class KategoriArtikelController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return DB::transaction(function () {
-            $kategori = KategoriArtikel::orderBy("created_at", "DESC")->paginate(10);
+        return DB::transaction(function () use($request) {
+            $kategori = KategoriArtikel::orderBy("created_at", "DESC")->paginate($request->per_page);
 
             return GetKategoriArtikelResource::collection($kategori);
         });
