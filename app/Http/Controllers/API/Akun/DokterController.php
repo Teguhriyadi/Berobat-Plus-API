@@ -134,6 +134,7 @@ class DokterController extends Controller
                             "tempat_lahir" => $item["getUser"]["tempat_lahir"],
                             "tanggal_lahir" => $item["getUser"]["tanggal_lahir"],
                             "status" => $item["getUser"]["status"],
+                            "uid_firebase" => $item["getUser"]["uuid_firebase"],
                         ],
                         "nomor_str" => $item["nomor_str"],
                         "kelas" => $item["kelas"],
@@ -141,7 +142,8 @@ class DokterController extends Controller
                             "id_biaya_praktek" => $item["getBiaya"]["id_biaya_praktek"],
                             "ahli_id" => $item["getBiaya"]["ahli_id"],
                             "biaya" => $item["getBiaya"]["biaya"],
-                        ]
+                        ],
+                        "file_dokumen" => $item["file_dokumen"]
                     ];
                 }
             }

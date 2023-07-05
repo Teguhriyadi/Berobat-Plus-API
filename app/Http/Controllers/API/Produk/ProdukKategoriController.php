@@ -63,4 +63,13 @@ class ProdukKategoriController extends Controller
             return response()->json(["pesan" => "Data Produk Kategori Berhasil di Hapus"]);
         });
     }
+
+    public function detail_by_kategori($id_kategori)
+    {
+        return DB::transaction(function() use ($id_kategori) {
+            $data = ProdukKategori::where("id_kategori_produk", $id_kategori)->get();
+
+            return GetProdukKategoriResource::collection($data);
+        });
+    }
 }

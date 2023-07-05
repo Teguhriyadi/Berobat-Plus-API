@@ -14,10 +14,16 @@ class GetPerawatResource extends JsonResource
      */
     public function toArray($request)
     {
+        $jumlah = $this->ratings->sum('star');
+        $rating = $this->ratings->count();
+        $average = ($rating !== 0) ? ($jumlah / $rating) : 0;
+
         return [
             "id_perawat" => $this->id_perawat,
             "nomor_strp" => $this->nomor_strp,
-            "user" => $this->getUser
+            "user" => $this->getUser,
+            "file_dokumen" => $this->file_dokumen,
+            "rating" => $average
         ];
     }
 }

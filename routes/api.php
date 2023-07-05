@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\EveryoneChannel;
 use App\Http\Controllers\API\Akun\AllAccountController;
 use App\Http\Controllers\API\Akun\ChangePasswordController;
 use App\Http\Controllers\API\Akun\CompanyController;
@@ -8,11 +9,15 @@ use App\Http\Controllers\API\Akun\KonsumenController;
 use App\Http\Controllers\API\Akun\OwnerApotekController;
 use App\Http\Controllers\API\Akun\OwnerRumahSakitController;
 use App\Http\Controllers\API\Akun\PerawatController;
+use App\Http\Controllers\API\Akun\Profile\Konsumen\ProfileController;
 use App\Http\Controllers\API\Akun\Public\ActivateAccountController;
 use App\Http\Controllers\API\Akun\Public\PictureController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\DashboardController;
+use App\Http\Controllers\API\Konsumen\RiwayatTransaksiBuatJanjiController;
+use App\Http\Controllers\API\Master\Ahli\JadwalAntrianController;
 use App\Http\Controllers\API\Master\Ahli\KeahlianController;
+use App\Http\Controllers\API\Master\Alamat\AlamatUserController;
 use App\Http\Controllers\API\Master\Artikel\DataArtikelController;
 use App\Http\Controllers\API\Master\Artikel\DetailArtikelController;
 use App\Http\Controllers\API\Master\Artikel\GroupingArtikelController;
@@ -33,6 +38,7 @@ use App\Http\Controllers\API\Produk\ProdukKategoriController;
 use App\Http\Controllers\API\Tes\CekResiController;
 use App\Http\Controllers\API\Tes\RajaOngkirController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
+use App\Http\Controllers\ChatingAppController;
 use App\Http\Controllers\ChatingController;
 use App\Http\Controllers\DiagnosaController;
 use Illuminate\Http\Request;
@@ -49,6 +55,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get("/send-message", [ChatingController::class, "handle"]);
+
 Route::post("/kirim-pesan", [ChatingController::class, "index"]);
 
 Route::post("invoice", [DashboardController::class, "invoice"]);
@@ -63,6 +71,7 @@ Route::get("/resi", [CekResiController::class, "index"]);
 require __DIR__ . '/auth/login.php';
 
 Route::prefix("akun")->group(function () {
+    Route::put("/user/uid", [ProfileController::class, "update_uid"]);
     Route::resource("/konsumen", KonsumenController::class);
 });
 
@@ -107,16 +116,20 @@ Route::middleware("auth:sanctum")->group(function () {
 
     Route::prefix("master")->group(function () {
 
+        require __DIR__ . '/ahli/rating/rating.php';
         require __DIR__ . '/ahli/praktek/praktek_ahli.php';
         require __DIR__ . '/ahli/jadwal/antrian.php';
         require __DIR__ . '/ahli/jadwal/praktek.php';
         require __DIR__ . '/ahli/detail/praktek.php';
         require __DIR__ . '/ahli/keahlian/master_keahlian.php';
+        require __DIR__ . '/master/pembelian/pembelian.php';
 
         Route::prefix("cari")->group(function() {
             Route::post("/keahlian", [CariKeahlianController::class, "index"]);
             Route::post("/rumah_sakit", [CariRumahSakitController::class, "index"]);
         });
+
+        Route::resource("alamat_user", AlamatUserController::class);
 
         Route::prefix("produk")->group(function () {
             Route::resource("kategori_produk", KategoriProdukController::class);
@@ -178,11 +191,25 @@ Route::middleware("auth:sanctum")->group(function () {
         });
 
         Route::prefix("produk")->group(function () {
-            Route::get("/data_produk/by_owner", [DataProdukController::class, "get_by_owner"]);
-            Route::get("/data_produk/by_owner/{id_profil_apotek}/get", [DataProdukController::class, "get_produk_by_owner"]);
+            Route::prefix("data_produk")->group(function() {
+                Route::get("/by_owner", [DataProdukController::class, "get_by_owner"]);
+                Route::get("/by_owner/{id_profil_apotek}/get", [DataProdukController::class, "get_produk_by_owner"]);
+                Route::get("/all", [DataProdukController::class, "all"]);
+            });
             Route::resource("/data_produk", DataProdukController::class);
+            Route::get("/produk_kategori/{id_kategori}", [ProdukKategoriController::class, "detail_by_kategori"]);
             Route::resource("/produk_kategori", ProdukKategoriController::class);
         });
+    });
+
+    Route::prefix("konsumen")->group(function() {
+        Route::resource("/riwayat_transaksi_buat_janji", RiwayatTransaksiBuatJanjiController::class);
+    });
+
+    Route::prefix("ahli")->group(function() {
+        Route::get("/jadwal_antrian", [JadwalAntrianController::class, "data_antrian"]);
+        Route::get("/jadwal_antrian/{id_jadwal_antrian}", [JadwalAntrianController::class, "detail"]);
+        Route::put("/jadwal_antrian/{id_jadwal_antrian}", [JadwalAntrianController::class, "update"]);
     });
     
     Route::prefix("dokter")->group(function() {

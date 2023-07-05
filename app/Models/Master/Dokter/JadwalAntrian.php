@@ -25,4 +25,9 @@ class JadwalAntrian extends Model
     {
         return $this->belongsTo("App\Models\Ahli\JadwalPraktek", "id_jadwal_praktek", "id_jadwal_praktek");
     }
+
+    public function konsumen()
+    {
+        return $this->belongsTo("App\Models\Akun\Konsumen", "konsumen_id", "id_konsumen");
+    }
 }

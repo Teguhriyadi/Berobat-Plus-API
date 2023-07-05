@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Akun;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Akun\Perawat\GetPerawatResource;
 use App\Models\Akun\Perawat;
+use App\Models\Master\Ahli\Rating;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -103,8 +104,15 @@ class PerawatController extends Controller
     public function data()
     {
         return DB::transaction(function () {
-            $perawat = Perawat::orderBy("created_at", "DESC")->with("getUser:id,nama,email,nomor_hp,alamat,jenis_kelamin,foto,usia,berat_badan,tinggi_badan,tempat_lahir,tanggal_lahir,status")->get();
-
+            
+            $perawat = Perawat::with("getUser:id,nama,email,nomor_hp,jenis_kelamin,foto,usia,uuid_firebase", "ratings")
+                ->get()
+                ->sortByDesc(function($perawat) {
+                    $rating = $perawat->ratings->count();
+                    $jumlah = $perawat->ratings->sum("star");
+                    return $rating !== 0 ? $jumlah / $rating : 0;
+                });
+            
             return GetPerawatResource::collection($perawat);
         });
     }

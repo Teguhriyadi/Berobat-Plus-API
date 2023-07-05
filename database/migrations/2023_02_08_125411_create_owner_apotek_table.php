@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('owner_apotek', function (Blueprint $table) {
             $table->string("id_owner_apotek", 50)->primary();
             $table->integer("user_id");
+            $table->string("file_dokumen")->nullable();
             $table->timestamps();
         });
     }

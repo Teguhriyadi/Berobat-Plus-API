@@ -14,6 +14,10 @@ class GetKategoriResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            "id_kategori_produk" => $this->id_kategori_produk,
+            "nama_kategori_produk" => $this->nama_kategori_produk,
+            "slug_kategori_produk" => $this->slug_kategori_produk
+        ];
     }
 }

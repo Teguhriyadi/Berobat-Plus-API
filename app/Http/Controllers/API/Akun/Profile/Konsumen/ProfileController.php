@@ -83,4 +83,15 @@ class ProfileController extends Controller
             return response()->json(["pesan" => "Data Saldo Berhasil di Ubah"]);
         });
     }
+
+    public function update_uid(Request $request)
+    {
+        return DB::transaction(function () use ($request) {
+            User::where("id", $request["id"])->update([
+                "uuid_firebase" => $request["uuid_firebase"]
+            ]);
+
+            return response()->json(["pesan" => "Data Berhasil di Simpan"]);
+        });
+    }
 }

@@ -23,4 +23,9 @@ class Perawat extends Model
     {
         return $this->belongsTo("App\Models\User", "user_id", "id");
     }
+
+    public function ratings()
+    {
+        return $this->hasMany("App\Models\Master\Ahli\Rating", "ahli_id", "user_id");
+    }
 }
