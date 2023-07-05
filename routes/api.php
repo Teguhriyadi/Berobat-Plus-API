@@ -122,6 +122,7 @@ Route::middleware("auth:sanctum")->group(function () {
         require __DIR__ . '/ahli/jadwal/praktek.php';
         require __DIR__ . '/ahli/detail/praktek.php';
         require __DIR__ . '/ahli/keahlian/master_keahlian.php';
+        require __DIR__ . '/master/pembelian/pembelian.php';
 
         Route::prefix("cari")->group(function() {
             Route::post("/keahlian", [CariKeahlianController::class, "index"]);
@@ -196,6 +197,7 @@ Route::middleware("auth:sanctum")->group(function () {
                 Route::get("/all", [DataProdukController::class, "all"]);
             });
             Route::resource("/data_produk", DataProdukController::class);
+            Route::get("/produk_kategori/{id_kategori}", [ProdukKategoriController::class, "detail_by_kategori"]);
             Route::resource("/produk_kategori", ProdukKategoriController::class);
         });
     });
