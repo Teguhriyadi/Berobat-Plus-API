@@ -18,10 +18,10 @@ use Illuminate\Support\Facades\Validator;
 
 class DataArtikelController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return DB::transaction(function () {
-            $artikel = DataArtikel::orderBy(DB::raw("RAND()"))->with("getUser:id,nama")->paginate(4);
+        return DB::transaction(function () use($request) {
+            $artikel = DataArtikel::orderBy(DB::raw("RAND()"))->with("getUser:id,nama")->paginate($request->per_page);
 
             return GetArtikelResource::collection($artikel);
         });

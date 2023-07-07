@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\DB;
 
 class PerawatController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return DB::transaction(function () {
-            $perawat = Perawat::orderBy("created_at", "DESC")->with("getUser:id,nama,email,nomor_hp,alamat,jenis_kelamin,foto,usia,berat_badan,tinggi_badan,tempat_lahir,tanggal_lahir,status")->paginate(10);
+        return DB::transaction(function () use($request) {
+            $perawat = Perawat::orderBy("created_at", "DESC")->with("getUser:id,nama,email,nomor_hp,alamat,jenis_kelamin,foto,usia,berat_badan,tinggi_badan,tempat_lahir,tanggal_lahir,status")->paginate($request->per_page);
 
             return GetPerawatResource::collection($perawat);
         });

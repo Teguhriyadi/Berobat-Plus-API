@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class ProdukKategoriController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return DB::transaction(function () {
-            $produk_kategori = ProdukKategori::with("getProduk:id_produk,kode_produk,nama_produk,slug_produk,deskripsi_produk,harga_produk,foto_produk")->with("getKategori:id_kategori_produk,nama_kategori_produk")->paginate(10);
+        return DB::transaction(function () use($request) {
+            $produk_kategori = ProdukKategori::with("getProduk:id_produk,kode_produk,nama_produk,slug_produk,deskripsi_produk,harga_produk,foto_produk")->with("getKategori:id_kategori_produk,nama_kategori_produk")->paginate($request->per_page);
 
             return GetProdukKategoriResource::collection($produk_kategori);
         });
