@@ -19,7 +19,6 @@ use Database\Seeders\Master\Ahli\MasterJoinKeahlianSeeder;
 use Database\Seeders\Master\Artikel\ContentArtikelSeeder;
 use Database\Seeders\Master\CekResi\CekResiSeeder;
 use Database\Seeders\Master\Dokter\BiayaDokterSeeder;
-use Database\Seeders\Master\Dokter\JadwalPraktekSeeder;
 use Database\Seeders\Master\GroupingArtikel\GroupingSeeder;
 use Database\Seeders\Master\Kategori\KategoriArtikelSeeder;
 use Database\Seeders\Master\Penyakit\SpesialisPenyakitSeeder;
@@ -66,7 +65,6 @@ class DatabaseSeeder extends Seeder
         $this->call(OwnerRumahSakitSeeder::class);
         $this->call(JualObatSeeder::class);
         $this->call(TransaksiObatSeeder::class);
-        $this->call(JadwalPraktekSeeder::class);
         $this->call(CekResiSeeder::class);
         $this->call(MasterJoinKeahlianSeeder::class);
     }
