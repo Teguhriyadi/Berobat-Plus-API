@@ -26,7 +26,7 @@ class DetailPraktekController extends Controller
                 "id_detail_praktek" => "JDWL-P-" . date("YmdHis"),
                 "ahli_id" => $request->ahli_id,
                 "id_rumah_sakit" => $id_rumah_sakit,
-                "biaya_praktek" => $request->biaya_pratek
+                "biaya_praktek" => $request->biaya
             ]);
 
             return response()->json(["pesan" => "Data Berhasil di Tambahkan"]);

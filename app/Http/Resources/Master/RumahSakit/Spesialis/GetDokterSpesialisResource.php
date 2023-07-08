@@ -16,10 +16,11 @@ class GetDokterSpesialisResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id_praktek" => $this->id_praktek,
-            "nama_dokter" => $this->getDokter->getUser->nama,
-            "email" => $this->getDokter->getUser->email,
-            "nomor_hp" => $this->getDokter->getUser->nomor_hp,
+            "id_praktek" => $this->id_praktek_ahli,
+            "id_dokter" => $this->user->id,
+            "nama_dokter" => $this->user->nama,
+            "email" => $this->user->email,
+            "nomor_hp" => $this->user->nomor_hp,
             "id_keahlian" => $this->getKeahlian,
             "id_spesialis" => $this->id_spesialis
         ];

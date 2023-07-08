@@ -28,4 +28,9 @@ class DetailPraktek extends Model
     {
         return $this->belongsTo("App\Models\Akun\RumahSakit", "id_rumah_sakit", "id_rumah_sakit");
     }
+
+    public function jadwal_praktek()
+    {
+        return $this->hasMany("App\Models\JadwalPraktek", "id_detail_praktek", "id_detail_praktek");
+    }
 }

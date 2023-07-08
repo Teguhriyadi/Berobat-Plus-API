@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Master\Ahli;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Master\Ahli\GetJadwalPraktekResource;
+use App\Models\Ahli\DetailPraktek;
 use App\Models\Ahli\JadwalPraktek;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -11,11 +12,13 @@ use Illuminate\Support\Facades\DB;
 
 class JadwalPraktekController extends Controller
 {
-    public function index($id_detail_praktek)
+    public function index($ahli_id, $id_rumah_sakit)
     {
-        return DB::transaction(function() use($id_detail_praktek) {
-            $jadwal = JadwalPraktek::where("id_detail_praktek", $id_detail_praktek)->whereMonth("tanggal", Carbon::now()->format("m"))->get();
-            
+        return DB::transaction(function() use ($ahli_id, $id_rumah_sakit) {
+            $detail = DetailPraktek::where("ahli_id", $ahli_id)->where("id_rumah_sakit", $id_rumah_sakit)->first();
+
+            $jadwal = JadwalPraktek::where("id_detail_praktek", $detail['id_detail_praktek'])->whereMonth("tanggal", Carbon::now()->format("m"))->get();
+
             return GetJadwalPraktekResource::collection($jadwal);
         });
     }
