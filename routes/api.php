@@ -14,6 +14,7 @@ use App\Http\Controllers\API\Akun\Public\ActivateAccountController;
 use App\Http\Controllers\API\Akun\Public\PictureController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use App\Http\Controllers\API\DashboardController;
+use App\Http\Controllers\API\Konsumen\PembayaranController;
 use App\Http\Controllers\API\Konsumen\CheckoutController;
 use App\Http\Controllers\API\Konsumen\RiwayatTransaksiBuatJanjiController;
 use App\Http\Controllers\API\Master\Ahli\JadwalAntrianController;
@@ -204,6 +205,7 @@ Route::middleware("auth:sanctum")->group(function () {
     });
 
     Route::prefix("konsumen")->group(function() {
+        Route::post("/pembayaran", [PembayaranController::class, ""]);
         Route::resource("/riwayat_transaksi_buat_janji", RiwayatTransaksiBuatJanjiController::class);
         Route::resource("/checkout", CheckoutController::class);
     });
