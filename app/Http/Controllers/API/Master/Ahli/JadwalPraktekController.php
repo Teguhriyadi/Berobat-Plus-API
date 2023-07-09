@@ -15,12 +15,12 @@ use Illuminate\Validation\ValidationException;
 
 class JadwalPraktekController extends Controller
 {
-    public function index($ahli_id, $id_rumah_sakit)
+    public function index(Request $request, $ahli_id, $id_rumah_sakit)
     {
-        return DB::transaction(function() use ($ahli_id, $id_rumah_sakit) {
+        return DB::transaction(function() use ($request, $ahli_id, $id_rumah_sakit) {
             $detail = DetailPraktek::where("ahli_id", $ahli_id)->where("id_rumah_sakit", $id_rumah_sakit)->first();
 
-            $jadwal = JadwalPraktek::where("id_detail_praktek", $detail['id_detail_praktek'])->whereMonth("tanggal", Carbon::now()->format("m"))->get();
+            $jadwal = JadwalPraktek::where("id_detail_praktek", $detail['id_detail_praktek'])->whereMonth("tanggal", Carbon::now()->format("m"))->paginate($request->per_page);
 
             return GetJadwalPraktekResource::collection($jadwal);
         });
