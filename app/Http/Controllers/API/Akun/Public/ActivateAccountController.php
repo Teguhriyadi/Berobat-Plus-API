@@ -8,9 +8,11 @@ use App\Models\Akun\Dokter;
 use App\Models\Akun\OwnerApotek;
 use App\Models\Akun\Perawat;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class ActivateAccountController extends Controller
 {
@@ -60,10 +62,37 @@ class ActivateAccountController extends Controller
                 ]);
             }
 
-            User::where("id", $user["id"])->update([
-                "created_by" => Auth::user()->id,
-                "status" => 1
-            ]);
+            if ($user["id_role"] == "RO-2003062") {
+                try {
+                    $messages = [
+                        "required" => "Kolom :attribute Harus Diisi"
+                    ];
+
+                    $this->validate($request, [
+                        "is_dokter_rs" => "required"
+                    ], $messages);
+
+                    if ($request["is_dokter_rs"] == "1") {
+                        User::where("id", $user["id"])->update([
+                            "created_by" => Auth::user()->id,
+                            "status" => "0"
+                        ]);
+                    } else if ($request["is_dokter_rs"] == "2") {
+                        User::where("id", $user["id"])->update([
+                            "created_by" => Auth::user()->id,
+                            "status" => "1"
+                        ]);
+                    }
+
+                } catch (ValidationException $e) {
+                    return response()->json(["errors" => $e->errors()], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+                }
+            } else {
+                User::where("id", $user["id"])->update([
+                    "created_by" => Auth::user()->id,
+                    "status" => "1"
+                ]);
+            }
 
             return response()->json(["pesan" => "Data Berhasil di Simpan"]);
 
