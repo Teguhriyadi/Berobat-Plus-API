@@ -98,16 +98,15 @@ class ProfilApotekController extends Controller
         return DB::transaction(function () use ($request) {
             $lat = $request->latitude;
             $long = $request->longitude;
-            // $lat = "-6.352326";
-            // $long = "108.3203647";
 
             $locations = DB::table('profil_apotek')
                 ->select('id_profil_apotek', 'nama_apotek', 'latitude', 'longitude')
                 ->selectRaw('(6371 * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $long . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance')
                 ->orderBy('distance', 'ASC')
                 ->get();
+                
+                return response()->json(['data' => $locations]);
 
-            return response()->json($locations);
         });
     }
 }
