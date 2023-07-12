@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Autentikasi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ahli\BiayaPraktek;
 use App\Models\Akun\Dokter;
 use App\Models\Akun\OwnerApotek;
 use App\Models\Akun\OwnerRumahSakit;
@@ -98,6 +99,12 @@ class LoginController extends Controller
                     "id_dokter" => "DKTR-" . date("YmdHis"),
                     "user_id" => $user["id"],
                     "file_dokumen" => url("storage/".$dokumen)
+                ]);
+
+                BiayaPraktek::create([
+                    "id_biaya_praktek" => "BIA-P-" . date("YmdHis"),
+                    "ahli_id" => $user["id"],
+                    "biaya" => 0
                 ]);
             } else if ($request->option == "perawat") {
                 Perawat::create([

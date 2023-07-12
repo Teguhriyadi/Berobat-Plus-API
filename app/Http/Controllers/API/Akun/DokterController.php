@@ -114,7 +114,9 @@ class DokterController extends Controller
     public function data()
     {
         return DB::transaction(function () {
-            $masterdokter = Dokter::get();
+            $masterdokter = Dokter::whereHas("getUser", function($query) {
+                $query->where("status", 1);
+            })->get();
 
             $data = [];
             foreach ($masterdokter as $item) {

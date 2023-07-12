@@ -45,11 +45,5 @@ class BiayaDokterSeeder extends Seeder
             "ahli_id" => 17,
             "biaya" => 40000
         ]);
-
-        BiayaPraktek::create([
-            "id_biaya_praktek" => "BIA-P-006",
-            "ahli_id" => 20,
-            "biaya" => 50000
-        ]);
     }
 }

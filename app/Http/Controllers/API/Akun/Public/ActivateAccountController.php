@@ -48,12 +48,6 @@ class ActivateAccountController extends Controller
                 Dokter::where("id_dokter", $dokter["id_dokter"])->update([
                     "nomor_str" => $request->nomor_str
                 ]);
-                
-                BiayaPraktek::create([
-                    "id_biaya_praktek" => "BIA-P-" . date("YmdHis"),
-                    "ahli_id" => $id_user,
-                    "biaya" => 0
-                ]);
             } else if($user["id_role"] == "RO-2003063") {
                 $perawat = Perawat::where("user_id", $user["id"])->first();
 

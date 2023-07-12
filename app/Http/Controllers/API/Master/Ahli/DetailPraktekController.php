@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API\Master\Ahli;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Master\Ahli\GetDetailPraktekrResource;
 use App\Models\Ahli\DetailPraktek;
+use App\Models\Ahli\PraktekAhli;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -27,6 +29,18 @@ class DetailPraktekController extends Controller
                 "ahli_id" => $request->ahli_id,
                 "id_rumah_sakit" => $id_rumah_sakit,
                 "biaya_praktek" => $request->biaya
+            ]);
+
+            PraktekAhli::create([
+                "id_praktek_ahli" => "PR-A-" . date("YmdHis"),
+                "ahli_id" => $request->ahli_id,
+                "id_keahlian" => $request->id_keahlian,
+                "id_spesialis" => $request->id_spesialis,
+                "id_rumah_sakit" => $id_rumah_sakit
+            ]);
+
+            User::where("id", $request->ahli_id)->update([
+                "status" => "1"
             ]);
 
             return response()->json(["pesan" => "Data Berhasil di Tambahkan"]);
