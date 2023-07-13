@@ -17,7 +17,9 @@ class DokterController extends Controller
     public function index()
     {
         return DB::transaction(function () {
-            $dokter = Dokter::orderBy(DB::raw("RAND()"))->with("getUser:id,nama,email,jenis_kelamin,nomor_hp,alamat,tempat_lahir,tempat_lahir,tanggal_lahir,status")->with("getBiaya:id_biaya_praktek,ahli_id,biaya")->paginate(2);
+            $dokter = Dokter::whereHas("getUser", function($query) {
+                $query->where("status", "1");
+            })->orderBy(DB::raw("RAND()"))->with("getUser:id,nama,email,jenis_kelamin,nomor_hp,alamat,tempat_lahir,tempat_lahir,tanggal_lahir,status")->with("getBiaya:id_biaya_praktek,ahli_id,biaya")->paginate(2);
 
             return GetDokterResource::collection($dokter);
         });
