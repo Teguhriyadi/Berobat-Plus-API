@@ -105,7 +105,9 @@ class PerawatController extends Controller
     {
         return DB::transaction(function () {
             
-            $perawat = Perawat::with("getUser:id,nama,email,nomor_hp,jenis_kelamin,foto,usia,uuid_firebase", "ratings")
+            $perawat = Perawat::whereHas("getUser", function($query) {
+                $query->where("status", "1");
+            })->with("getUser:id,nama,email,nomor_hp,jenis_kelamin,foto,usia,uuid_firebase", "ratings")
                 ->get()
                 ->sortByDesc(function($perawat) {
                     $rating = $perawat->ratings->count();

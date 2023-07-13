@@ -112,6 +112,12 @@ class LoginController extends Controller
                     "user_id" => $user["id"],
                     "file_dokumen" => url("storage/" . $dokumen)
                 ]);
+
+                BiayaPraktek::create([
+                    "id_biaya_praktek" => "BIA-P-" . date("YmdHis"),
+                    "ahli_id" => $user["id"],
+                    "biaya" => 0 
+                ]);
             } else if ($request->option == "rumah_sakit") {
                 OwnerRumahSakit::create([
                     "id_owner_rumah_sakit" => "OWN-RS-" . date("YmdHis"),
