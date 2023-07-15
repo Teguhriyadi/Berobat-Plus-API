@@ -15,7 +15,7 @@ class ValidatorRegister extends FormRequest
             return [
                 "nama" => "required",
                 "password" => "required|min:8|max:15",
-                "nomor_hp" => "required|min:12|max:15",
+                "nomor_hp" => "required|digits_between:12,15",
                 "option" => "required",
                 "jenis_kelamin" => "required",
                 "foto" => "required",
@@ -25,7 +25,7 @@ class ValidatorRegister extends FormRequest
             return [
                 "nama" => "required",
                 "password" => "required|min:8|max:15",
-                "nomor_hp" => "required|min:12|max:15",
+                "nomor_hp" => "required|digits_between:12,15",
                 "option" => "required",
                 "jenis_kelamin" => "required",
                 "foto" => "required",
