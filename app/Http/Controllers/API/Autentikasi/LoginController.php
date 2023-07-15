@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Autentikasi;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Autentikasi\ValidatorRegister;
 use App\Models\Ahli\BiayaPraktek;
 use App\Models\Akun\Dokter;
 use App\Models\Akun\OwnerApotek;
@@ -62,7 +63,7 @@ class LoginController extends Controller
         return response()->json(["pesan" => "Anda Berhasil Logout"]);
     }
 
-    public function register(Request $request)
+    public function register(ValidatorRegister $request)
     {
         return DB::transaction(function() use($request) {
             
