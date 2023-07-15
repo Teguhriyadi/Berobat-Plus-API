@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Autentikasi;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Autentikasi\ValidatorLogin;
 use App\Http\Requests\Autentikasi\ValidatorRegister;
 use App\Models\Ahli\BiayaPraktek;
 use App\Models\Akun\Dokter;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    public function login(Request $request)
+    public function login(ValidatorLogin $request)
     {
 
         $user = User::where("nomor_hp", $request->nomor_hp)->first();
