@@ -13,7 +13,7 @@ class SpesialisRumahSakitController extends Controller
     public function index($id_rumah_sakit)
     {
         return DB::transaction(function () use ($id_rumah_sakit) {
-            $spesialis = SpesialisRumahSakit::with("getSpesialisPenyakit:id_spesialis_penyakit,nama_spesialis,slug_spesialis")->where("id_rumah_sakit", $id_rumah_sakit)->paginate(10);
+            $spesialis = SpesialisRumahSakit::with("getSpesialisPenyakit:id_spesialis_penyakit,icon,nama_spesialis,slug_spesialis")->where("id_rumah_sakit", $id_rumah_sakit)->paginate(10);
 
 
             return GetSpesialisResource::collection($spesialis);
@@ -36,7 +36,7 @@ class SpesialisRumahSakitController extends Controller
     public function edit($id_rumah_sakit, $id_spesialis)
     {
         return DB::transaction(function() use ($id_rumah_sakit, $id_spesialis) {
-            $spesialis = SpesialisRumahSakit::with("getSpesialisPenyakit:id_penyakit,nama_spesialis,slug_spesialis,logo")->where("id_spesialis", $id_spesialis)->where("id_rumah_sakit", $id_rumah_sakit)->first();
+            $spesialis = SpesialisRumahSakit::with("getSpesialisPenyakit:id_penyakit,icon,nama_spesialis,slug_spesialis,logo")->where("id_spesialis", $id_spesialis)->where("id_rumah_sakit", $id_rumah_sakit)->first();
 
             return new GetSpesialisResource($spesialis);
         });
