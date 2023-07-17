@@ -18,4 +18,9 @@ class KeranjangDetail extends Model
     protected $keyType = "string";
 
     public $incrementing = false;
+
+    public function keranjang()
+    {
+        return $this->belongsTo("App\Models\Transaksi\Keranjang", "keranjang_id", "id_keranjang");
+    }
 }

@@ -222,6 +222,8 @@ Route::middleware("auth:sanctum")->group(function () {
 
     require __DIR__ . '/master/transaksi/keranjang/keranjang.php';
 
+    require __DIR__ . '/master/transaksi/detail_keranjang/detail.php';
+
     require __DIR__ . '/xendit/pembayaran.php';
 
     Route::get("/count_data", [DashboardController::class, "dashboard"]);

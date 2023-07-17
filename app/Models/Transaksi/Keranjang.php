@@ -18,4 +18,9 @@ class Keranjang extends Model
     protected $keyType = "string";
 
     public $incrementing = false;
+
+    public function konsumen()
+    {
+        return $this->belongsTo("App\Models\Akun\Konsumen", "konsumen_id", "id_konsumen");
+    }
 }

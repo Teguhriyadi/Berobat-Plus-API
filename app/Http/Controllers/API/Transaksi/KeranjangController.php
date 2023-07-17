@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API\Transaksi;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Transaksi\GetKeranjangDetailResource;
+use App\Http\Resources\Transaksi\GetKeranjangResource;
 use App\Models\Apotek\Produk\ProdukApotek;
 use App\Models\Transaksi\Keranjang;
 use App\Models\Transaksi\KeranjangDetail;
@@ -12,6 +14,15 @@ use Illuminate\Support\Facades\DB;
 
 class KeranjangController extends Controller
 {
+    public function index()
+    {
+        return DB::transaction(function() {
+            $keranjang = Keranjang::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->get();
+
+            return GetKeranjangResource::collection($keranjang);
+        });
+    }
+
     public function store(Request $request)
     {
         return DB::transaction(function() use ($request) {
@@ -60,6 +71,15 @@ class KeranjangController extends Controller
             $data_keranjang->update();
 
             return response()->json(["pesan" => "Data Berhasil di Tambahkan"]);
+        });
+    }
+
+    public function show($id_keranjang)
+    {
+        return DB::transaction(function() use ($id_keranjang) {
+            $data = KeranjangDetail::where("keranjang_id", $id_keranjang)->get();
+
+            return GetKeranjangDetailResource::collection($data);
         });
     }
 }
