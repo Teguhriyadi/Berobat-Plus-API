@@ -195,7 +195,7 @@ class UsersSeeder extends Seeder
         User::create([
             "nama" => "Rizki Anugrah",
             "email" => "rizkianugrah@gmail.com",
-            "password" => bcrypt("perawat"),
+            "password" => bcrypt("perawat123"),
             "nomor_hp" => "2839232398",
             "alamat" => "Cirebon",
             "id_role" => "RO-2003063",
@@ -205,7 +205,7 @@ class UsersSeeder extends Seeder
         User::create([
             "nama" => "Fyou",
             "email" => "fyou@gmail.com",
-            "password" => bcrypt("perawat"),
+            "password" => bcrypt("perawat123"),
             "nomor_hp" => "33384938493",
             "alamat" => "Cirebon",
             "id_role" => "RO-2003063",
@@ -235,7 +235,7 @@ class UsersSeeder extends Seeder
         User::create([
             "nama" => "Aisyah",
             "email" => "aisyah@gmail.com",
-            "password" => bcrypt("perawat"),
+            "password" => bcrypt("perawat123"),
             "nomor_hp" => "99239020",
             "alamat" => "Solo",
             "id_role" => "RO-2003063",
@@ -245,7 +245,7 @@ class UsersSeeder extends Seeder
         User::create([
             "nama" => "Tri",
             "email" => "tri@gmail.com",
-            "password" => bcrypt("perawat"),
+            "password" => bcrypt("perawat123"),
             "nomor_hp" => "9923892",
             "alamat" => "Magelang",
             "id_role" => "RO-2003063",

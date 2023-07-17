@@ -19,53 +19,81 @@ class ActivateAccountController extends Controller
     public function active_account($id_user)
     {
         return DB::transaction(function () use ($id_user) {
-
+            
             echo $id_user;
-
+            
             die();
             $cek = User::where("id", $id_user)->first();
-
+            
             User::where("id", $id_user)->update([
                 "created_by" => Auth::user()->id,
                 "status" => $cek->status == "1" ? "0" : "1"
             ]);
-
-
-
+            
+            
+            
             return response()->json(["pesan" => "Status Akun Berhasil Diubah"]);
         });
     }
-
+    
     public function active_account_status(Request $request, $id_user)
     {
         return DB::transaction(function() use ($request, $id_user) {
-
+            
             $user = User::where("id", $id_user)->first();
-
+            
             if ($user["id_role"] == "RO-2003062") {
-                $dokter = Dokter::where("user_id", $user["id"])->first();
-
-                Dokter::where("id_dokter", $dokter["id_dokter"])->update([
-                    "nomor_str" => $request->nomor_str
-                ]);
+                
+                try {
+                    
+                    $messages = [
+                        "required" => "Kolom :attribute Harus Diisi"
+                    ];
+                    
+                    $this->validate($request, [
+                        "nomor_str" => "required"
+                    ], $messages);
+                    
+                    $dokter = Dokter::where("user_id", $user["id"])->first();
+                    
+                    Dokter::where("id_dokter", $dokter["id_dokter"])->update([
+                        "nomor_str" => $request->nomor_str
+                    ]);
+                } catch (ValidationException $e) {
+                    return response()->json(["errors" => $e->errors()], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+                }
+                
             } else if($user["id_role"] == "RO-2003063") {
-                $perawat = Perawat::where("user_id", $user["id"])->first();
+                try {
 
-                Perawat::where("id_perawat", $perawat["id_perawat"])->update([
-                    "nomor_strp" => $request->nomor_strp
-                ]);
+                    $messages = [
+                        "required" => "Kolom :attribute Harus Diisi"
+                    ];
+                    
+                    $this->validate($request, [
+                        "nomor_strp" => "required"
+                    ], $messages);
+
+                    $perawat = Perawat::where("user_id", $user["id"])->first();
+                    
+                    Perawat::where("id_perawat", $perawat["id_perawat"])->update([
+                        "nomor_strp" => $request->nomor_strp
+                    ]);
+                } catch (ValidationException $e) {
+                    return response()->json(["errors" => $e->errors()], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+                }
             }
-
+            
             if ($user["id_role"] == "RO-2003062") {
                 try {
                     $messages = [
                         "required" => "Kolom :attribute Harus Diisi"
                     ];
-
+                    
                     $this->validate($request, [
                         "is_dokter_rs" => "required"
                     ], $messages);
-
+                    
                     if ($request["is_dokter_rs"] == "1") {
                         User::where("id", $user["id"])->update([
                             "created_by" => Auth::user()->id,
@@ -77,7 +105,7 @@ class ActivateAccountController extends Controller
                             "status" => "1"
                         ]);
                     }
-
+                    
                 } catch (ValidationException $e) {
                     return response()->json(["errors" => $e->errors()], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
                 }
@@ -87,9 +115,9 @@ class ActivateAccountController extends Controller
                     "status" => "1"
                 ]);
             }
-
+            
             return response()->json(["pesan" => "Data Berhasil di Simpan"]);
-
+            
         });
     }
 }

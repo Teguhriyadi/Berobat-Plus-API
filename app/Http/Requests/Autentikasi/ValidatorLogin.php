@@ -12,7 +12,7 @@ class ValidatorLogin extends FormRequest
     {
         return [
             "password" => "required|min:8|max:15",
-            "nomor_hp" => "required|digits_between:12,15"
+            "nomor_hp" => "required"
         ];
     }
 

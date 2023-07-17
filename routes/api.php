@@ -220,6 +220,8 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::get("/is_active", [DashboardController::class, "is_active"]);
     });
 
+    require __DIR__ . '/master/transaksi/keranjang/keranjang.php';
+
     require __DIR__ . '/xendit/pembayaran.php';
 
     Route::get("/count_data", [DashboardController::class, "dashboard"]);

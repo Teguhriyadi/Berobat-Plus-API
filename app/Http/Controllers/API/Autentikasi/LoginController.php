@@ -20,7 +20,6 @@ class LoginController extends Controller
 {
     public function login(ValidatorLogin $request)
     {
-
         $user = User::where("nomor_hp", $request->nomor_hp)->first();
 
         if (!$user) {
