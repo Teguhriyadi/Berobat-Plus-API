@@ -20,9 +20,9 @@ class KeranjangController extends Controller
             if (empty(Auth::user()->konsumen)) {
                 return response()->json(["pesan" => "Konsumen Tidak Ditemukan"]);
             } else {
-                $keranjang = Keranjang::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->get();
+                $keranjang = Keranjang::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->where("status", 0)->first();
     
-                return GetKeranjangResource::collection($keranjang);
+                return new GetKeranjangResource($keranjang);
             }
         });
     }
@@ -88,6 +88,28 @@ class KeranjangController extends Controller
             $data = KeranjangDetail::where("keranjang_id", $id_keranjang)->get();
 
             return GetKeranjangDetailResource::collection($data);
+        });
+    }
+
+    public function total()
+    {
+        return DB::transaction(function() {
+
+            if (empty(Auth::user()->konsumen)) {
+                return response()->json(["pesan" => "Konsumen Tidak Ditemukan"]);
+            } else {
+                $keranjang = Keranjang::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->first();
+
+                if (empty($keranjang->id_keranjang)) {
+                    return response()->json(["pesan" => "Keranjang Tidak Ada", "total" => 0]);
+                } else {
+                    $detail = KeranjangDetail::where("keranjang_id", $keranjang->id_keranjang)->sum("jumlah");
+        
+                    return response()->json(["pesan" => "Data Ditemukan", "total" => $detail, "id_keranjang" => $keranjang->id_keranjang, "harga" => "Rp." . number_format($keranjang->jumlah_harga) ]);
+                }
+    
+            }
+
         });
     }
 }
