@@ -17,9 +17,13 @@ class KeranjangController extends Controller
     public function index()
     {
         return DB::transaction(function() {
-            $keranjang = Keranjang::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->get();
-
-            return GetKeranjangResource::collection($keranjang);
+            if (empty(Auth::user()->konsumen)) {
+                return response()->json(["pesan" => "Konsumen Tidak Ditemukan"]);
+            } else {
+                $keranjang = Keranjang::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->get();
+    
+                return GetKeranjangResource::collection($keranjang);
+            }
         });
     }
 
@@ -27,7 +31,10 @@ class KeranjangController extends Controller
     {
         return DB::transaction(function() use ($request) {
 
-            $produk = ProdukApotek::where("id_produk", $request->produk_id)->first();
+            if (empty(Auth::user()->konsumen)) {
+                return response()->json(["pesan" => "Konsumen Tidak Ditemukan"]);
+            } else {
+                $produk = ProdukApotek::where("id_produk", $request->produk_id)->first();
 
             $cek_pesanan = Keranjang::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->first();
 
@@ -71,6 +78,9 @@ class KeranjangController extends Controller
             $data_keranjang->update();
 
             return response()->json(["pesan" => "Data Berhasil di Tambahkan"]);
+            }
+
+            die();
         });
     }
 
