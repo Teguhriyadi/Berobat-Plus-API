@@ -26,6 +26,12 @@ class GetKeranjangDetailResource extends JsonResource
                 "tanggal" => Carbon::createFromFormat('Y-m-d', $this->keranjang->tanggal)->isoFormat('D MMMM Y'),
                 "jumlah_harga" => "Rp." . number_format($this->keranjang->jumlah_harga)
             ],
+            "produk" => [
+                "id_produk" => $this->produk->id_produk,
+                "kode_produk" => $this->produk->kode_produk,
+                "nama_produk" => $this->produk->nama_produk,
+                "harga_produk" => "Rp." . number_format($this->produk->harga_produk)
+            ],
             "qty" => $this->jumlah,
             "jumlah_harga" => "Rp." . number_format($this->jumlah_harga)
         ];

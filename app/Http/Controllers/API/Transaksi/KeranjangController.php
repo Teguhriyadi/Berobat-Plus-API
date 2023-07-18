@@ -79,8 +79,6 @@ class KeranjangController extends Controller
 
             return response()->json(["pesan" => "Data Berhasil di Tambahkan"]);
             }
-
-            die();
         });
     }
 

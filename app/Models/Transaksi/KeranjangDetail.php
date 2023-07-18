@@ -23,4 +23,9 @@ class KeranjangDetail extends Model
     {
         return $this->belongsTo("App\Models\Transaksi\Keranjang", "keranjang_id", "id_keranjang");
     }
+
+    public function produk()
+    {
+        return $this->belongsTo("App\Models\Apotek\Produk\ProdukApotek", "produk_id", "id_produk");
+    }
 }
