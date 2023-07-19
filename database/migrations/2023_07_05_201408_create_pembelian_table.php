@@ -23,7 +23,7 @@ return new class extends Migration
             $table->double("tarif")->double();
             $table->text("alamat_pengiriman");
             $table->enum("status_pembelian", ["PENDING", "SUDAH PEMBAYARAN", "BARANG DIKIRIM", "SELESAI"]);
-            $table->string("resi_pengiriman", 50);
+            $table->string("resi_pengiriman", 50)->nullable();
             $table->timestamps();
         });
     }

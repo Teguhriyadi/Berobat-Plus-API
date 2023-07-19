@@ -105,7 +105,7 @@ class KeranjangController extends Controller
                 } else {
                     $detail = KeranjangDetail::where("keranjang_id", $keranjang->id_keranjang)->sum("jumlah");
         
-                    return response()->json(["pesan" => "Data Ditemukan", "total" => $detail, "id_keranjang" => $keranjang->id_keranjang, "harga" => "Rp." . number_format($keranjang->jumlah_harga) ]);
+                    return response()->json(["pesan" => "Data Ditemukan", "total" => $detail, "id_keranjang" => $keranjang->id_keranjang, "harga" => "Rp." . number_format($keranjang->jumlah_harga) , "price" => $keranjang->jumlah_harga ]);
                 }
     
             }
