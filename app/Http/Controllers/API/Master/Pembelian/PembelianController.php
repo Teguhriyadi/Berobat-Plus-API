@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API\Master\Pembelian;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Transaksi\GetPembelianBarangResource;
+use App\Http\Resources\Transaksi\GetPembelianResource;
 use App\Models\Apotek\Produk\ProdukApotek;
 use App\Models\Transaksi\Keranjang;
 use App\Models\Transaksi\KeranjangDetail;
@@ -14,6 +16,15 @@ use Illuminate\Support\Facades\DB;
 
 class PembelianController extends Controller
 {
+    public function index()
+    {
+        return DB::transaction(function() {
+            $pembelian = Pembelian::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->get();
+
+            return GetPembelianResource::collection($pembelian);
+        });
+    }
+
     public function store(Request $request)
     {
         return DB::transaction(function() use ($request) {
@@ -32,13 +43,12 @@ class PembelianController extends Controller
             
             $keranjang->delete();
 
-            $nomer = 1;
-            foreach ($request->id_keranjang_detail as $index => $key) {
-                $detail = KeranjangDetail::where("id_keranjang_detail", $index)->first();
+            foreach ($request->id_keranjang_detail as $id_keranjang_detail) {
+                $detail = KeranjangDetail::where("id_keranjang_detail", $id_keranjang_detail)->first();
                 $produk = ProdukApotek::where("id_produk", $detail["produk_id"])->first();
 
                 PembelianBarang::create([
-                    "id_pembelian_barang" => "PMBL-B-".date("YmdHis") . $nomer++,
+                    "id_pembelian_barang" => "PMBL-B-".date("YmdHis") . $id_keranjang_detail,
                     "id_pembelian" => $pembelian->id_pembelian,
                     "kode_produk" => $produk["kode_produk"],
                     "jumlah" => $detail["jumlah"],
@@ -50,6 +60,15 @@ class PembelianController extends Controller
             }
 
             return response()->json(["pesan" => "Data Berhasil di Tambahkan"]);
+        });
+    }
+
+    public function show($id_pembelian)
+    {
+        return DB::transaction(function() use ($id_pembelian) {
+            $detail = PembelianBarang::where("id_pembelian", $id_pembelian)->get();
+            
+            return GetPembelianBarangResource::collection($detail);
         });
     }
 }
