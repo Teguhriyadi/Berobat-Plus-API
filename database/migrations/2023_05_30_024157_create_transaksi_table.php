@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->string("id_transaksi", 50)->primary();
+            $table->string("id_konsumen", 50);
             $table->string("nama_konsumen");
             $table->string("nomor_hp_konsumen");
             $table->tinyInteger("jenis_transaksi");

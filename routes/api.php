@@ -79,6 +79,8 @@ Route::prefix("akun")->group(function () {
 
 Route::middleware("auth:sanctum")->group(function () {
 
+    require __DIR__ . '/xendit/bank/list_bank.php';
+
     Route::prefix("akun")->group(function () {
 
         Route::put("/update-picture", [PictureController::class, "update_picture"]);
@@ -219,6 +221,10 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::prefix("dokter")->group(function() {
         Route::get("/is_active", [DashboardController::class, "is_active"]);
     });
+
+    require __DIR__ . '/transaksi/produk/produk.php';
+
+    require __DIR__ . '/transaksi/konsultasi/pembayaran.php';
 
     require __DIR__ . '/master/transaksi/keranjang/keranjang.php';
 

@@ -16,7 +16,10 @@ class GetSpesialisDokterController extends Controller
     public function index($id_spesialis, $id_rumah_sakit)
     {
         return DB::transaction(function () use ($id_spesialis, $id_rumah_sakit) {
-            $dokter = PraktekAhli::where("id_spesialis", $id_spesialis)->with("getKeahlian:id_keahlian,nama_keahlian")->paginate(10);
+            $dokter = PraktekAhli::join("detail_praktek", "praktek_ahli.ahli_id", "=", "detail_praktek.ahli_id")
+            ->where("praktek_ahli.id_spesialis", $id_spesialis)
+            ->where("detail_praktek.id_rumah_sakit", $id_rumah_sakit)
+            ->get();
 
             return GetDokterSpesialisResource::collection($dokter);
         });

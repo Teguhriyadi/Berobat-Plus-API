@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Akun;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Master\Konsumen\ValidatorKonsumen;
 use App\Http\Resources\Akun\Konsumen\GetKonsumenResource;
 use App\Models\Akun\Konsumen;
 use App\Models\User;
@@ -20,14 +21,14 @@ class KonsumenController extends Controller
         });
     }
 
-    public function store(Request $request)
+    public function store(ValidatorKonsumen $request)
     {
         return DB::transaction(function () use ($request) {
 
             $user = User::create([
                 "nama" => $request->nama,
-                "email" => $request->email,
                 "password" => bcrypt($request->password),
+                "email" => $request->email,
                 "nomor_hp" => $request->nomor_hp,
                 "alamat" => "Indonesia",
                 "id_role" => "RO-2003064",

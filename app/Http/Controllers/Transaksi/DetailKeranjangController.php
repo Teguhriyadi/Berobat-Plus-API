@@ -8,10 +8,28 @@ use App\Models\Master\Obat\TransaksiObat;
 use App\Models\Transaksi\Keranjang;
 use App\Models\Transaksi\KeranjangDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class DetailKeranjangController extends Controller
 {
+    public function hapus_semua_data()
+    {
+        return DB::transaction(function () {
+            $keranjang = Keranjang::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->first();
+
+            $detail_keranjang = KeranjangDetail::where("keranjang_id", $keranjang["id_keranjang"])->get();
+            
+            foreach ($detail_keranjang as $d) {
+                $d->delete();
+            }
+
+            $keranjang->delete();
+
+            return response()->json(["pesan" => "Data Berhasil di Hapus"]);
+        });
+    }
+
     public function destroy($id_keranjang_detail)
     {
         return DB::transaction(function() use ($id_keranjang_detail) {

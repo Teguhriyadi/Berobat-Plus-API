@@ -19,9 +19,15 @@ class PembelianController extends Controller
     public function index()
     {
         return DB::transaction(function() {
-            $pembelian = Pembelian::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->get();
 
-            return GetPembelianResource::collection($pembelian);
+            if (empty(Auth::user()->konsumen->id_konsumen)) {
+                return response()->json(["pesan" => "Data 2 Ditemukan", "data" => []]);
+            } else {
+                $pembelian = Pembelian::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->get();
+    
+                return GetPembelianResource::collection($pembelian);
+            }
+
         });
     }
 
@@ -59,7 +65,7 @@ class PembelianController extends Controller
                 $detail->delete();
             }
 
-            return response()->json(["pesan" => "Data Berhasil di Tambahkan"]);
+            return response()->json(["pesan" => "Data Berhasil di Tambahkan", "pembelian" => $pembelian->id_pembelian]);
         });
     }
 
@@ -69,6 +75,14 @@ class PembelianController extends Controller
             $detail = PembelianBarang::where("id_pembelian", $id_pembelian)->get();
             
             return GetPembelianBarangResource::collection($detail);
+        });
+    }
+
+    public function edit($id_pembelian) {
+        return DB::transaction(function() use ($id_pembelian) {
+            $detail_keranjang = Pembelian::where("id_pembelian", $id_pembelian)->first();
+
+            return new GetPembelianResource($detail_keranjang);
         });
     }
 }

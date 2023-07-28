@@ -22,7 +22,8 @@ class GetDokterSpesialisResource extends JsonResource
             "email" => $this->user->email,
             "nomor_hp" => $this->user->nomor_hp,
             "id_keahlian" => $this->getKeahlian,
-            "id_spesialis" => $this->id_spesialis
+            "id_spesialis" => $this->id_spesialis,
+            "biaya" => "Rp. " . number_format($this->biaya_praktek)
         ];
     }
 }
