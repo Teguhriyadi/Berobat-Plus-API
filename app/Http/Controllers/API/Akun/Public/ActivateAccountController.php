@@ -56,6 +56,12 @@ class ActivateAccountController extends Controller
                     
                     $dokter = Dokter::where("user_id", $user["id"])->first();
                     
+                    $cek_nomor_str = $dokter->where("nomor_str", $request->nomor_str)->count();
+
+                    if ($cek_nomor_str > 0) {
+                        return response()->json(["status" => false, "pesan" => "Nomor STR Sudah Digunakan"]);
+                    }
+
                     Dokter::where("id_dokter", $dokter["id_dokter"])->update([
                         "nomor_str" => $request->nomor_str
                     ]);
@@ -76,6 +82,12 @@ class ActivateAccountController extends Controller
 
                     $perawat = Perawat::where("user_id", $user["id"])->first();
                     
+                    $cek_nomor_strp = $perawat->where("nomor_strp", $perawat->nomor_strp)->count();
+
+                    if ($cek_nomor_strp > 0) {
+                        return response()->json(["status" => false, "pesan" => "Nomor STRP Sudah Digunakan"]);
+                    }
+
                     Perawat::where("id_perawat", $perawat["id_perawat"])->update([
                         "nomor_strp" => $request->nomor_strp
                     ]);

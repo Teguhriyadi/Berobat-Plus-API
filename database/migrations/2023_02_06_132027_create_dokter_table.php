@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string("nomor_str", 50)->nullable();
             $table->tinyInteger("kelas")->nullable();
             $table->string("file_dokumen")->nullable();
-            $table->enum("is_online", [1, 0])->default(1);
             $table->timestamps();
         });
     }

@@ -86,6 +86,7 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::put("/update-picture", [PictureController::class, "update_picture"]);
 
         Route::get("/all_account", [AllAccountController::class, "index"]);
+        Route::get("/data_register", [AllAccountController::class, "data_register"]);
         Route::resource("/company", CompanyController::class);
 
         Route::get("/dokter/data", [DokterController::class, "data"]);
