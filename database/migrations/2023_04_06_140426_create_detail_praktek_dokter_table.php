@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("id_detail_praktek", 50)->primary();
             $table->tinyInteger("ahli_id");
             $table->string("id_rumah_sakit");
-            $table->double("biaya_praktek");
+            $table->double("biaya_praktek")->nullable();
             $table->timestamps();
         });
     }

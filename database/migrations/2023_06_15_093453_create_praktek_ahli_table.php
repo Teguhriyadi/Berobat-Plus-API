@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('praktek_ahli', function (Blueprint $table) {
             $table->string("id_praktek_ahli", 50)->primary();
             $table->string("ahli_id", 50);
-            $table->string("id_keahlian", 50);
-            $table->string("id_spesialis", 50);
+            $table->string("id_keahlian", 50)->nullable();
+            $table->string("id_spesialis", 50)->nullable();
             $table->string("id_rumah_sakit", 50);
             $table->timestamps();
         });
