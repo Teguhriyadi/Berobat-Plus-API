@@ -220,6 +220,7 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::get("/jadwal_antrian", [JadwalAntrianController::class, "data_antrian"]);
         Route::get("/jadwal_antrian/{id_jadwal_antrian}", [JadwalAntrianController::class, "detail"]);
         Route::put("/jadwal_antrian/{id_jadwal_antrian}", [JadwalAntrianController::class, "update"]);
+        Route::get("/transaksi_buat_janji", [RiwayatTransaksiBuatJanjiController::class, "transaksi_buat_janji"]);
     });
     
     Route::prefix("dokter")->group(function() {

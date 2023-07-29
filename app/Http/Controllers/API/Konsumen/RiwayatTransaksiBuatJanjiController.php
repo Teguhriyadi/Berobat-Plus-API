@@ -28,4 +28,13 @@ class RiwayatTransaksiBuatJanjiController extends Controller
             return new GetRiwayatTransaksiBuaJanjiResource($data);
         });
     }
+
+    public function transaksi_buat_janji()
+    {
+        return DB::transaction(function() {
+            $data = RiwayatTransaksi::where("ahli_id", Auth::user()->getDokter->user_id)->get();
+
+            return GetRiwayatTransaksiBuaJanjiResource::collection($data);
+        });
+    }
 }
