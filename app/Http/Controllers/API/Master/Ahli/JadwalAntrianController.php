@@ -17,10 +17,10 @@ class JadwalAntrianController extends Controller
     {
         return DB::transaction(function() {
 
-            $cek = JadwalAntrian::where("status", 1)->first();
+            $cek = JadwalAntrian::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->where("status", 1)->first();
 
             if (empty($cek)) {
-                return response()->json(["message" => "Tidak Ada Antrian"]);
+                return response()->json(["status" => false, "message" => "Tidak Ada Antrian", "data" => []]);
             } else {
                 $jadwal = JadwalAntrian::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->where("status", 1)->first();
     
@@ -118,6 +118,7 @@ class JadwalAntrianController extends Controller
                 "nama" => $jadwal_antrian->konsumen->getUsers->nama,
                 "nomor_hp" => $jadwal_antrian->konsumen->getUsers->nomor_hp,
                 "nomer_antrian" => $jadwal_antrian->nomer_antrian,
+                "ahli_id" => $jadwal_antrian->jadwal_praktek->detail_praktek->ahli_id,
                 "nama_ahli" => $jadwal_antrian->jadwal_praktek->detail_praktek->user->nama,
                 "nomor_hp_ahli" => $jadwal_antrian->jadwal_praktek->detail_praktek->user->nomor_hp,
                 "foto_ahli" => null,
