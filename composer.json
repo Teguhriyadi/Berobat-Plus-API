@@ -17,6 +17,7 @@
         "php-http/guzzle7-adapter": "^1.0",
         "predis/predis": "^2.2",
         "pusher/pusher-php-server": "^7.2",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "torann/geoip": "^3.0",
         "xendit/xendit-php": "^2.19"
     },

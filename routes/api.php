@@ -59,6 +59,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get("/send-message", [ChatingController::class, "handle"]);
 
+Route::get("/qr/{code}", [DashboardController::class, "qr"]);
 Route::post("/kirim-pesan", [ChatingController::class, "index"]);
 
 Route::post("invoice", [DashboardController::class, "invoice"]);

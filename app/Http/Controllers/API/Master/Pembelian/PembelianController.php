@@ -21,9 +21,9 @@ class PembelianController extends Controller
         return DB::transaction(function() {
 
             if (empty(Auth::user()->konsumen->id_konsumen)) {
-                return response()->json(["pesan" => "Data 2 Ditemukan", "data" => []]);
+                return response()->json(["pesan" => "Data Tidak Ditemukan", "data" => []]);
             } else {
-                $pembelian = Pembelian::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->get();
+                $pembelian = Pembelian::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->orderBy("created_at", "DESC")->get();
     
                 return GetPembelianResource::collection($pembelian);
             }
