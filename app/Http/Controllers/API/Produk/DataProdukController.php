@@ -13,10 +13,10 @@ use Illuminate\Support\Str;
 
 class DataProdukController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return DB::transaction(function () {
-            $produk = ProdukApotek::paginate(4);
+        return DB::transaction(function () use($request){
+            $produk = ProdukApotek::paginate($request->per_page);
 
             $data = [];
             foreach ($produk as $p) {
