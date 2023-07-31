@@ -35,7 +35,9 @@ class GetAntrianResource extends JsonResource
             ],
             "nomer_antrian" => $this->nomer_antrian,
             "status" => $this->status,
-            "tanggal_antrian" => Carbon::parse($this->tanggal)->translatedFormat('l, d F Y')
+            "tanggal_antrian" => Carbon::parse($this->tanggal)->translatedFormat('l, d F Y'),
+            "alasan" => $this->alasan,
+            "delete" => empty($this->deleted_at) ? false : true
         ];
     }
 }

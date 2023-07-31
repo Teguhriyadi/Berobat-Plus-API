@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('jadwal_praktek', function (Blueprint $table) {
             $table->string("id_jadwal_praktek", 50)->primary();
             $table->string("id_detail_praktek", 50);
-            $table->string("hari", 30);
-            $table->date("tanggal");
-            $table->time("mulai_jam");
-            $table->time("selesai_jam");
+            $table->string("hari", 30)->nullable();
+            $table->date("tanggal")->nullable();
+            $table->time("mulai_jam")->nullable();
+            $table->time("selesai_jam")->nullable();
         });
     }
 

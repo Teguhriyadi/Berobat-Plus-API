@@ -16,7 +16,7 @@ class GetRiwayatTransaksiBuaJanjiResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id_transaksi_bua_janji" => $this->id_transaksi_buat_janji,
+            "id_transaksi_buat_janji" => $this->id_transaksi_buat_janji,
             "konsumen" => [
                 "nama" => $this->nama,
                 "nomor_hp" => $this->nomor_hp

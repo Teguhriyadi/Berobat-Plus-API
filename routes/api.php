@@ -59,6 +59,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get("/send-message", [ChatingController::class, "handle"]);
 
+Route::get("/qr/{code}", [DashboardController::class, "qr"]);
 Route::post("/kirim-pesan", [ChatingController::class, "index"]);
 
 Route::post("invoice", [DashboardController::class, "invoice"]);
@@ -87,6 +88,9 @@ Route::middleware("auth:sanctum")->group(function () {
 
         Route::get("/all_account", [AllAccountController::class, "index"]);
         Route::get("/data_register", [AllAccountController::class, "data_register"]);
+        Route::get("/data_praktek_dokter", [AllAccountController::class, "data_praktek_dokter"]);
+        Route::put("/update_praktek_dokter/{id_praktek_ahli}/update", [AllAccountController::class, "update"]);
+
         Route::resource("/company", CompanyController::class);
 
         Route::get("/dokter/data", [DokterController::class, "data"]);
@@ -217,6 +221,7 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::get("/jadwal_antrian", [JadwalAntrianController::class, "data_antrian"]);
         Route::get("/jadwal_antrian/{id_jadwal_antrian}", [JadwalAntrianController::class, "detail"]);
         Route::put("/jadwal_antrian/{id_jadwal_antrian}", [JadwalAntrianController::class, "update"]);
+        Route::get("/transaksi_buat_janji", [RiwayatTransaksiBuatJanjiController::class, "transaksi_buat_janji"]);
     });
     
     Route::prefix("dokter")->group(function() {

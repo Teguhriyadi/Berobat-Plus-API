@@ -105,7 +105,7 @@ class LoginController extends Controller
                 BiayaPraktek::create([
                     "id_biaya_praktek" => "BIA-P-" . date("YmdHis"),
                     "ahli_id" => $user["id"],
-                    "biaya" => $request->biaya_praktek
+                    "biaya" => empty($request->biaya_praktek) ? 0 : $request->biaya_praktek
                 ]);
             } else if ($request->option == "perawat") {
                 Perawat::create([

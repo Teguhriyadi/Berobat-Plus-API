@@ -8,6 +8,7 @@ use App\Models\Akun\Konsumen;
 use App\Models\Akun\OwnerApotek;
 use App\Models\Akun\Perawat;
 use App\Models\Akun\RumahSakit;
+use App\Models\Master\Dokter\JadwalAntrian;
 use App\Models\TestingPayment;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -92,6 +93,15 @@ class DashboardController extends Controller
             ]);
 
             return response()->json(["pesan" => "Data Berhasil di Simpan"]);
+        });
+    }
+
+    public function qr($code)
+    {
+        return DB::transaction(function() use ($code) {
+            $jadwal = JadwalAntrian::where("id_jadwal_antrian", $code)->first();
+
+            return response()->json($jadwal);
         });
     }
 }

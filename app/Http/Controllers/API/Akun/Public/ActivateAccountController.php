@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API\Akun\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ahli\BiayaPraktek;
+use App\Models\Ahli\DetailPraktek;
+use App\Models\Ahli\PraktekAhli;
 use App\Models\Akun\Dokter;
 use App\Models\Akun\OwnerApotek;
 use App\Models\Akun\Perawat;
@@ -107,6 +109,19 @@ class ActivateAccountController extends Controller
                     ], $messages);
                     
                     if ($request["is_dokter_rs"] == "1") {
+
+                        DetailPraktek::create([
+                            "id_detail_praktek" => "JDWL-P-" . date("YmdHis"),
+                            "ahli_id" => $user["id"],
+                            "id_rumah_sakit" => $request["id_rumah_sakit"]
+                        ]);
+
+                        PraktekAhli::create([
+                            "id_praktek_ahli" => "PR-A-" . date("YmdHis"),
+                            "ahli_id" => $user["id"],
+                            "id_rumah_sakit" => $request["id_rumah_sakit"]
+                        ]);
+
                         User::where("id", $user["id"])->update([
                             "created_by" => Auth::user()->id,
                             "status" => "0"
