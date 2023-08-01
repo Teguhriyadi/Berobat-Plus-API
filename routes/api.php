@@ -39,7 +39,7 @@ use App\Http\Controllers\API\Produk\DataProdukController;
 use App\Http\Controllers\API\Produk\ProdukKategoriController;
 use App\Http\Controllers\API\Tes\CekResiController;
 use App\Http\Controllers\API\Tes\RajaOngkirController;
-use App\Http\Controllers\API\Transaksi\PlottingResetProdukController;
+use App\Http\Controllers\API\Transaksi\PlottingResepProdukController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\ChatingAppController;
 use App\Http\Controllers\ChatingController;
@@ -81,7 +81,7 @@ Route::prefix("akun")->group(function () {
 
 Route::middleware("auth:sanctum")->group(function () {
 
-    Route::get("/plotting", [PlottingResetProdukController::class, "index"]);
+    Route::get("/plotting", [PlottingResepProdukController::class, "index"]);
 
     require __DIR__ . '/xendit/bank/list_bank.php';
 

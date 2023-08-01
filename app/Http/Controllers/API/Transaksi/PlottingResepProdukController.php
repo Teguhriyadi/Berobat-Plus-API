@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class PlottingResetProdukController extends Controller
+class PlottingResepProdukController extends Controller
 {
     public function index()
     {
