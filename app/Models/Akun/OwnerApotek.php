@@ -23,4 +23,9 @@ class OwnerApotek extends Model
     {
         return $this->belongsTo("App\Models\User", "user_id", "id");
     }
+
+    public function produk()
+    {
+        return $this->belongsToMany("App\Models\Apotek\Produk\ProdukApotek", "produk_id", "id_produk")->withPivot("stok");
+    }
 }

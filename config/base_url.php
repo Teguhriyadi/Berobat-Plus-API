@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'url' => "http://10.0.140.207:5173/detail/"
+    'url' => "http://192.168.1.44:5173/detail/"
 ];

@@ -25,4 +25,9 @@ class ProfilApotek extends Model
     {
         return $this->belongsTo("App\Models\User", "id_user", "id");
     }
+
+    public function produk()
+    {
+        return $this->hasMany("App\Models\Apotek\Produk\ProdukApotek", "id_profil_apotek", "id_profil_apotek");
+    }
 }

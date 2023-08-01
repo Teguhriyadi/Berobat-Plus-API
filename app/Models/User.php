@@ -33,6 +33,11 @@ class User extends Authenticatable
         return $this->belongsTo("App\Models\Akun\OwnerApotek", "id", "user_id");
     }
 
+    public function getProfilApotek()
+    {
+        return $this->belongsTo("App\Models\Apotek\Pengaturan\ProfilApotek", "id", "id_user");
+    }
+
     public function getOwnerRs()
     {
         return $this->belongsTo("App\Models\Akun\OwnerRumahSakit", "id", "user_id");

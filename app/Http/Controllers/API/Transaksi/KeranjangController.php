@@ -49,7 +49,7 @@ class KeranjangController extends Controller
             }
 
             $pesanan_baru = Keranjang::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->first();
-
+    
             $cek_pesanan_detail = KeranjangDetail::where("produk_id", $request->produk_id)->where("keranjang_id", $pesanan_baru->id_keranjang)->first();
 
             if (empty($cek_pesanan_detail)) {

@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Models\Transaksi;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class ResepObat extends Model
+{
+    use HasFactory;
+
+    protected $table = "resep_obat";
+
+    protected $guarded = [''];
+
+    public $primaryKey = "id_resep_obat";
+
+    protected $keyType = "string";
+
+    public $incrementing = false;
+
+    public function users()
+    {
+        return $this->belongsTo("App\Models\User", "ahli_id", "id");
+    }
+}
