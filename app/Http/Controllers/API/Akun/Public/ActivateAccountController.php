@@ -81,10 +81,10 @@ class ActivateAccountController extends Controller
                     $this->validate($request, [
                         "nomor_strp" => "required"
                     ], $messages);
-
+                    
                     $perawat = Perawat::where("user_id", $user["id"])->first();
                     
-                    $cek_nomor_strp = $perawat->where("nomor_strp", $perawat->nomor_strp)->count();
+                    $cek_nomor_strp = $perawat->where("nomor_strp", $request->nomor_strp)->count();
 
                     if ($cek_nomor_strp > 0) {
                         return response()->json(["status" => false, "pesan" => "Nomor STRP Sudah Digunakan"]);

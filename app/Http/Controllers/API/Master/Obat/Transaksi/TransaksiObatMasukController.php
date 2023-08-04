@@ -14,7 +14,7 @@ class TransaksiObatMasukController extends Controller
     public function index()
     {
         return DB::transaction(function () {
-            $transaksi = TransaksiObat::orderBy("created_at", "DESC")->with("getObat:id_obat,nama_obat,harga")->paginate(10);
+            $transaksi = TransaksiObat::orderBy("created_at", "DESC")->paginate(10);
 
             return GetTransaksiMasukResource::collection($transaksi);
         });
@@ -26,11 +26,11 @@ class TransaksiObatMasukController extends Controller
             TransaksiObat::create([
                 "id_transaksi_obat" => "TRN-O-" . date("YmdHis"),
                 "kode_produk" => $request->kode_produk,
-                "tanggal" => $request->tanggal,
+                "tanggal" => date("Y-m-d"),
                 "qty" => $request->qty,
                 "apotek_id" => Auth::user()->getApotek->id_owner_apotek,
-                "nama_supplier" => $request->nama_supplier,
-                "asal_supplier" => $request->asal_supplier,
+                "nama_supplier" => empty($request->nama_supplier) ? null : $request->nama_supplier,
+                "asal_supplier" => empty($request->asal_supplier) ? null : $request->asal_supplier,
                 "status" => 1
             ]);
 
@@ -55,8 +55,8 @@ class TransaksiObatMasukController extends Controller
                 "obat_id" => $request->obat_id,
                 "tanggal" => $request->tanggal,
                 "qty" => $request->qty,
-                "nama_supplier" => $request->nama_supplier,
-                "asal_supplier" => $request->asal_supplier
+                "nama_supplier" => empty($request->nama_supplier) ? null : $request->nama_supplier,
+                "asal_supplier" => empty($request->asal_supplier) ? null : $request->asal_supplier
             ]);
 
             return response()->json(["pesan" => "Data Transaksi Obat Masuk Berhasil di Simpan"]);

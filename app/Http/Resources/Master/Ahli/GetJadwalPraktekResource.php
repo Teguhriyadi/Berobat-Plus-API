@@ -23,10 +23,10 @@ class GetJadwalPraktekResource extends JsonResource
                 "rumah_sakit" => $this->detail_praktek->rumah_sakit->nama_rs,
                 "biaya" => $this->detail_praktek->biaya_praktek
             ],
-            "hari" => $this->hari,
+            "hari" => Carbon::parse($this->hari)->isoFormat("dddd"),
             "tanggal" => Carbon::parse($this->tanggal)->isoFormat("dddd") . ", " . Carbon::createFromFormat('Y-m-d', $this->tanggal)->isoFormat('D MMMM Y'),
-            "mulai_jam" => $this->mulai_jam,
-            "selesai_jam" => $this->selesai_jam,
+            "mulai_jam" => Carbon::createFromFormat("H:i:s", $this->mulai_jam)->format("H:i"),
+            "selesai_jam" => Carbon::createFromFormat("H:i:s", $this->selesai_jam)->format("H:i")
         ];
     }
 }

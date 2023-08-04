@@ -26,6 +26,6 @@ class TransaksiObat extends Model
 
     public function getObat()
     {
-        return $this->belongsTo("App\Models\Master\Obat\DataObat", "obat_id", "id_obat");
+        return $this->belongsTo("App\Models\Apotek\Produk\ProdukApotek", "kode_produk", "kode_produk");
     }
 }

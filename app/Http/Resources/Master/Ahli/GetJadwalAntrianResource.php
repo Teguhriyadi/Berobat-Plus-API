@@ -30,7 +30,6 @@ class GetJadwalAntrianResource extends JsonResource
             ],
             "nomor_str" => $this->jadwal_praktek->detail_praktek->user->getDokter->nomor_str,
             "ahli" => $this->jadwal_praktek->detail_praktek->user->nama,
-            "nomer_antrian" => $this->nomer_antrian,
             "status" => $this->status,
             "tanggal" => Carbon::createFromFormat('Y-m-d', $this->tanggal)->isoFormat('DD MMMM YYYY'),
             "code" => $this->qr_code

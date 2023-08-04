@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -68,7 +69,7 @@ class LoginController extends Controller
         return DB::transaction(function() use($request) {
             
             if ($request->file("foto")) {
-                $data = $request->file("foto")->store("profil_ahli");
+                $data = $request->file("foto")->store("profil_user");
             }
 
             if ($request->file("file_dokumen")) {
@@ -87,6 +88,7 @@ class LoginController extends Controller
 
             $user = User::create([
                 "nama" => $request->nama,
+                "email" => empty($request->email) ? Str::slug($request->nama) . "@gmail.com" : $request->email,
                 "password" => bcrypt($request->password),
                 "nomor_hp" => $request->nomor_hp,
                 "id_role" =>  $role,

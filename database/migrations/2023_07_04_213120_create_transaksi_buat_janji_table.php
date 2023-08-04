@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string("konsumen_id", 50);
             $table->string("nama", 100);
             $table->string("nomor_hp", 30);
-            $table->integer("nomer_antrian");
             $table->integer("ahli_id");
             $table->string("nama_ahli", 100);
             $table->string("nomor_hp_ahli", 30);

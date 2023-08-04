@@ -22,6 +22,7 @@ class GetProdukResource extends JsonResource
             "slug_produk" => $this->slug_produk,
             "deskripsi_produk" => $this->deskripsi_produk,
             "harga_produk" => "Rp." . number_format($this->harga_produk),
+            "total_stok" => $this->qty
         ];
     }
 }

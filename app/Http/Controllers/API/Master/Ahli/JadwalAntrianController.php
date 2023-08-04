@@ -94,14 +94,13 @@ class JadwalAntrianController extends Controller
         public function update($id_jadwal_antrian)
         {
             return DB::transaction(function() use ($id_jadwal_antrian) {
-                $jadwal_antrian = JadwalAntrian::where("id_jadwal_antrian", $id_jadwal_antrian)->first();
+                $jadwal_antrian = JadwalAntrian::withTrashed()->where("id_jadwal_antrian", $id_jadwal_antrian)->first();
                 
                 RiwayatTransaksi::create([
                     "id_transaksi_buat_janji" => "TRN-BJ-" . date("YmdHis"),
                     "konsumen_id" => $jadwal_antrian->konsumen_id,
                     "nama" => $jadwal_antrian->konsumen->getUsers->nama,
                     "nomor_hp" => $jadwal_antrian->konsumen->getUsers->nomor_hp,
-                    "nomer_antrian" => $jadwal_antrian->nomer_antrian,
                     "ahli_id" => $jadwal_antrian->jadwal_praktek->detail_praktek->ahli_id,
                     "nama_ahli" => $jadwal_antrian->jadwal_praktek->detail_praktek->user->nama,
                     "nomor_hp_ahli" => $jadwal_antrian->jadwal_praktek->detail_praktek->user->nomor_hp,
@@ -119,46 +118,29 @@ class JadwalAntrianController extends Controller
                 return response()->json(["message" => "Data Berhasil di Simpan"]);
             });
         }
-
+        
         public function all()
         {
             return DB::transaction(function() {
                 $cek = JadwalAntrian::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->first();
-            
-            if (empty($cek)) {
-                return response()->json(["status" => false, "message" => "Tidak Ada Antrian", "data" => []]);
-            } else {
-                $jadwal = JadwalAntrian::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->where("status", 1)->get();
                 
-                return GetJadwalAntrianResource::collection($jadwal);
-            }
+                if (empty($cek)) {
+                    return response()->json(["status" => false, "message" => "Tidak Ada Antrian", "data" => []]);
+                } else {
+                    $jadwal = JadwalAntrian::where("konsumen_id", Auth::user()->konsumen->id_konsumen)->where("status", 1)->get();
+                    
+                    return GetJadwalAntrianResource::collection($jadwal);
+                }
             });
         }
-
-        public function destroy(Request $request, $id_jadwal_antrian)
+        
+        public function destroy($id_jadwal_antrian)
         {
-            try {
-                $messages = [
-                    "required" => "Kolom :attribute Harus Diisi"
-                ];
+            return DB::transaction(function() use ($id_jadwal_antrian) {
+                JadwalAntrian::where("id_jadwal_antrian", $id_jadwal_antrian)->delete();
                 
-                $this->validate($request, [
-                    "alasan" => "required"
-                ], $messages);
-
-                $jadwal = JadwalAntrian::where("id_jadwal_antrian", $id_jadwal_antrian)->first();
-
-                $jadwal->update([
-                    "alasan" => $request->alasan
-                ]);
-
-                $jadwal->delete();
-
                 return response()->json(["pesan" => "Data Berhasil di Hapus"]);
-
-            } catch (ValidationException $e) {
-                return response()->json(["errors" => $e->errors()], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
-            }
+            });
         }
     }
     

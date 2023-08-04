@@ -17,13 +17,13 @@ class DataProdukController extends Controller
     {
         return DB::transaction(function () use($request){
             $produk = ProdukApotek::paginate($request->per_page);
-
+            
             $data = [];
             foreach ($produk as $p) {
                 $transaksi_masuk = TransaksiObat::where("kode_produk", $p->kode_produk)->where("status", 1)->sum("qty");
-
+                
                 $transaksi_keluar = TransaksiObat::where("kode_produk", $p->kode_produk)->where("status", 0)->sum("qty");
-
+                
                 $total_stok = $transaksi_masuk - $transaksi_keluar;
                 $data[] = [
                     "id" => $p["id_produk"],
@@ -37,18 +37,18 @@ class DataProdukController extends Controller
                     "qty" => $total_stok
                 ];
             }
-
+            
             return response()->json([
                 "data" => $data
             ]);
         });
     }
-
+    
     public function store(Request $request)
     {
         $owner = Auth::user()->getApotek;
         return DB::transaction(function () use ($request, $owner) {
-
+            
             ProdukApotek::create([
                 "kode_produk" => "PRO-" . date("YmdHis"),
                 "id_owner_apotek" => $owner->id_owner_apotek,
@@ -58,24 +58,24 @@ class DataProdukController extends Controller
                 "deskripsi_produk" => $request->deskripsi_produk,
                 "harga_produk" => $request->harga_produk,
             ]);
-
+            
             return response()->json(["pesan" => "Data Produk Berhasil di Tambahkan"]);
         });
     }
-
+    
     public function edit($kode_produk)
     {
         return DB::transaction(function () use ($kode_produk) {
             $apotek = ProdukApotek::where("kode_produk", $kode_produk)->first();
-
+            
             return new GetProdukResource($apotek);
         });
     }
-
+    
     public function update(Request $request, $kode_produk)
     {
         return DB::transaction(function () use ($kode_produk, $request) {
-
+            
             ProdukApotek::where("kode_produk", $kode_produk)->update([
                 "id_profil_apotek" => $request->id_profil_apotek,
                 "nama_produk" => $request->nama_produk,
@@ -83,50 +83,62 @@ class DataProdukController extends Controller
                 "deskripsi_produk" => $request->deskripsi_produk,
                 "harga_produk" => $request->harga_produk,
             ]);
-
+            
             return response()->json(["pesan" => "Data Produk Berhasil di Simpan"]);
         });
     }
-
+    
     public function destroy($kode_produk)
     {
         return DB::transaction(function () use ($kode_produk) {
-
+            
             ProdukApotek::where("kode_produk", $kode_produk)->delete();
-
+            
             return response()->json(["pesan" => "Data Produk Berhasil di Hapus"]);
         });
     }
-
+    
     public function get_by_owner()
     {
         return DB::transaction(function() {
             $produk_by_owner = ProdukApotek::where("id_owner_apotek", Auth::user()->getApotek->id_owner_apotek)->get();
 
+            foreach ($produk_by_owner as $p) {
+                $transaksi_masuk = TransaksiObat::where("kode_produk", $p->kode_produk)->where("status", 1)->sum("qty");
+                
+                $transaksi_keluar = TransaksiObat::where("kode_produk", $p->kode_produk)->where("status", 0)->sum("qty");
+
+                $total_stok = $transaksi_masuk - $transaksi_keluar;
+                
+                $p->qty = $total_stok;
+            }
+            
             return GetProdukResource::collection($produk_by_owner);
         });
     }
-
+    
     public function get_produk_by_owner($id_profil_apotek)
     {
         return DB::transaction(function() use($id_profil_apotek) {
-            $produk = ProdukApotek::where("id_owner_apotek", Auth::user()->getApotek->id_owner_apotek)->where("id_profil_apotek", $id_profil_apotek)->get();
-
+            $produk = ProdukApotek::where("id_owner_apotek", Auth::user()->getApotek->id_owner_apotek)
+            ->where("id_profil_apotek", $id_profil_apotek)
+            ->get();
+            
             return GetProdukResource::collection($produk);
         });
     }
-
+    
     public function all()
     {
         return DB::transaction(function () {
             $produk = ProdukApotek::get();
-
+            
             $data = [];
             foreach ($produk as $p) {
                 $transaksi_masuk = TransaksiObat::where("kode_produk", $p->kode_produk)->where("status", 1)->sum("qty");
-
+                
                 $transaksi_keluar = TransaksiObat::where("kode_produk", $p->kode_produk)->where("status", 0)->sum("qty");
-
+                
                 $total_stok = $transaksi_masuk - $transaksi_keluar;
                 $data[] = [
                     "id" => $p["id_produk"],
@@ -140,7 +152,7 @@ class DataProdukController extends Controller
                     "qty" => $total_stok
                 ];
             }
-
+            
             return response()->json([
                 "data" => $data
             ]);

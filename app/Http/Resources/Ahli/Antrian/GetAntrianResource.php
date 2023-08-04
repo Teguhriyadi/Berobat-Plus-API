@@ -30,13 +30,12 @@ class GetAntrianResource extends JsonResource
                 "ahli" => [
                     "id_detail_praktek" => $this->jadwal_praktek->detail_praktek->id_detail_praktek,
                     "user" => $this->jadwal_praktek->detail_praktek->user->only("nama", "nomor_hp"),
-                    "biaya" => $this->jadwal_praktek->detail_praktek->biaya_praktek
+                    "biaya" => "Rp. " . number_format($this->jadwal_praktek->detail_praktek->biaya_praktek)
                 ]
             ],
-            "nomer_antrian" => $this->nomer_antrian,
+            "qr" => $this->qr_code,
             "status" => $this->status,
             "tanggal_antrian" => Carbon::parse($this->tanggal)->translatedFormat('l, d F Y'),
-            "alasan" => $this->alasan,
             "delete" => empty($this->deleted_at) ? false : true
         ];
     }

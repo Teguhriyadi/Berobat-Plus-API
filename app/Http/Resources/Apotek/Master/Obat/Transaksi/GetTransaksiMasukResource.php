@@ -16,7 +16,7 @@ class GetTransaksiMasukResource extends JsonResource
     {
         return [
             "id_transaksi_obat" => $this->id_transaksi_obat,
-            "get_obat" => $this->getObat,
+            "get_obat" => $this->getObat->only("id_produk","kode_produk","nama_produk","harga_produk"),
             "tanggal" => $this->tanggal,
             "qty" => $this->qty,
             "nama_supplier" => $this->nama_supplier,

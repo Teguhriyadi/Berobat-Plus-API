@@ -25,10 +25,10 @@ class AllAccountController extends Controller
         });
     }
 
-    public function data_register()
+    public function data_register(Request $request)
     {
-        return DB::transaction(function() {
-            $data = User::where("status", "0")->orderBy("created_at", "ASC")->get();
+        return DB::transaction(function() use ($request) {
+            $data = User::where("status", "0")->orderBy("created_at", "ASC")->paginate($request->per_page);
 
             return GetDataRegisterResource::collection($data);
         });
