@@ -40,7 +40,7 @@ class ProfilApotekController extends Controller
 
             $user = User::create([
                 "nama" => $request->nama,
-                "email" => empty($request->email) ? Str::slug($request->nama) : $request->email,
+                "email" => empty($request->email) ? Str::slug($request->nama) . "@gmail.com" : $request->email,
                 "password" => bcrypt($request->password),
                 "nomor_hp" => $request->nomor_hp,
                 "id_role" => "RO-2003067",

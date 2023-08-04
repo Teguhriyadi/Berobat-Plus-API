@@ -1,6 +1,5 @@
 <?php
 
-use App\Events\EveryoneChannel;
 use App\Http\Controllers\API\Akun\AllAccountController;
 use App\Http\Controllers\API\Akun\ChangePasswordController;
 use App\Http\Controllers\API\Akun\CompanyController;
@@ -41,9 +40,7 @@ use App\Http\Controllers\API\Tes\CekResiController;
 use App\Http\Controllers\API\Tes\RajaOngkirController;
 use App\Http\Controllers\API\Transaksi\PlottingResepProdukController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
-use App\Http\Controllers\ChatingAppController;
 use App\Http\Controllers\ChatingController;
-use App\Http\Controllers\DiagnosaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -247,5 +244,3 @@ Route::middleware("auth:sanctum")->group(function () {
 
     Route::get("/logout", [LoginController::class, "logout"]);
 });
-
-Route::post("/tes-diagnosa", [DiagnosaController::class, "diagnosa"]);
