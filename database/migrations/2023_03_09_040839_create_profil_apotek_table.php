@@ -19,10 +19,11 @@ return new class extends Migration
             $table->string("slug_apotek");
             $table->text("deskripsi_apotek");
             $table->text("alamat_apotek");
-            $table->string("nomor_hp", 30);
+            $table->string("nomor_hp_apotek", 30);
             $table->string("foto_apotek")->nullable();
             $table->tinyInteger("status");
-            $table->string("id_user");
+            $table->integer("id_user");
+            $table->integer("user_penanggung_jawab_id");
             $table->string("latitude", 100)->nullable();
             $table->string("longitude", 100)->nullable();
             $table->timestamps();

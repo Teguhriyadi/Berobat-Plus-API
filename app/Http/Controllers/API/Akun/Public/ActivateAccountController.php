@@ -110,6 +110,8 @@ class ActivateAccountController extends Controller
                     
                     if ($request["is_dokter_rs"] == "1") {
 
+                        BiayaPraktek::where("ahli_id", $user["id"])->delete();
+
                         DetailPraktek::create([
                             "id_detail_praktek" => "JDWL-P-" . date("YmdHis"),
                             "ahli_id" => $user["id"],

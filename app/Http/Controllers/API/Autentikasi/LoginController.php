@@ -84,6 +84,8 @@ class LoginController extends Controller
                 $role = "RO-2003066";
             } else if($request->option == "apotek") {
                 $role = "RO-2003065";
+            } else if ($request->option == "admin_apotek") {
+                $role = "RO-2003067";
             }
 
             $user = User::create([

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Apotek\Pengaturan;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Apotek\ProfilApotek\ValidatorProfilApotek;
 use App\Http\Resources\Apotek\Pengaturan\ProfilApotekResource;
 use App\Models\Apotek\Pengaturan\ProfilApotek;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,24 +17,48 @@ class ProfilApotekController extends Controller
     public function index()
     {
         return DB::transaction(function () {
-            $profil = ProfilApotek::orderBy("created_at", "DESC")->with("getUser:id,nama")->paginate(10);
+
+            if (Auth::user()->id_role == "RO-2003065") {
+                $profil = ProfilApotek::where("id_user", Auth::user()->id)
+                    ->orderBy("created_at", "DESC")
+                    ->with("getUser:id,nama")
+                    ->paginate(10);
+            } else if (Auth::user()->id_role == "RO-2003067") {
+                $profil = ProfilApotek::where("user_penanggung_jawab_id", Auth::user()->id)
+                    ->orderBy("created_at", "DESC")
+                    ->with("getUser:id,nama")
+                    ->paginate(10);
+            }
 
             return ProfilApotekResource::collection($profil);
         });
     }
 
-    public function store(Request $request)
+    public function store(ValidatorProfilApotek $request)
     {
         return DB::transaction(function () use ($request) {
+
+            $user = User::create([
+                "nama" => $request->nama,
+                "email" => empty($request->email) ? Str::slug($request->nama) : $request->email,
+                "password" => bcrypt($request->password),
+                "nomor_hp" => $request->nomor_hp,
+                "id_role" => "RO-2003067",
+                "created_by" => Auth::user()->id,
+                "jenis_kelamin" => $request->jenis_kelamin,
+                "status" => 1
+            ]);
+
             ProfilApotek::create([
                 "id_profil_apotek" => "PR-A-" . date("YmdHis"),
                 "nama_apotek" => $request->nama_apotek,
                 "slug_apotek" => Str::slug($request->nama_apotek),
                 "deskripsi_apotek" => $request->deskripsi_apotek,
                 "alamat_apotek" => $request->alamat_apotek,
-                "nomor_hp" => $request->nomor_hp,
+                "nomor_hp_apotek" => $request->nomor_hp_apotek,
                 "status" => 0,
                 "id_user" => Auth::user()->id,
+                "user_penanggung_jawab_id" => $user->id,
                 "latitude" => $request->latitude,
                 "longitude" => $request->longitude
             ]);
@@ -50,17 +76,29 @@ class ProfilApotekController extends Controller
         });
     }
 
-    public function update(Request $request, $id_profil_apotek)
+    public function update(ValidatorProfilApotek $request, $id_profil_apotek)
     {
         return DB::transaction(function () use ($request, $id_profil_apotek) {
-            ProfilApotek::where("id_profil_apotek", $id_profil_apotek)->update([
+
+            $profil_apotek = ProfilApotek::where("id_profil_apotek", $id_profil_apotek)->first();
+
+            $profil_apotek->where("id_profil_apotek", $id_profil_apotek)->update([
                 "nama_apotek" => $request->nama_apotek,
                 "slug_apotek" => Str::slug($request->nama_apotek),
                 "deskripsi_apotek" => $request->deskripsi_apotek,
                 "alamat_apotek" => $request->alamat_apotek,
-                "nomor_hp" => $request->nomor_hp,
+                "nomor_hp_apotek" => $request->nomor_hp_apotek,
                 "latitude" => $request->latitude,
                 "longitude" => $request->longitude
+            ]);
+
+            User::where("id", $profil_apotek->user_penanggung_jawab_id)->update([
+                "nama" => $request->nama,
+                "email" => empty($request->email) ? Str::slug($request->nama) : $request->email,
+                "password" => bcrypt($request->password),
+                "nomor_hp" => $request->nomor_hp,
+                "id_role" => "RO-2003067",
+                "jenis_kelamin" => $request->jenis_kelamin
             ]);
 
             return response()->json(["pesan" => "Data Berhasil di Simpan"]);
@@ -70,7 +108,12 @@ class ProfilApotekController extends Controller
     public function destroy($id_profil_apotek)
     {
         return DB::transaction(function () use ($id_profil_apotek) {
-            ProfilApotek::where("id_profil_apotek", $id_profil_apotek)->delete();
+
+            $profil_apotek = ProfilApotek::where("id_profil_apotek", $id_profil_apotek)->first();
+
+            User::where("id", $profil_apotek->user_penanggung_jawab_id)->delete();
+
+            $profil_apotek::where("id_profil_apotek", $id_profil_apotek)->delete();
 
             return response()->json(["pesan" => "Data Berhasil di Hapus"]);
         });
