@@ -41,6 +41,8 @@ use App\Http\Controllers\API\Tes\RajaOngkirController;
 use App\Http\Controllers\API\Transaksi\PlottingResepProdukController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\ChatingController;
+use App\Http\Controllers\Midtrans\NotificationController;
+use App\Http\Controllers\Midtrans\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -56,6 +58,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get("/send-message", [ChatingController::class, "handle"]);
+
+Route::post("/payment", [PaymentController::class, "payment"]);
+Route::post("/token/payment", [PaymentController::class, "getTokenCreditCard"]);
+Route::post("/credit_card/payment", [PaymentController::class, "creditCardCharge"]);
+Route::post("/buy_product", [PaymentController::class, "buy_product"]);
+Route::post("/notification", [NotificationController::class, "post"]);
 
 Route::get("/qr/{code}", [DashboardController::class, "qr"]);
 Route::post("/kirim-pesan", [ChatingController::class, "index"]);

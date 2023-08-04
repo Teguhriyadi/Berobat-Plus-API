@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('praktek_dokter', function (Blueprint $table) {
-            $table->string("id_praktek")->primary();
-            $table->string("id_dokter", 50);
-            $table->string("id_keahlian", 50);
-            $table->string("id_spesialis", 50);
-            $table->string("id_rumah_sakit", 50);
+        Schema::create('midtrans', function (Blueprint $table) {
+            $table->id();
+            $table->string("invoice", 30);
+            $table->bigInteger("product_reference");
+            $table->string("transaction_id");
+            $table->enum("status", ["WAITING", "PENDING", "CANCEL", "SUCCESS"]);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('praktek_dokter');
+        Schema::dropIfExists('midtrans');
     }
 };
