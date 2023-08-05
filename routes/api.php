@@ -64,6 +64,7 @@ Route::post("/token/payment", [PaymentController::class, "getTokenCreditCard"]);
 Route::post("/credit_card/payment", [PaymentController::class, "creditCardCharge"]);
 Route::post("/buy_product", [PaymentController::class, "buy_product"]);
 Route::post("/notification", [NotificationController::class, "post"]);
+Route::get("/banks", [PaymentController::class, "bank"]);
 
 Route::get("/qr/{code}", [DashboardController::class, "qr"]);
 Route::post("/kirim-pesan", [ChatingController::class, "index"]);
@@ -88,7 +89,7 @@ Route::middleware("auth:sanctum")->group(function () {
 
     Route::get("/plotting", [PlottingResepProdukController::class, "index"]);
 
-    require __DIR__ . '/xendit/bank/list_bank.php';
+    require __DIR__ . '/midtrans/bank/list_bank.php';
 
     require __DIR__ . '/ahli/resep/resep_obat.php';
 

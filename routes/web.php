@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\API\DashboardController;
-use App\Http\Controllers\TesXenditController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/pembayaran", [DashboardController::class, "pembayaran"]);
-Route::post("/pembayaran", [DashboardController::class, "invoice"]);
-
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::resource("/tes-xendit", TesXenditController::class);

@@ -5,9 +5,25 @@ namespace App\Http\Controllers\Midtrans;
 use App\Http\Controllers\Controller;
 use App\Models\Midtrans;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class PaymentController extends Controller
 {
+    protected $serverKey = "SB-Mid-server-e2RCiK9QhAuL1L5MVMW3C40H";
+
+    public function bank()
+    {
+        $url = "https://api.sandbox.midtrans.com/api/v2/beneficiary_banks";
+
+        $headers = [
+            "Authorization" => "Basic " . base64_encode($this->serverKey . ":")
+        ];
+
+        $response = Http::withHeaders($headers)->get($url);
+
+        return response()->json($response);
+    }
+
     public function buy_product(Request $request)
     {
         try {

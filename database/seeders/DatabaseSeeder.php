@@ -28,8 +28,8 @@ use Database\Seeders\Master\Produk\TransaksiObatSeeder;
 use Database\Seeders\Master\RoleSeeder;
 use Database\Seeders\Master\RumahSakit\DetailPraktekDokterSeeder;
 use Database\Seeders\Master\RumahSakit\FasilitasRumahSakitSeeder;
-use Database\Seeders\Master\RumahSakit\PraktekDokterSeeder;
 use Database\Seeders\Master\RumahSakit\SpesialisRumahSakitSeeder;
+use Database\Seeders\Midtrans\BankSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -54,7 +54,6 @@ class DatabaseSeeder extends Seeder
         $this->call(KeahlianSeeder::class);
         $this->call(DetailPraktekDokterSeeder::class);
         $this->call(SpesialisRumahSakitSeeder::class);
-        $this->call(PraktekDokterSeeder::class);
         $this->call(SpesialisPenyakitSeeder::class);
         $this->call(BiayaDokterSeeder::class);
         $this->call(KategoriProdukSeeder::class);
@@ -67,5 +66,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TransaksiObatSeeder::class);
         $this->call(CekResiSeeder::class);
         $this->call(MasterJoinKeahlianSeeder::class);
+        $this->call(BankSeeder::class);
     }
 }
