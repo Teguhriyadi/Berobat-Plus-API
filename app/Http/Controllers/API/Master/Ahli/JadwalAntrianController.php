@@ -41,7 +41,7 @@ class JadwalAntrianController extends Controller
             $ada = JadwalAntrian::where("status", 1)->where("konsumen_id", Auth::user()->konsumen->id_konsumen)->where("id_jadwal_praktek", $request->id_jadwal_praktek)->count();
             
             if ($ada > 0) {
-                return response()->json(["pesan" => "Maaf, Anda Sudah Membuat Antrian Pada Jadwal Praktek Ini"]);
+                return response()->json(["status" => false, "pesan" => "Maaf, Anda Sudah Membuat Antrian Pada Jadwal Praktek Ini"]);
             } else {
                 
                 $jadwal = JadwalAntrian::create([
@@ -57,9 +57,9 @@ class JadwalAntrianController extends Controller
                 ]);
                 
                 return response()->json([
+                    "status" => true,
                     "pesan" => "Data Berhasil di Tambahkan", 
                     "data" => [
-                        "antrian" => $jadwal["nomer_antrian"],
                         "tanggal" => $jadwal["tanggal"]
                         ]
                     ]);
@@ -76,7 +76,7 @@ class JadwalAntrianController extends Controller
                     $query->whereHas('detail_praktek', function($subquery) use ($logged_in) {
                         $subquery->where('ahli_id', $logged_in);
                     });
-                })->where("status", 1)->orderBy("id_jadwal_antrian", "ASC")->withTrashed()->get();
+                })->where("status", 1)->orderBy("id_jadwal_antrian", "ASC")->get();
                 
                 return GetAntrianResource::collection($jadwal);
             });
@@ -137,7 +137,13 @@ class JadwalAntrianController extends Controller
         public function destroy($id_jadwal_antrian)
         {
             return DB::transaction(function() use ($id_jadwal_antrian) {
-                JadwalAntrian::where("id_jadwal_antrian", $id_jadwal_antrian)->delete();
+                $jadwal = JadwalAntrian::where("id_jadwal_antrian", $id_jadwal_antrian)->first();
+
+                $jadwal->update([
+                    "status" => "0"
+                ]);
+
+                $jadwal->delete();
                 
                 return response()->json(["pesan" => "Data Berhasil di Hapus"]);
             });

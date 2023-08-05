@@ -67,12 +67,6 @@ Route::post("/notification", [NotificationController::class, "post"]);
 Route::get("/banks", [PaymentController::class, "bank"]);
 
 Route::get("/qr/{code}", [DashboardController::class, "qr"]);
-Route::post("/kirim-pesan", [ChatingController::class, "index"]);
-
-Route::post("invoice", [DashboardController::class, "invoice"]);
-
-Route::post("callback", [DashboardController::class, "callback"]);
-
 Route::post("/tes_ongkir", [RajaOngkirController::class, "index"]);
 
 Route::get("/create-api", [DashboardController::class, "create_api"]);

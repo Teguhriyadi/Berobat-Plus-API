@@ -9,6 +9,7 @@ use App\Models\Master\Obat\TransaksiObat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class DataProdukController extends Controller
@@ -49,6 +50,10 @@ class DataProdukController extends Controller
         $owner = Auth::user()->getApotek;
         return DB::transaction(function () use ($request, $owner) {
             
+            if ($request->file("foto_produk")) {
+                $data = $request->file("foto_produk")->store("produk");
+            }
+
             ProdukApotek::create([
                 "kode_produk" => "PRO-" . date("YmdHis"),
                 "id_owner_apotek" => $owner->id_owner_apotek,
@@ -57,6 +62,7 @@ class DataProdukController extends Controller
                 "slug_produk" => Str::slug($request->nama_produk),
                 "deskripsi_produk" => $request->deskripsi_produk,
                 "harga_produk" => $request->harga_produk,
+                "foto_produk" => url("storage/" . $data)
             ]);
             
             return response()->json(["pesan" => "Data Produk Berhasil di Tambahkan"]);
@@ -76,12 +82,25 @@ class DataProdukController extends Controller
     {
         return DB::transaction(function () use ($kode_produk, $request) {
             
+            if ($request->file("foto_produk")) {
+                if ($request->gambarLama) {
+                    Storage::delete($request->gambarLama);
+                }
+
+                $nama_gambar = $request->file("foto_produk")->store("produk");
+
+                $data = url("/storage/" . $nama_gambar);
+            } else {
+                $data = url('') . '/storage/' . $request->gambarLama;
+            }
+
             ProdukApotek::where("kode_produk", $kode_produk)->update([
                 "id_profil_apotek" => $request->id_profil_apotek,
                 "nama_produk" => $request->nama_produk,
                 "slug_produk" => Str::slug($request->nama_produk),
                 "deskripsi_produk" => $request->deskripsi_produk,
                 "harga_produk" => $request->harga_produk,
+                "foto_produk" => $data
             ]);
             
             return response()->json(["pesan" => "Data Produk Berhasil di Simpan"]);

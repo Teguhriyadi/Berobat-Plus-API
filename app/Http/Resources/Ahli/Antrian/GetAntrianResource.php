@@ -36,7 +36,7 @@ class GetAntrianResource extends JsonResource
             "qr" => $this->qr_code,
             "status" => $this->status,
             "tanggal_antrian" => Carbon::parse($this->tanggal)->translatedFormat('l, d F Y'),
-            "delete" => empty($this->deleted_at) ? false : true
+            "delete" => empty($this->deleted_at) ? "false" : "true"
         ];
     }
 }
