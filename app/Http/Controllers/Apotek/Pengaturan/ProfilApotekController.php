@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Apotek\ProfilApotek\ValidatorProfilApotek;
 use App\Http\Resources\Apotek\Pengaturan\ProfilApotekResource;
 use App\Models\Apotek\Pengaturan\ProfilApotek;
+use App\Models\Master\Pengaturan\Profil;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,20 +15,22 @@ use Illuminate\Support\Str;
 
 class ProfilApotekController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return DB::transaction(function () {
+        return DB::transaction(function () use($request) {
+
+            $profil = ProfilApotek::get();
 
             if (Auth::user()->id_role == "RO-2003065") {
                 $profil = ProfilApotek::where("id_user", Auth::user()->id)
                     ->orderBy("created_at", "DESC")
                     ->with("getUser:id,nama")
-                    ->paginate(10);
+                    ->paginate($request->per_page);
             } else if (Auth::user()->id_role == "RO-2003067") {
                 $profil = ProfilApotek::where("user_penanggung_jawab_id", Auth::user()->id)
                     ->orderBy("created_at", "DESC")
                     ->with("getUser:id,nama")
-                    ->paginate(10);
+                    ->paginate($request->per_page);
             }
 
             return ProfilApotekResource::collection($profil);

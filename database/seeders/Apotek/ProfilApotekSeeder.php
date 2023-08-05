@@ -24,7 +24,7 @@ class ProfilApotekSeeder extends Seeder
             "nomor_hp_apotek" => "2389283923",
             "status" => 1,
             "id_user" => 8,
-            "user_penanggung_jawab_id" => 20,
+            "user_penanggung_jawab_id" => 8,
             "latitude" => "-6.6539487",
             "longitude" => "108.4072596"
         ]);
@@ -38,7 +38,7 @@ class ProfilApotekSeeder extends Seeder
             "nomor_hp_apotek" => "2389283924",
             "status" => 0,
             "id_user" => 8,
-            "user_penanggung_jawab_id" => 21,
+            "user_penanggung_jawab_id" => 8,
             "latitude" => "-6.6868722",
             "longitude" => "108.5462849"
         ]);
