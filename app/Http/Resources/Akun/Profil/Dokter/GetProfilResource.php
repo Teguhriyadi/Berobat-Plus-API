@@ -18,7 +18,7 @@ class GetProfilResource extends JsonResource
             "nomor_str" => $this->nomor_str,
             "kelas" => $this->kelas,
             "user" => $this->getUser,
-            "biaya" => $this->getBiaya->biaya,
+            "biaya" => empty($this->getBiaya->biaya) ? 0 : $this->getBiaya->biaya,
             "is_online" => $this->is_online
         ];
     }
