@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API\Master\Pembelian;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Midtrans\CoreApi;
 use App\Http\Resources\Transaksi\GetPembelianBarangResource;
 use App\Http\Resources\Transaksi\GetPembelianResource;
 use App\Models\Apotek\Produk\ProdukApotek;
+use App\Models\Midtrans\Invoice;
 use App\Models\Transaksi\Keranjang;
 use App\Models\Transaksi\KeranjangDetail;
 use App\Models\Transaksi\Pembelian;
@@ -33,21 +35,43 @@ class PembelianController extends Controller
 
     public function store(Request $request)
     {
-        return DB::transaction(function() use ($request) {
+        try {
+            $result = null;
+            $payment_method = $request->payment_method;
+            $invoice = "INV-" . date("YmdHis");
             $keranjang = Keranjang::where("id_keranjang", $request->id_keranjang)->first();
+            $total_amount = $keranjang["jumlah_harga"];
 
-            $pembelian = Pembelian::create([
-                "id_pembelian" => "PMBL-" . date("YmdHis"),
-                "konsumen_id" => Auth::user()->konsumen->id_konsumen,
-                "tanggal_pembelian" => date("Y-m-d"),
-                "total_pembelian" => $keranjang->jumlah_harga,
-                "nama_kota" => "Bandung",
-                "tarif" => 5000,
-                "alamat_pengiriman" => "Bandung",
-                "status_pembelian" => "PENDING",
+            $transaction = array
+            (
+                "transaction_details" => [
+                    "gross_amount" => $total_amount,
+                    "order_id" => $invoice
+                ],
+                "customer_details" => [
+                    "email" => Auth::user()->email,
+                    "first_name" => Auth::user()->nama,
+                    "last_name" => "member",
+                    "phone" => Auth::user()->nomor_hp
+                ]
+            );
+
+            switch ($payment_method) {
+                case "bank_transfer" :
+                    $result = self::bankTransfer($request, $total_amount, $transaction);
+                    break;
+
+                // case "credit_card" :
+                //     $result = self::creditCardCharge($order_id, $total_amount, $request->token_id, $transaction);
+                //     break;
+            }
+
+            Invoice::create([
+                "invoice" => $invoice,
+                "id_jenis_transaksi" => $result["id_pembelian"],
+                "transaction_id" => $result["transaksi_id"],
+                "status" => "PENDING"
             ]);
-            
-            $keranjang->delete();
 
             foreach ($request->id_keranjang_detail as $id_keranjang_detail) {
                 $detail = KeranjangDetail::where("id_keranjang_detail", $id_keranjang_detail)->first();
@@ -55,18 +79,21 @@ class PembelianController extends Controller
 
                 PembelianBarang::create([
                     "id_pembelian_barang" => "PMBL-B-".date("YmdHis") . $id_keranjang_detail,
-                    "id_pembelian" => $pembelian->id_pembelian,
+                    "id_pembelian" => $result["id_pembelian"],
                     "kode_produk" => $produk["kode_produk"],
                     "jumlah" => $detail["jumlah"],
                     "nama_barang" => $produk["nama_produk"],
                     "harga" => $produk["harga_produk"]
                 ]);
 
-                $detail->delete();
+                // $detail->delete();
             }
 
-            return response()->json(["pesan" => "Data Berhasil di Tambahkan", "pembelian" => $pembelian->id_pembelian]);
-        });
+            return response()->json(["pesan" => "Data Berhasil di Tambahkan", "pembelian" => $result["id_pembelian"]]);
+
+        } catch (\Exception $e) {
+            dd($e);
+        }
     }
 
     public function show($id_pembelian)
@@ -84,5 +111,47 @@ class PembelianController extends Controller
 
             return new GetPembelianResource($detail_keranjang);
         });
+    }
+
+    static function bankTransfer(Request $request, $total_amount, $transaction_object)
+    {
+        try {
+            $transaction = $transaction_object;
+            $transaction["payment_type"] = "bank_transfer";
+            $transaction["bank_transfer"] = [
+                "bank" => $request->bank,
+                "va_number" => "11111"
+            ];
+
+            $charge = CoreApi::charge($transaction);
+
+            if (!$charge) {
+                return ["code" => 0, "message" => "Terjadi Kesalahan"];
+            }
+
+            $keranjang = Keranjang::where("id_keranjang", $request->id_keranjang)->first();
+
+            $pembelian = new Pembelian();
+            $pembelian->id_pembelian = "PMBL-" . date("YmdHis");
+            $pembelian->konsumen_id = Auth::user()->konsumen->id_konsumen;
+            $pembelian->tanggal_pembelian = date("Y-m-d");
+            $pembelian->total_pembelian = $keranjang->jumlah_harga;
+            $pembelian->nama_kota = "Bandung";
+            $pembelian->tarif = 5000;
+            $pembelian->alamat_pengiriman = "Bandung";
+            $pembelian->status_pembelian = "PENDING";
+            
+            if (!$pembelian->save()) {
+                return false;
+            }
+
+            // $keranjang->delete();
+            
+            return ["code" => 1, "message" => "Success", "result" => $charge, "id_pembelian" => $pembelian->id_pembelian, "transaksi_id" => $charge->transaction_id];
+
+        } catch (\Exception $e) {
+            dd($e);
+            return ["code" => 0, "message" => "Terjadi Kesalahan"];
+        }
     }
 }
