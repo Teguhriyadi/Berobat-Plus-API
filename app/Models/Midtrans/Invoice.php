@@ -12,4 +12,9 @@ class Invoice extends Model
     protected $table = "invoice_message";
 
     protected $guarded = [''];
+
+    public function pembelian()
+    {
+        return $this->hasOne("App\Models\Transaksi\Pembelian", "id_jenis_transaksi", "id_pembelian");
+    }
 }

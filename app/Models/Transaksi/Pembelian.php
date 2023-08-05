@@ -23,4 +23,9 @@ class Pembelian extends Model
     {
         return $this->belongsTo("App\Models\Akun\Konsumen", "konsumen_id", "id_konsumen");
     }
+
+    public function invoice()
+    {
+        return $this->hasOne("App\Models\Midtrans\Invoice", "id_jenis_transaksi", "id_pembelian");
+    }
 }

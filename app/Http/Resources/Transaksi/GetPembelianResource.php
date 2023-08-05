@@ -29,7 +29,8 @@ class GetPembelianResource extends JsonResource
             ],
             "tarif" => "Rp. " . number_format($this->tarif),
             "status" => $this->status_pembelian,
-            "resi_pengiriman" => $this->resi_pengiriman
+            "resi_pengiriman" => $this->resi_pengiriman,
+            "notification" => $this->invoice->only("invoice", "transaction_id", "status")
         ];
     }
 }
