@@ -251,5 +251,25 @@ class UsersSeeder extends Seeder
             "id_role" => "RO-2003063",
             "status" => 1
         ]);
+
+        User::create([
+            "nama" => "Penanggung Jawab 1",
+            "email" => "pj_1@gmail.com",
+            "password" => bcrypt("penanggung_jawab"),
+            "nomor_hp" => "2839238292998",
+            "alamat" => "Banyuwangi",
+            "id_role" => "RO-2003067",
+            "status" => 1
+        ]);
+
+        User::create([
+            "nama" => "Penanggung Jawab 2",
+            "email" => "pj_2@gmail.com",
+            "password" => bcrypt("penanggung_jawab"),
+            "nomor_hp" => "2839238292999",
+            "alamat" => "Padang",
+            "id_role" => "RO-2003067",
+            "status" => 1
+        ]);
     }
 }
