@@ -86,7 +86,7 @@ class PembelianController extends Controller
                     "harga" => $produk["harga_produk"]
                 ]);
 
-                // $detail->delete();
+                $detail->delete();
             }
 
             return response()->json(["pesan" => "Data Berhasil di Tambahkan", "pembelian" => $result["id_pembelian"]]);
@@ -145,7 +145,7 @@ class PembelianController extends Controller
                 return false;
             }
 
-            // $keranjang->delete();
+            $keranjang->delete();
             
             return ["code" => 1, "message" => "Success", "result" => $charge, "id_pembelian" => $pembelian->id_pembelian, "transaksi_id" => $charge->transaction_id];
 
