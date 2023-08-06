@@ -147,7 +147,8 @@ class DokterController extends Controller
                             "ahli_id" => $item["getBiaya"]["ahli_id"],
                             "biaya" => $item["getBiaya"]["biaya"],
                         ],
-                        "file_dokumen" => $item["file_dokumen"]
+                        "file_dokumen" => $item["file_dokumen"],
+                        "foto" => $item["foto"]
                     ];
                 }
             }
