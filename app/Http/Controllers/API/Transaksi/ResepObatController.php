@@ -16,7 +16,6 @@ class ResepObatController extends Controller
     {
         return DB::transaction(function() {
             $resep_obat = ResepObat::where("ahli_id", Auth::user()->id)->first();
-
         });
     }
 
