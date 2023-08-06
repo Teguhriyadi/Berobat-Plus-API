@@ -21,6 +21,7 @@ class ProfilApotekResource extends JsonResource
             "deskripsi_apotek" => $this->deskripsi_apotek,
             "alamat_apotek" => $this->alamat_apotek,
             "nomor_hp" => $this->nomor_hp,
+            "foto_apotek" => $this->foto_apotek,
             "status" => $this->status,
             "user" => $this->getUser,
             "latitude" => $this->latitude,

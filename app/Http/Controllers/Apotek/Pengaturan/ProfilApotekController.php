@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProfilApotekController extends Controller
@@ -41,6 +42,10 @@ class ProfilApotekController extends Controller
     {
         return DB::transaction(function () use ($request) {
 
+            if ($request->file("foto_apotek")) {
+                $data = $request->file("foto_apotek")->store("profil_apotek");
+            }
+
             $user = User::create([
                 "nama" => $request->nama,
                 "email" => empty($request->email) ? Str::slug($request->nama) . "@gmail.com" : $request->email,
@@ -59,6 +64,7 @@ class ProfilApotekController extends Controller
                 "deskripsi_apotek" => $request->deskripsi_apotek,
                 "alamat_apotek" => $request->alamat_apotek,
                 "nomor_hp_apotek" => $request->nomor_hp_apotek,
+                "foto_apotek" => url("storage/".$data),
                 "status" => 0,
                 "id_user" => Auth::user()->id,
                 "user_penanggung_jawab_id" => $user->id,
@@ -83,6 +89,18 @@ class ProfilApotekController extends Controller
     {
         return DB::transaction(function () use ($request, $id_profil_apotek) {
 
+            if ($request->file("foto_apotek")) {
+                if ($request->gambarLama) {
+                    Storage::delete($request->gambarLama);
+                }
+
+                $nama_gambar = $request->file("foto_apotek")->store("apotek");
+
+                $data = url("/storage/" . $nama_gambar);
+            } else {
+                $data = url('') . '/storage/' . $request->gambarLama;
+            }
+
             $profil_apotek = ProfilApotek::where("id_profil_apotek", $id_profil_apotek)->first();
 
             $profil_apotek->where("id_profil_apotek", $id_profil_apotek)->update([
@@ -91,6 +109,7 @@ class ProfilApotekController extends Controller
                 "deskripsi_apotek" => $request->deskripsi_apotek,
                 "alamat_apotek" => $request->alamat_apotek,
                 "nomor_hp_apotek" => $request->nomor_hp_apotek,
+                "foto_apotek" => $data,
                 "latitude" => $request->latitude,
                 "longitude" => $request->longitude
             ]);

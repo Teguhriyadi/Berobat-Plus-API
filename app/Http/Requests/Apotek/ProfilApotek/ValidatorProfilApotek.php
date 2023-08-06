@@ -21,7 +21,7 @@ class ValidatorProfilApotek extends FormRequest
             "deskripsi_apotek" => "required",
             "alamat_apotek" => "required",
             "nomor_hp_apotek" => "required",
-            // "foto_apotek" => "required",
+            "foto_apotek" => "required",
             "latitude" => "required",
             "longitude" => "required",
         ];

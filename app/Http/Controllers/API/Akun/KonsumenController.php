@@ -35,13 +35,17 @@ class KonsumenController extends Controller
                 "status" => 1
             ]);
 
-            Konsumen::create([
+            $konsumen = Konsumen::create([
                 "id_konsumen" => "KSN-" . date("YmdHis"),
                 "user_id" => $user->id,
                 "nik" => $request->nik
             ]);
 
-            return response()->json(["pesan" => "Data Konsumen Berhasil di Tambahkan", "user" => $user["id"]]);
+            return response()->json([
+                "pesan" => "Data Konsumen Berhasil di Tambahkan", 
+                "user" => $user["id"],
+                "konsumen_id" => $konsumen["id_konsumen"]
+            ]);
         });
     }
 
