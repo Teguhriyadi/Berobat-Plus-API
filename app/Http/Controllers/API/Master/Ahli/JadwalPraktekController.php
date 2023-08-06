@@ -48,6 +48,7 @@ class JadwalPraktekController extends Controller
                 $currentDate = $startDate->copy();
                 
                 if (JadwalPraktek::where('hari', $hari)
+                ->where("id_detail_praktek", $id_detail_praktek)
                 ->whereBetween('tanggal', [$startDate->format('Y-m-d'), $endDate->format('Y-m-d')])
                 ->exists()
                 ) {
