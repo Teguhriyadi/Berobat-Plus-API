@@ -241,8 +241,6 @@ Route::middleware("auth:sanctum")->group(function () {
 
     require __DIR__ . '/master/transaksi/detail_keranjang/detail.php';
 
-    require __DIR__ . '/xendit/pembayaran.php';
-
     Route::get("/count_data", [DashboardController::class, "dashboard"]);
 
     Route::get("/logout", [LoginController::class, "logout"]);
