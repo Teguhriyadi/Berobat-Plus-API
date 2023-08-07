@@ -19,6 +19,7 @@ class PlottingResepProdukController extends Controller
         return DB::transaction(function() {
             $data = ResepObatDetail::join("resep_obat", "resep_obat.id_resep_obat", "=", "resep_obat_detail.id_resep_obat")
                 ->join("produk", "produk.id_produk", "=", "resep_obat_detail.produk_id")
+                ->where("resep_obat.status", "1")
                 ->get();
             
             $convert = [];

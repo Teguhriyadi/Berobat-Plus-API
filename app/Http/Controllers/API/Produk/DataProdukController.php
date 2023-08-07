@@ -47,8 +47,8 @@ class DataProdukController extends Controller
     
     public function store(Request $request)
     {
-        $owner = Auth::user()->getApotek;
-        return DB::transaction(function () use ($request, $owner) {
+
+        return DB::transaction(function () use ($request) {
             
             if ($request->file("foto_produk")) {
                 $data = $request->file("foto_produk")->store("produk");
@@ -56,8 +56,8 @@ class DataProdukController extends Controller
 
             ProdukApotek::create([
                 "kode_produk" => "PRO-" . date("YmdHis"),
-                "id_owner_apotek" => $owner->id_owner_apotek,
-                "id_profil_apotek" => $request->id_profil_apotek,
+                "id_owner_apotek" => Auth::user()->getAdminApotek->getUser->getApotek->id_owner_apotek,
+                "id_profil_apotek" => Auth::user()->getAdminApotek->id_profil_apotek,
                 "nama_produk" => $request->nama_produk,
                 "slug_produk" => Str::slug($request->nama_produk),
                 "deskripsi_produk" => $request->deskripsi_produk,
@@ -95,7 +95,7 @@ class DataProdukController extends Controller
             }
 
             ProdukApotek::where("kode_produk", $kode_produk)->update([
-                "id_profil_apotek" => $request->id_profil_apotek,
+                "id_profil_apotek" => Auth::user()->getAdminApotek->id_profil_apotek,
                 "nama_produk" => $request->nama_produk,
                 "slug_produk" => Str::slug($request->nama_produk),
                 "deskripsi_produk" => $request->deskripsi_produk,

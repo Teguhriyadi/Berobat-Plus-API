@@ -63,6 +63,11 @@ class User extends Authenticatable
         return $this->hasOne(Perawat::class, 'user_id');
     }
 
+    public function getAdminApotek()
+    {
+        return $this->belongsTo("App\Models\Apotek\Pengaturan\ProfilApotek", "id", "user_penanggung_jawab_id");
+    }
+
     public function rating()
     {
         return $this->hasOne(Rating::class, 'user_id');

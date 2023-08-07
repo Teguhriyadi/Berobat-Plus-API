@@ -28,7 +28,7 @@ class TransaksiObatKeluarController extends Controller
                 "obat_id" => $request->obat_id,
                 "tanggal" => $request->tanggal,
                 "qty" => $request->qty,
-                "apotek_id" => Auth::user()->getApotek->id_owner_apotek,
+                "apotek_id" => Auth::user()->getAdminApotek->id_profil_apotek,
                 "status" => 0
             ]);
 

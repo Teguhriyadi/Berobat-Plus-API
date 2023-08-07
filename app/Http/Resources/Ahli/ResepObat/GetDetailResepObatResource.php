@@ -17,7 +17,12 @@ class GetDetailResepObatResource extends JsonResource
         return [
             "id_resep_obat_detail" => $this->id_resep_obat_detail,
             "resep_obat" => $this->resep_obat->only("id_resep_obat"),
-            "produk" => $this->produk->only("id_produk", "kode_produk", "nama_produk", "harga_produk"),
+            "produk" => [
+                "id_produk" => $this->produk->id_produk,
+                "kode_produk" => $this->produk->kode_produk,
+                "nama_produk" => $this->produk->nama_produk,
+                "harga_produk" => "Rp. " . number_format($this->produk->harga_produk)
+            ],
             "qty" => $this->jumlah,
             "total" => $this->jumlah_harga,
             "convert" => "Rp. " . number_format($this->jumlah_harga)

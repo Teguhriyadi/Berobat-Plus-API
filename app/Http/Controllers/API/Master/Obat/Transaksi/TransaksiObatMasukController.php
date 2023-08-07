@@ -28,7 +28,7 @@ class TransaksiObatMasukController extends Controller
                 "kode_produk" => $request->kode_produk,
                 "tanggal" => date("Y-m-d"),
                 "qty" => $request->qty,
-                "apotek_id" => Auth::user()->getApotek->id_owner_apotek,
+                "apotek_id" => Auth::user()->getAdminApotek->id_profil_apotek,
                 "nama_supplier" => empty($request->nama_supplier) ? null : $request->nama_supplier,
                 "asal_supplier" => empty($request->asal_supplier) ? null : $request->asal_supplier,
                 "status" => 1

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer("produk_id");
             $table->integer("jumlah");
             $table->double("jumlah_harga");
+            $table->enum("status", [1, 0])->default(0);
             $table->timestamps();
         });
     }

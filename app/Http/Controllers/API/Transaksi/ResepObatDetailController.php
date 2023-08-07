@@ -39,15 +39,21 @@ class ResepObatDetailController extends Controller
         try {
             $resep_obat = ResepObat::where("ahli_id", Auth::user()->id)
                 ->where("konsumen_id", $id_konsumen)
+                ->where("status", "0")
                 ->first();
             
             if (!$resep_obat) {
-                return response()->json(["status" => false, "message" => "Resep Obat Tidak Ditemukan"]);
+                return response()->json(["status" => false, "message" => "Resep Obat Tidak Ditemukan", "data" => []]);
             }
 
-            $data = ResepObatDetail::where("id_resep_obat", $resep_obat->id_resep_obat)->get();
-            
-            return GetDetailResepObatResource::collection($data);
+            $data = ResepObatDetail::where("id_resep_obat", $resep_obat->id_resep_obat)
+                ->where("status", "0")
+                ->get();
+            $response = GetDetailResepObatResource::collection($data);
+            $format = "Rp. " . number_format($resep_obat->jumlah_harga);
+            $id_keranjang = $resep_obat->id_resep_obat;
+
+            return response()->json(["id_keranjang" => $id_keranjang, "total_harga" => $format, "data" => $response]);
         } catch (\Exception $e) {
             dd($e);
         }
@@ -123,6 +129,30 @@ class ResepObatDetailController extends Controller
             ]);
             
             return response()->json(["pesan" => "Produk Berhasil di Tambahkan"]);
+        } catch (\Exception $e) {
+            dd($e);
+        }
+    }
+
+    public function resep($id_keranjang)
+    {
+        try {
+            $resep_obat = ResepObatDetail::where("id_resep_obat", $id_keranjang)
+                ->where("status", "0")    
+                ->get();
+
+            foreach ($resep_obat as $item) {
+                $item->update([
+                    "status" => "1"
+                ]);
+            }
+
+            ResepObat::where("id_resep_obat", $id_keranjang)->update([
+                "status" => "1"
+            ]);
+
+            return response()->json(["pesan" => "Data Berhasil di Simpan"]);
+
         } catch (\Exception $e) {
             dd($e);
         }

@@ -23,4 +23,9 @@ class ResepObat extends Model
     {
         return $this->belongsTo("App\Models\User", "ahli_id", "id");
     }
+
+    public function konsumen()
+    {
+        return $this->belongsTo("App\Models\Akun\Konsumen", "konsumen_id", "id_konsumen");
+    }
 }
