@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string("konsumen_id", 50);
             $table->datetime("tanggal");
             $table->double("jumlah_harga");
-            $table->enum("status", [1, 0])->default(0);
+            $table->enum("status", [1, 0, 2])->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

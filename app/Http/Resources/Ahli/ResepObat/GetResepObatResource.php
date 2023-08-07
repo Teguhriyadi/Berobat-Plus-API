@@ -26,7 +26,9 @@ class GetResepObatResource extends JsonResource
                 "nomor_hp" => $this->konsumen->getUsers->nomor_hp
             ],
             "tanggal" => Carbon::createFromFormat('Y-m-d H:i:s', $this->tanggal)->isoFormat('D MMMM Y'),
-            "jumlah_harga" => "Rp. " . number_format($this->jumlah_harga)
+            "jumlah_harga" => "Rp. " . number_format($this->jumlah_harga),
+            "status" => $this->status,
+            "delete" => $this->deleted_at
         ];
     }
 }

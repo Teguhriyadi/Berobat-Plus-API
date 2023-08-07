@@ -25,6 +25,7 @@ class ResepObatController extends Controller
                 
                 $resep_obat = ResepObat::where("konsumen_id", Auth::user()->konsumen->id_konsumen)
                 ->where("status", "1")
+                ->orWhere("status", "2")
                 ->get();
                 
             } else if ($cek->id_role == "RO-2003062") {
@@ -97,6 +98,26 @@ class ResepObatController extends Controller
             
             return GetDetailResepObatResource::collection($resep_obat);
             
+        } catch (\Exception $e) {
+            dd($e);
+        }
+    }
+
+    public function destroy($id_resep_obat)
+    {
+        try {
+            $resep_obat = ResepObat::where("id_resep_obat", $id_resep_obat)->first();
+
+            $detail = ResepObatDetail::where("id_resep_obat", $id_resep_obat)->get();
+
+            foreach ($detail as $d) {
+                $d->delete();
+            }
+
+            $resep_obat->delete();
+
+            return response()->json(["pesan" => "Data Berhasil di Hapus"]);
+
         } catch (\Exception $e) {
             dd($e);
         }

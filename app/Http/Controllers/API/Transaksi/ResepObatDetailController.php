@@ -157,4 +157,28 @@ class ResepObatDetailController extends Controller
             dd($e);
         }
     }
+
+    public function setuju($id_resep_obat)
+    {
+        try {
+            $resep_obat = ResepObat::where("id_resep_obat", $id_resep_obat)->first();
+
+            $detail = ResepObatDetail::where("id_resep_obat", $id_resep_obat)->get();
+
+            foreach ($detail as $d) {
+                $d->update([
+                    "status" => "2"
+                ]);
+            }
+
+            $resep_obat->update([
+                "status" => "2"
+            ]);
+
+            return response()->json(["pesan" => "Data Berhasil di Simpan"]);
+
+        } catch (\Exception $e) {
+            dd($e);
+        }
+    }
 }
