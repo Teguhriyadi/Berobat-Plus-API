@@ -7,6 +7,7 @@ use App\Http\Resources\Ahli\Antrian\GetAntrianResource;
 use App\Http\Resources\Master\Ahli\GetJadwalAntrianResource;
 use App\Models\Master\Dokter\JadwalAntrian;
 use App\Models\Transaksi\RiwayatTransaksi;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -95,7 +96,14 @@ class JadwalAntrianController extends Controller
         {
             return DB::transaction(function() use ($id_jadwal_antrian) {
                 $jadwal_antrian = JadwalAntrian::withTrashed()->where("id_jadwal_antrian", $id_jadwal_antrian)->first();
+               
+                $convert = strtotime($jadwal_antrian->tanggal);
+                $sekarang = strtotime(Carbon::now()->format("Y-m-d"));
                 
+                if ($sekarang < $convert) {
+                    return response()->json(["status" => false, "pesan" => "Belum Waktunya Untuk Diselesaikan"]);
+                }
+
                 RiwayatTransaksi::create([
                     "id_transaksi_buat_janji" => "TRN-BJ-" . date("YmdHis"),
                     "konsumen_id" => $jadwal_antrian->konsumen_id,

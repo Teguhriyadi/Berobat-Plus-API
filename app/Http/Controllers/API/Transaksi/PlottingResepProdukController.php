@@ -19,22 +19,22 @@ class PlottingResepProdukController extends Controller
         return DB::transaction(function() {
             $data = ResepObatDetail::join("resep_obat", "resep_obat.id_resep_obat", "=", "resep_obat_detail.id_resep_obat")
                 ->join("produk", "produk.id_produk", "=", "resep_obat_detail.produk_id")
-                ->where("resep_obat.status", "1")
-                ->where("resep_obat.deleted_at", "!=", null)
+                ->where("resep_obat.status", "2")
+                ->where("resep_obat.deleted_at", null)
                 ->get();
             
             $convert = [];
             foreach ($data as $item) {
 
-                if (empty(Auth::user()->getProfilApotek->id_profil_apotek)) {
+                if (empty(Auth::user()->getAdminApotek->id_profil_apotek)) {
                     return response()->json(["pesan" => "Data Stok Obat Tidak Ada"]);
-                } else {
-                    $transaksi_masuk = TransaksiObat::where("kode_produk", $item->kode_produk)
-                    ->where("apotek_id", Auth::user()->getProfilApotek->id_profil_apotek)
-                    ->where("status", 1)
-                    ->sum("qty");
                 }
 
+                $transaksi_masuk = TransaksiObat::where("kode_produk", $item->kode_produk)
+                ->where("apotek_id", Auth::user()->getAdminApotek->id_profil_apotek)
+                ->where("status", 1)
+                ->sum("qty");
+                
                 $jumlah_resep = $item->jumlah;
 
                 if ($transaksi_masuk >= $jumlah_resep) {
@@ -55,6 +55,14 @@ class PlottingResepProdukController extends Controller
                         $convert[] = $item;
                     }
                 }
+            }
+
+            if (empty($convert)) {
+                return response()->json([
+                    "status" => false, 
+                    "pesan" => "Data Resep Obat Tidak Ada",
+                    "data" => []
+                ]);
             }
             
             return GetResepObatResource::collection($convert);

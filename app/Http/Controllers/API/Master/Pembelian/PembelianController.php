@@ -12,6 +12,7 @@ use App\Models\Transaksi\Keranjang;
 use App\Models\Transaksi\KeranjangDetail;
 use App\Models\Transaksi\Pembelian;
 use App\Models\Transaksi\PembelianBarang;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -86,10 +87,29 @@ class PembelianController extends Controller
                     "harga" => $produk["harga_produk"]
                 ]);
 
-                $detail->delete();
+                // $detail->delete();
             }
 
-            return response()->json(["pesan" => "Data Berhasil di Tambahkan", "pembelian" => $result["id_pembelian"]]);
+            $convert = json_encode($result["result"], true);
+
+            $va_number = json_decode($convert, true);
+
+            return response()->json([
+                "pesan" => "Data Berhasil di Tambahkan",
+                "detail" => [
+                    "transaksi" => [
+                        "tanggal" => Carbon::createFromFormat("Y-m-d H:i:s", date("Y-m-d H:i:s"))->isoFormat("dddd, DD MMMM YYYY | HH:mm:ss"),
+                        "pembelian" => $result["id_pembelian"],
+                        "va_number" => $va_number["va_numbers"][0]["va_number"],
+                        "total" => "Rp. " . number_format($keranjang["jumlah_harga"]),
+                        "bank" => $request->bank
+                    ],
+                    "konsumen" => [
+                        "nama" => Auth::user()->nama,
+                        "nomor_hp" => Auth::user()->nomor_hp
+                    ]
+                ]
+            ]);
 
         } catch (\Exception $e) {
             dd($e);
@@ -145,9 +165,9 @@ class PembelianController extends Controller
                 return false;
             }
 
-            $keranjang->delete();
+            // $keranjang->delete();
             
-            return ["code" => 1, "message" => "Success", "result" => $charge, "id_pembelian" => $pembelian->id_pembelian, "transaksi_id" => $charge->transaction_id];
+            return ["code" => 1, "message" => "Success", "result" => $charge, "id_pembelian" => $pembelian->id_pembelian, "transaksi_id" => $charge->transaction_id, "va_numbers" => $charge];
 
         } catch (\Exception $e) {
             dd($e);

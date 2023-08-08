@@ -43,6 +43,7 @@ use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\ChatingController;
 use App\Http\Controllers\Midtrans\NotificationController;
 use App\Http\Controllers\Midtrans\PaymentController;
+use App\Http\Controllers\Midtrans\TokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -80,6 +81,8 @@ Route::prefix("akun")->group(function () {
 });
 
 Route::middleware("auth:sanctum")->group(function () {
+
+    Route::get("/midtrans/get_token/{id_keranjang}", [TokenController::class, "get_token"]);
 
     Route::get("/plotting", [PlottingResepProdukController::class, "index"]);
 
