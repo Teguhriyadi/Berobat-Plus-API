@@ -35,6 +35,7 @@ class DataProdukController extends Controller
                     "deskripsi_produk" => $p["deskripsi_produk"],
                     "harga" => $p["harga_produk"],
                     "harga_produk" => "Rp. " . number_format($p["harga_produk"]),
+                    "foto_produk" => $p["foto_produk"],
                     "qty" => $total_stok
                 ];
             }
@@ -168,6 +169,7 @@ class DataProdukController extends Controller
                     "deskripsi_produk" => $p["deskripsi_produk"],
                     "harga" => $p["harga_produk"],
                     "harga_produk" => "Rp. " . number_format($p["harga_produk"]),
+                    "foto_produk" => $p["foto_produk"],
                     "qty" => $total_stok
                 ];
             }
