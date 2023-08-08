@@ -174,4 +174,49 @@ class PembelianController extends Controller
             return ["code" => 0, "message" => "Terjadi Kesalahan"];
         }
     }
+
+    public function checkout(Request $request)
+    {
+        try {
+            $json = json_decode($request->get("json"));
+
+            $keranjang = Keranjang::where("id_keranjang", $json->id_keranjang)->first();
+
+            $pembelian = new Pembelian();
+            $pembelian->id_pembelian = "PMBL-" . date("YmdHis");
+            $pembelian->konsumen_id = Auth::user()->konsumen->id_konsumen;
+            $pembelian->tanggal_pembelian = date("Y-m-d");
+            $pembelian->total_pembelian = $keranjang->jumlah_harga;
+            $pembelian->nama_kota = "Bandung";
+            $pembelian->tarif = 5000;
+            $pembelian->alamat_pengiriman = "Bandung";
+            $pembelian->status_pembelian = "PENDING";
+            $pembelian->save();
+
+            $detail_keranjang = KeranjangDetail::where("id_keranjang", $json->id_keranjang)->get();
+
+            foreach ($detail_keranjang as $detail) {
+                $produk = ProdukApotek::where("id_produk", $detail["produk_id"])->first();
+
+                PembelianBarang::create([
+                    "id_pembelian_barang" => "PMBL-B-".date("YmdHis") . $detail["id_keranjang_detail"],
+                    "id_pembelian" => $pembelian["id_pembelian"],
+                    "kode_produk" => $produk["kode_produk"],
+                    "jumlah" => $detail["jumlah"],
+                    "nama_barang" => $produk["nama_produk"],
+                    "harga" => $produk["harga_produk"]
+                ]);
+
+                // $detail->delete();
+            }
+
+            return response()->json([
+                "success" => true,
+                "message" => "Berhasil Di Proses"
+            ], 200);
+
+        } catch (\Exception $e) {
+            dd($e);
+        }
+    }
 }
