@@ -30,7 +30,6 @@ class GetRiwayatTransaksiBuaJanjiResource extends JsonResource
                 "biaya" => "Rp." . number_format($this->biaya_praktek),
                 "nama_rs" => $this->nama_rs
             ],
-            "nomer_antrian" => $this->nomer_antrian,
             "tanggal_transaksi" => Carbon::parse($this->tanggal_transaksi)->translatedFormat('l, d F Y'),
             "status" => $this->status
         ];

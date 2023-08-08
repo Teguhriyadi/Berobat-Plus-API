@@ -58,5 +58,27 @@ class TransaksiObatSeeder extends Seeder
             "asal_supplier" => "Cirebon",
             "status" => 1
         ]);
+
+        TransaksiObat::create([
+            "id_transaksi_obat" => "TR-O-2003065",
+            "kode_produk" => "PRO-2003065",
+            "tanggal" => "2023-05-27",
+            "qty" => 50,
+            "apotek_id" => "PR-A-12345678911",
+            "nama_supplier" => "Mohammad Ilham",
+            "asal_supplier" => "Cirebon",
+            "status" => 1
+        ]);
+
+        TransaksiObat::create([
+            "id_transaksi_obat" => "TR-O-2003066",
+            "kode_produk" => "PRO-2003066",
+            "tanggal" => "2023-05-27",
+            "qty" => 50,
+            "apotek_id" => "PR-A-12345678911",
+            "nama_supplier" => "Mohammad Ilham",
+            "asal_supplier" => "Cirebon",
+            "status" => 1
+        ]);
     }
 }

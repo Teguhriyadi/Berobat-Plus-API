@@ -39,8 +39,8 @@ class DataProdukSeeder extends Seeder
             "kode_produk" => "PRO-2003063",
             "id_owner_apotek" => "OWN-293293289",
             "id_profil_apotek" => "PR-A-12345678910",
-            "nama_produk" => "Maag",
-            "slug_produk" => "maag",
+            "nama_produk" => "Promag",
+            "slug_produk" => "promag",
             "deskripsi_produk" => "Obat Termahal",
             "harga_produk" => 20000
         ]);
@@ -53,6 +53,26 @@ class DataProdukSeeder extends Seeder
             "slug_produk" => "paracetamol",
             "deskripsi_produk" => "Obat Termahal",
             "harga_produk" => 10000
+        ]);
+
+        ProdukApotek::create([
+            "kode_produk" => "PRO-2003065",
+            "id_owner_apotek" => "OWN-293293289",
+            "id_profil_apotek" => "PR-A-12345678911",
+            "nama_produk" => "Panadol",
+            "slug_produk" => "panadol",
+            "deskripsi_produk" => "Obat Termahal",
+            "harga_produk" => 40000
+        ]);
+
+        ProdukApotek::create([
+            "kode_produk" => "PRO-2003066",
+            "id_owner_apotek" => "OWN-293293289",
+            "id_profil_apotek" => "PR-A-12345678911",
+            "nama_produk" => "Minyak Telon",
+            "slug_produk" => "minyak-telon",
+            "deskripsi_produk" => "Obat Termahal",
+            "harga_produk" => 30000
         ]);
     }
 }

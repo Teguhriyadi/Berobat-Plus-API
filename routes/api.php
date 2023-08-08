@@ -38,6 +38,7 @@ use App\Http\Controllers\API\Produk\DataProdukController;
 use App\Http\Controllers\API\Produk\ProdukKategoriController;
 use App\Http\Controllers\API\Tes\CekResiController;
 use App\Http\Controllers\API\Tes\RajaOngkirController;
+use App\Http\Controllers\API\Transaksi\PesanPerawatController;
 use App\Http\Controllers\API\Transaksi\PlottingResepProdukController;
 use App\Http\Controllers\Apotek\Pengaturan\ProfilApotekController;
 use App\Http\Controllers\ChatingController;
@@ -225,7 +226,12 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::resource("/checkout", CheckoutController::class);
     });
 
+    Route::prefix("perawat")->group(function() {
+        Route::resource("pesan_perawat", PesanPerawatController::class);
+    });
+
     Route::prefix("ahli")->group(function() {
+        
         Route::get("/jadwal_antrian", [JadwalAntrianController::class, "data_antrian"]);
         Route::get("/jadwal_antrian/{id_jadwal_antrian}", [JadwalAntrianController::class, "detail"]);
         Route::put("/jadwal_antrian/{id_jadwal_antrian}", [JadwalAntrianController::class, "update"]);
