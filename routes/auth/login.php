@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Autentikasi\ConfirmEmailController;
 use App\Http\Controllers\API\Autentikasi\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,4 +13,6 @@ Route::prefix("autentikasi")->group(function () {
         ]);
     })->name("login");
     Route::post("/register", [LoginController::class, "register"]);
+    Route::post("/confirm_email", [ConfirmEmailController::class, "confirm"]);
+    Route::put("/forgot_password/{token}", [ConfirmEmailController::class, "forgot_password"]);
 });
