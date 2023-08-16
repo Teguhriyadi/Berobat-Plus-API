@@ -25,7 +25,7 @@ class RiwayatKonsultasiSeeder extends Seeder
             "nomor_hp_ahli" => "283293823892",
             "biaya_konsultasi" => 20000,
             "pembayaran" => 1,
-            "status" => 0 
+            "status" => "0" 
         ]);
         
         TransaksiKonsultasi::create([
@@ -38,7 +38,7 @@ class RiwayatKonsultasiSeeder extends Seeder
             "nomor_hp_ahli" => "283293823893",
             "biaya_konsultasi" => 30000,
             "pembayaran" => 1,
-            "status" => 0 
+            "status" => "0" 
         ]);
     }
 }
