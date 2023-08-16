@@ -244,7 +244,7 @@ Route::middleware("auth:sanctum")->group(function () {
 
     require __DIR__ . '/transaksi/produk/produk.php';
 
-    // require __DIR__ . '/transaksi/konsultasi/pembayaran.php';
+    require __DIR__ . '/transaksi/konsultasi/rekap.php';
 
     require __DIR__ . '/master/transaksi/keranjang/keranjang.php';
 
