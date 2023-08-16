@@ -101,7 +101,7 @@ class DataRumahSakitController extends Controller
             Storage::delete($data);
             
             $rumah_sakit->delete();
-
+            
             return response()->json(["pesan" => "Data Akun Rumah Sakit Berhasil di Hapus"]);
         });
     }
@@ -122,37 +122,47 @@ class DataRumahSakitController extends Controller
     {
         return DB::transaction(function () use ($request) {
             
-            $perPage = 10;
-            $page = $request->get('page', 1);
-            $offset = ($page - 1) * $perPage;
-            
             $lat = $request->latitude;
             $long = $request->longitude;
             
-            $locations = DB::table('rumah_sakit')
-            ->select('id_rumah_sakit', 'nama_rs', 'latitude', 'longitude', 'foto_rs', 'kategori_rs', 'alamat_rs', 'deskripsi_rs')
-            ->selectRaw('(6371 * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $long . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance')
-            ->orderBy('distance', 'ASC')
-            ->offset($offset)
-            ->limit($perPage)
-            ->get()
-            ->map(function ($location) {
-                $location->jarak = round($location->distance / 10, 1);
-                return $location;
+            $locations = RumahSakit::paginate(10);
+            $data_rs = [];
+            
+            foreach ($locations as $lokasi) {
+                $hitung_latitude_a = $lokasi->latitude * 3.14 / 180;
+                $hitung_longitude_a = $lokasi->longitude * 3.14 / 180;
+                
+                $hitung_latitude_saya = $lat * 3.14 / 180;
+                $hitung_longitude_saya = $long * 3.14 / 180;
+                
+                $selisih_a = $hitung_latitude_saya - $hitung_latitude_a;
+                $selisih_b = $hitung_longitude_saya - $hitung_longitude_a;
+                
+                $hasil = pow(sin($selisih_a / 2), 2) + cos($lokasi->latitude) * cos($lat) * pow(sin($selisih_b / 2), 2);
+                
+                $sub_final = 2 * atan2(sqrt($hasil), sqrt(1 - $hasil));
+                $final = 6371 * $sub_final;
+                
+                $data_rs[] = [
+                    "id_rumah_sakit" => $lokasi->id_rumah_sakit,
+                    "nama_rs" => $lokasi->nama_rs,
+                    "latitude" => $lokasi->latitude,
+                    "longitude" => $lokasi->longitude,
+                    "kategori_rs" => $lokasi->kategori_rs,
+                    "alamat_rs" => $lokasi->alamat_rs,
+                    "foto_rs" => $lokasi->foto_rs,
+                    "deskripsi_rs" => $lokasi->deskripsi_rs,
+                    "distance" => $final,
+                    "jarak" => floor($final)
+                ];
+            }
+            
+            usort($data_rs, function($a, $b) {
+                return $a['distance'] - $b['distance'];
             });
             
-            $locationsCount = DB::table('rumah_sakit')
-            ->selectRaw('COUNT(*) as count')
-            ->first();
+            return response()->json(["data" => $data_rs]);
             
-            $pagination = new \Illuminate\Pagination\LengthAwarePaginator(
-                $locations,
-                $locationsCount->count,
-                $perPage,
-                $page
-            );
-            
-            return response()->json($pagination);
         });
     }
     
@@ -167,48 +177,49 @@ class DataRumahSakitController extends Controller
         // ->orderBy('distance', 'ASC')
         // ->get()
         // ->map(function ($location) {
-        //     $location->jarak = round($location->distance / 10, 1);
-        //     return $location;
-        // });
-        
-        // return response()->json($locations);
-
-        $locations = RumahSakit::get();
-        $data_rs = [];
-
-        foreach ($locations as $lokasi) {
-            $hitung_latitude_a = $lokasi->latitude * 3.14 / 180;
-            $hitung_longitude_a = $lokasi->longitude * 3.14 / 180;
-
-            $hitung_latitude_saya = $lat * 3.14 / 180;
-            $hitung_longitude_saya = $long * 3.14 / 180;
-
-            $selisih_a = $hitung_latitude_saya - $hitung_latitude_a;
-            $selisih_b = $hitung_longitude_saya - $hitung_longitude_a;
-
-            $hasil = pow(sin($selisih_a / 2), 2) + cos($lokasi->latitude) * cos($lat) * pow(sin($selisih_b / 2), 2);
-
-            $sub_final = 2 * atan2(sqrt($hasil), sqrt(1 - $hasil));
-            $final = 6371 * $sub_final;
-
-            $data_rs[] = [
-                "id_rumah_sakit" => $lokasi->id_rumah_sakit,
-                "nama_rs" => $lokasi->nama_rs,
-                "latitude" => $lokasi->latitude,
-                "longitude" => $lokasi->longitude,
-                "kategori_rs" => $lokasi->kategori_rs,
-                "alamat_rs" => $lokasi->alamat_rs,
-                "foto_rs" => $lokasi->foto_rs,
-                "deskripsi_rs" => $lokasi->deskripsi_rs,
-                "distance" => $final,
-                "jarak" => floor($final)
-            ];
+            //     $location->jarak = round($location->distance / 10, 1);
+            //     return $location;
+            // });
+            
+            // return response()->json($locations);
+            
+            $locations = RumahSakit::get();
+            $data_rs = [];
+            
+            foreach ($locations as $lokasi) {
+                $hitung_latitude_a = $lokasi->latitude * 3.14 / 180;
+                $hitung_longitude_a = $lokasi->longitude * 3.14 / 180;
+                
+                $hitung_latitude_saya = $lat * 3.14 / 180;
+                $hitung_longitude_saya = $long * 3.14 / 180;
+                
+                $selisih_a = $hitung_latitude_saya - $hitung_latitude_a;
+                $selisih_b = $hitung_longitude_saya - $hitung_longitude_a;
+                
+                $hasil = pow(sin($selisih_a / 2), 2) + cos($lokasi->latitude) * cos($lat) * pow(sin($selisih_b / 2), 2);
+                
+                $sub_final = 2 * atan2(sqrt($hasil), sqrt(1 - $hasil));
+                $final = 6371 * $sub_final;
+                
+                $data_rs[] = [
+                    "id_rumah_sakit" => $lokasi->id_rumah_sakit,
+                    "nama_rs" => $lokasi->nama_rs,
+                    "latitude" => $lokasi->latitude,
+                    "longitude" => $lokasi->longitude,
+                    "kategori_rs" => $lokasi->kategori_rs,
+                    "alamat_rs" => $lokasi->alamat_rs,
+                    "foto_rs" => $lokasi->foto_rs,
+                    "deskripsi_rs" => $lokasi->deskripsi_rs,
+                    "distance" => $final,
+                    "jarak" => floor($final)
+                ];
+            }
+            
+            usort($data_rs, function($a, $b) {
+                return $a['distance'] - $b['distance'];
+            });
+            
+            return response()->json(["data" => $data_rs]);
         }
-
-        usort($data_rs, function($a, $b) {
-            return $a['distance'] - $b['distance'];
-        });
-
-        return response()->json(["data" => $data_rs]);
     }
-}
+    

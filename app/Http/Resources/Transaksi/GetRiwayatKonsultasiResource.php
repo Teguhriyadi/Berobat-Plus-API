@@ -16,7 +16,16 @@ class GetRiwayatKonsultasiResource extends JsonResource
     {
         return [
             "id_transaksi_konsultasi" => $this->id_transaksi_konsultasi,
-            "konsumen" => $this->konsumen->getUsers->only("nama", "nomor_hp", "email")
+            "konsumen" => [
+                "id_konsumen" => $this->konsumen_id,
+                "nama" => $this->nama,
+                "nomor_hp" => $this->nomor_hp
+            ],
+            "ahli" => [
+                "id_ahli" => $this->ahli_id,
+                "nama" => $this->nama_ahli,
+                "nomor_hp" => $this->nomor_hp_ahli
+            ]
         ];
     }
 }
