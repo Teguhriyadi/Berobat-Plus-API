@@ -13,9 +13,7 @@ class RiwayatKonsultasiController extends Controller
     public function index()
     {
         try {
-            $data = TransaksiKonsultasi::where("konsumen_id", Auth::user()->konsumen->id_konsumen)
-                ->get();
-
+            $data = TransaksiKonsultasi::get();
             
             return GetRiwayatKonsultasiResource::collection($data);
         } catch (\Exception $e){
