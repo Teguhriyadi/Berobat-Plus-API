@@ -209,6 +209,6 @@ class DataRumahSakitController extends Controller
             return $a['distance'] - $b['distance'];
         });
 
-        return response()->json($data_rs);
+        return response()->json(["data" => $data_rs]);
     }
 }
