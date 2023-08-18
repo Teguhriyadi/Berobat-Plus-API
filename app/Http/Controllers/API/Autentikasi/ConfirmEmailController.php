@@ -32,7 +32,7 @@ class ConfirmEmailController extends Controller
                 "status" => "0"
             ]);
 
-            $verifyUrl = "http://192.168.255.25:5173/reset_password/" . $token . "/verify";
+            $verifyUrl = "http://192.168.137.1:5173/reset_password/" . $token . "/verify";
 
             $pesan = "Selamat Datang <b>". $user->nama ."</b><br> di <a href='https://berobatplus.shop/'> Berobat Plus </a>";
             $pesan .= "<hr>";
