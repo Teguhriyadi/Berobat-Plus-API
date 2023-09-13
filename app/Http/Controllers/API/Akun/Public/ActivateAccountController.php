@@ -33,7 +33,6 @@ class ActivateAccountController extends Controller
             ]);
             
             
-            
             return response()->json(["pesan" => "Status Akun Berhasil Diubah"]);
         });
     }

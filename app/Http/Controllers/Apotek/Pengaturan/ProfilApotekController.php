@@ -69,7 +69,8 @@ class ProfilApotekController extends Controller
                 "id_user" => Auth::user()->id,
                 "user_penanggung_jawab_id" => $user->id,
                 "latitude" => $request->latitude,
-                "longitude" => $request->longitude
+                "longitude" => $request->longitude,
+                "status" => 1
             ]);
 
             return response()->json(["pesan" => "Data Berhasil di Tambahkan"]);

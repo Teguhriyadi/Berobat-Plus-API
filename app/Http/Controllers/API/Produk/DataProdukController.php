@@ -121,7 +121,7 @@ class DataProdukController extends Controller
     public function get_by_owner()
     {
         return DB::transaction(function() {
-            $produk_by_owner = ProdukApotek::where("id_profil_apotek", Auth::user()->getApotek->id_admin_apotek)->get();
+            $produk_by_owner = ProdukApotek::where("id_profil_apotek", Auth::user()->getAdminApotek->id_profil_apotek)->get();
 
             foreach ($produk_by_owner as $p) {
                 $transaksi_masuk = TransaksiObat::where("kode_produk", $p->kode_produk)->where("status", 1)->sum("qty");
