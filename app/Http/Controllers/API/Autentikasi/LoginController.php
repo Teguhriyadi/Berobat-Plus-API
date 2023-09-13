@@ -68,6 +68,17 @@ class LoginController extends Controller
     {
         return DB::transaction(function() use($request) {
             
+            $user = User::where("nama", $request->nama)->count();
+
+            if ($user > 0) {
+                $count = User::max("id") + 1;
+
+                $str_email = Str::slug($request->nama) . $count . "@gmail.com";
+
+            } else {
+                $str_email = Str::slug($request->nama) . "@gmail.com";
+            }
+
             if ($request->file("foto")) {
                 $data = $request->file("foto")->store("profil_user");
             }
@@ -90,7 +101,7 @@ class LoginController extends Controller
 
             $user = User::create([
                 "nama" => $request->nama,
-                "email" => empty($request->email) ? Str::slug($request->nama) . "@gmail.com" : $request->email,
+                "email" => empty($request->email) ? $str_email : $request->email,
                 "password" => bcrypt($request->password),
                 "nomor_hp" => $request->nomor_hp,
                 "id_role" =>  $role,

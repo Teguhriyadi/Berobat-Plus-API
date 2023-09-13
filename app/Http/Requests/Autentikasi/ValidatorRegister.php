@@ -14,22 +14,24 @@ class ValidatorRegister extends FormRequest
         if (($request->option == "dokter") || ($request->option == "perawat") || ($request->option == "apotek") ) {
             return [
                 "nama" => "required",
+                "email" => "email|unique:users",
                 "password" => "required|min:8|max:15",
-                "nomor_hp" => "required",
+                "nomor_hp" => "required|unique:users",
                 "option" => "required",
                 "jenis_kelamin" => "required",
-                "foto" => "required",
-                "file_dokumen" => "required"
+                "foto" => "required|image|mimes:png,jpg,jpeg|max:2048",
+                "file_dokumen" => "required|mimetypes:application/pdf|max:10000",
             ];
         } else if ($request->option == "rumah_sakit") {
             return [
                 "nama" => "required",
+                "email" => "email|unique:users",
                 "password" => "required|min:8|max:15",
-                "nomor_hp" => "required",
+                "nomor_hp" => "required|unique:users",
                 "option" => "required",
                 "jenis_kelamin" => "required",
-                "foto" => "required",
-                "file_dokumen" => "required",
+                "foto" => "required|image|mimes:png,jpg,jpeg|max:2048",
+                "file_dokumen" => "required|mimetypes:application/pdf|max:10000",
                 "no_ktp" => "required|integer|digits_between:6,20"
             ];
         }
