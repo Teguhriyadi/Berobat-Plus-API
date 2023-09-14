@@ -61,12 +61,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get("/send-message", [ChatingController::class, "handle"]);
 
-Route::post("/payment", [PaymentController::class, "payment"]);
-Route::post("/token/payment", [PaymentController::class, "getTokenCreditCard"]);
-Route::post("/credit_card/payment", [PaymentController::class, "creditCardCharge"]);
-Route::post("/buy_product", [PaymentController::class, "buy_product"]);
 Route::post("/notification", [NotificationController::class, "post"]);
-Route::get("/banks", [PaymentController::class, "bank"]);
 
 Route::get("/qr/{code}", [DashboardController::class, "qr"]);
 Route::post("/tes_ongkir", [RajaOngkirController::class, "index"]);
