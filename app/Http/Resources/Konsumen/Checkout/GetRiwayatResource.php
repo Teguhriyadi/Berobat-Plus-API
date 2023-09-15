@@ -19,7 +19,7 @@ class GetRiwayatResource extends JsonResource
             "id_pembelian" => $this->id_pembelian,
             "konsumen" => [
                 "id_konsumen" => $this->konsumen_id,
-                "detail" => $this->konsumen->getUsers->onyly("nama", "nomor_hp")
+                "detail" => $this->konsumen->getUsers->only("nama", "nomor_hp")
             ],
             "tanggal_pembelian" => Carbon::createFromFormat("Y-m-d H:i:s", $this->tanggal_pembelian)->isoFormat("dddd, DD MMMM YYYY | HH:mm:ss"),
             "total_pembelian" => $this->total_pembelian,

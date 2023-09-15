@@ -32,9 +32,9 @@ class ConfirmEmailController extends Controller
                 "status" => "0"
             ]);
 
-            $verifyUrl = "http://192.168.66.25:5173/reset_password/" . $token . "/verify";
+            $verifyUrl = "https://smarthealth.berobatplus.shop/reset_password/" . $token . "/verify";
 
-            $pesan = "Selamat Datang <b>". $user->nama ."</b><br> di <a href='https://berobatplus.shop/'> Berobat Plus </a>";
+            $pesan = "Selamat Datang <b>". $user->nama ."</b><br> di <a href='https://smarthealth.berobatplus.shop/'> Berobat Plus </a>";
             $pesan .= "<hr>";
             $pesan .= "Silahkan Klik Tombol Dibawah Ini Jika Anda Ingin Mengganti Password <br>";
             $pesan .= "Terima Kasih...";
