@@ -53,11 +53,13 @@ class KonsumenController extends Controller
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => 'POST',
                 CURLOPT_POSTFIELDS => array(
-                    'target' => $request->nomor_hp|$request->nama,
-                    'message' => 'Hamdan',
+                    'target' => "$request->nomor_hp|$request->nama",
+                    'message' => 'Selamat Datang *' . $request->nama . '*, di *SmartHealth*
+
+Mohammad ',
                 ),
                 CURLOPT_HTTPHEADER => array(
-                    'Authorization: ' . env("TOKEN_WA ") 
+                    'Authorization: KzQ7wps3mtkvyaWxKSBs'
                 ),
             ));
             
